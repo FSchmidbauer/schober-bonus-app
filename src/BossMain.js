@@ -4,11 +4,11 @@ import BonusImage from "./images/bonus-image.png";
 import VoucherImage from "./images/voucher-image.png";
 import EmployeesImage from "./images/employees-image.png";
 
-export default function BossMain(createdUser) {
+export default function BossMain({ createdUser }) {
   return (
     <>
       <h1>HAUPTMENÜ</h1>
-      <h2>Hallo {createdUser.name}! Was willst Du tun?</h2>
+      <h2>Hallo {createdUser.name.split(" ")[0]}! Was willst Du tun?</h2>
       <ActionGrid>
         <BonusSection>
           <ActionImage src={BonusImage} />

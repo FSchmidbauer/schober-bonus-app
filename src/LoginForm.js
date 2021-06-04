@@ -1,33 +1,52 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-export default function LoginForm() {
-  const [noUser, setNoUser] = useState(true);
-  const [userIsBoss, setUserIsBoss] = useState(false);
-  const [userIsEmployee, setUserIsEmployee] = useState(false);
-  const [userIsPartner, setUserIsPartner] = useState(false);
-  const [createdUser, setCreatedUser] = useState(null);
+export default function LoginForm({
+  onSetCreatedUser,
+  createdUser,
+  onSetNoUser,
+  onSetUserIsBoss,
+  onSetUserIsEmployee,
+  onSetUserIsPartner,
+}) {
+  const [validErrorMessage, setValidErrorMessage] = useState(false);
 
   function updateUser(event) {
     const fieldName = event.target.name;
     let fieldValue = event.target.value;
-    setCreatedUser({ ...createdUser, [fieldName]: fieldValue });
+    onSetCreatedUser({ ...createdUser, [fieldName]: fieldValue });
   }
 
-  function showBossMenu() {
+  function showMainMenues(event) {
     if (
       createdUser.role === "geschaeftsfuehrer" &&
-      createdUser.name === "Joachim"
+      createdUser.name === "Joachim Schober"
     ) {
-      setNoUser(false);
-      setUserIsBoss(true);
+      onSetNoUser(false);
+      onSetUserIsBoss(true);
+    } else if (
+      createdUser.role === "mitarbeiter" &&
+      createdUser.name === "Florian Schmidbauer"
+    ) {
+      onSetNoUser(false);
+      onSetUserIsEmployee(true);
+    } else if (createdUser.role === "partnerunternehmen") {
+      onSetNoUser(false);
+      onSetUserIsPartner(true);
+    } else {
+      event.preventDefault();
+      setValidErrorMessage(true);
     }
   }
 
-  console.log(userIsBoss);
-
   return (
     <>
+      {validErrorMessage && (
+        <ValidError>
+          Dieser Nutzer ist leider nicht hinterlegt.<br></br>Bitte überprüfe
+          Deine Eingabe.
+        </ValidError>
+      )}
       <h1>LOGIN</h1>
       <form>
         <LoginRole htmlFor="role" name="role" id="role" onChange={updateUser}>
@@ -48,11 +67,17 @@ export default function LoginForm() {
           placeholder="Dein Name"
           onChange={updateUser}
         />
-        <LoginButton onClick={showBossMenu}>Login</LoginButton>
+        <LoginButton onClick={showMainMenues}>Login</LoginButton>
       </form>
     </>
   );
 }
+
+const ValidError = styled.div`
+  background-color: red;
+  color: white;
+  padding: 0.5rem;
+`;
 
 const LoginRole = styled.select`
   border: 0.3rem solid black;
@@ -60,6 +85,7 @@ const LoginRole = styled.select`
   font-size: 1.5rem;
   padding: 1rem;
   margin: 1rem;
+  cursor: pointer;
 `;
 
 const LoginName = styled.input`

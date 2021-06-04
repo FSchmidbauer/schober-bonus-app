@@ -7,12 +7,18 @@ import { useState } from "react";
 // } from "react-router-dom";
 import styled from "styled-components";
 import SchoberLogo from "./images/logo-autohaus-schober.png";
-import LoginForm from "./LoginForm.js";
+import LoginForm, { showBossMenu } from "./LoginForm.js";
 import BossMain from "./BossMain.js";
 import EmployeeMain from "./EmployeeMain.js";
 import PartnerMain from "./PartnerMain.js";
 
-export default function App(noUser, userIsBoss, userIsEmployee, userIsPartner) {
+export default function App() {
+  const [createdUser, setCreatedUser] = useState(null);
+  const [noUser, setNoUser] = useState(true);
+  const [userIsBoss, setUserIsBoss] = useState(false);
+  const [userIsEmployee, setUserIsEmployee] = useState(false);
+  const [userIsPartner, setUserIsPartner] = useState(false);
+
   return (
     <>
       <header>
@@ -20,10 +26,19 @@ export default function App(noUser, userIsBoss, userIsEmployee, userIsPartner) {
         <HeaderHeadline>BONUS-APP</HeaderHeadline>
       </header>
       <Main>
-        {noUser && <LoginForm />}
-        {/* {userIsBoss && <BossMain />} */}
-        {/* {userIsEmployee && <EmployeeMain />} */}
-        {/* {userIsPartner && <PartnerMain />} */}
+        {noUser && (
+          <LoginForm
+            onSetCreatedUser={setCreatedUser}
+            createdUser={createdUser}
+            onSetNoUser={setNoUser}
+            onSetUserIsBoss={setUserIsBoss}
+            onSetUserIsEmployee={setUserIsEmployee}
+            onSetUserIsPartner={setUserIsPartner}
+          />
+        )}
+        {userIsBoss && <BossMain createdUser={createdUser} />}
+        {userIsEmployee && <EmployeeMain createdUser={createdUser} />}
+        {userIsPartner && <PartnerMain createdUser={createdUser} />}
       </Main>
       <Footernav>
         {!noUser && <FooternavButton>Hauptmenü</FooternavButton>}
