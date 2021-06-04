@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-export default function EmployeeMain(createdUser) {
+export default function EmployeeMain({ createdUser }) {
   return (
     <>
       <h1>HAUPTMENÜ</h1>

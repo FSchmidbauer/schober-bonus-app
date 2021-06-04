@@ -7,7 +7,7 @@ import { useState } from "react";
 // } from "react-router-dom";
 import styled from "styled-components";
 import SchoberLogo from "./images/logo-autohaus-schober.png";
-import LoginForm, { showBossMenu } from "./LoginForm.js";
+import LoginForm from "./LoginForm.js";
 import BossMain from "./BossMain.js";
 import EmployeeMain from "./EmployeeMain.js";
 import PartnerMain from "./PartnerMain.js";
