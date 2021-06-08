@@ -1,12 +1,21 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-export default function PartnerMain({ createdUser }) {
+export default function PartnerMain({
+  createdUser,
+  onSetUserIsPartner,
+  onSetPartnerCreateNewVoucher,
+}) {
+  function openVoucherCreator() {
+    onSetUserIsPartner(false);
+    onSetPartnerCreateNewVoucher(true);
+  }
+
   return (
     <>
       <h1>HAUPTMENÜ</h1>
-      <h2>Hallo {createdUser.name.split(" ")[0]}! Was willst Du tun?</h2>
-      <NewVoucherSection>
+      <h2>Hallo {createdUser.name}! Was willst Du tun?</h2>
+      <NewVoucherSection onClick={openVoucherCreator}>
         <ActionImage />
         <p>Gutschein anlegen </p>
       </NewVoucherSection>

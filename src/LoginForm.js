@@ -49,17 +49,11 @@ export default function LoginForm({
       )}
       <h1>LOGIN</h1>
       <form>
-        <LoginRole htmlFor="role" name="role" id="role" onChange={updateUser}>
+        <LoginRole name="role" onChange={updateUser}>
           <option>-- Bitte Rolle wählen --</option>
-          <option name="role" value="geschaeftsfuehrer">
-            Geschäftsführer
-          </option>
-          <option name="role" value="mitarbeiter">
-            Mitarbeiter
-          </option>
-          <option name="role" value="partnerunternehmen">
-            Partner-Unternehmen
-          </option>
+          <option value="geschaeftsfuehrer">Geschäftsführer</option>
+          <option value="mitarbeiter">Mitarbeiter</option>
+          <option value="partnerunternehmen">Partner-Unternehmen</option>
         </LoginRole>
         <LoginName
           type="text"

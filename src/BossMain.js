@@ -4,14 +4,23 @@ import BonusImage from "./images/bonus-image.png";
 import VoucherImage from "./images/voucher-image.png";
 import EmployeesImage from "./images/employees-image.png";
 
-export default function BossMain({ createdUser }) {
+export default function BossMain({
+  createdUser,
+  onSetUserIsBoss,
+  onSetBossViewEmployees,
+}) {
+  function showBossViewEmployees() {
+    onSetUserIsBoss(false);
+    onSetBossViewEmployees(true);
+  }
+
   return (
     <>
       <h1>HAUPTMENÜ</h1>
       <h2>Hallo {createdUser.name.split(" ")[0]}! Was willst Du tun?</h2>
       <ActionGrid>
         <BonusSection>
-          <ActionImage src={BonusImage} />
+          <ActionImage src={BonusImage} onClick={showBossViewEmployees} />
           <p>Bonuspunkte vergeben</p>
         </BonusSection>
         <VoucherSection>
