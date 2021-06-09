@@ -15,6 +15,7 @@ export default function PartnerVoucherCheck({
       <ActionInfo>Sie haben gerade folgenden Gutschein erstellt:</ActionInfo>
       <ProvisorischerGutschein>
         <p>{voucherToConfirm.vouchertype}</p>
+        <p>von {voucherToConfirm.voucherpartner}</p>
         <p>
           über {voucherToConfirm.vouchervalue}{" "}
           {voucherToConfirm.vouchercurrency}
@@ -24,7 +25,7 @@ export default function PartnerVoucherCheck({
       <ButtonSection>
         <CorrectButton onClick={() => jumpOnLastPage()}>Anpassen</CorrectButton>
         <ConfirmButton onClick={() => onConfirmVoucher(voucherToConfirm)}>
-          Abschicken
+          Bestätigen
         </ConfirmButton>
       </ButtonSection>
     </>
@@ -38,7 +39,6 @@ const ActionInfo = styled.h4`
 const ButtonSection = styled.section`
   display: flex;
   justify-content: space-around;
-  padding: 0 3rem;
   margin: 0.75rem;
 `;
 

@@ -167,7 +167,7 @@ export default function BossViewEmpPoints({
       <ButtonSection>
         <CorrectButton onClick={() => jumpOnLastPage()}>Anpassen</CorrectButton>
         <ConfirmButton onClick={() => onConfirmPoints()}>
-          Abschicken
+          Bestätigen
         </ConfirmButton>
       </ButtonSection>
     </>
@@ -205,7 +205,6 @@ const EmpWithNewPoints = styled.section`
 const ButtonSection = styled.section`
   display: flex;
   justify-content: space-around;
-  padding: 0 3rem;
   margin: 0.75rem;
 `;
 

@@ -70,6 +70,9 @@ export default function BossEmpOverview({
   return (
     <>
       <h1>PUNKTEVERGABE</h1>
+      <ActionInfo>
+        Du kannst jedem Deiner Mitarbeiter bis zu fünf Bonuspunkte geben.
+      </ActionInfo>
       <EmpGrid>
         <section>
           <EmpImage src={Albert} />
@@ -473,6 +476,10 @@ export default function BossEmpOverview({
     </>
   );
 }
+
+const ActionInfo = styled.h4`
+  padding: 0 2rem;
+`;
 
 const CheckButton = styled.button`
   background-color: red;

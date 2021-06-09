@@ -3,6 +3,7 @@ import Voucher from "../models/voucher.model.js";
 function postVoucher(req, res) {
   const voucher = new Voucher({
     vouchertype: req.body.vouchertype,
+    voucherpartner: req.body.voucherpartner,
     vouchervalue: req.body.vouchervalue,
     vouchercurrency: req.body.vouchercurrency,
     neededpoints: req.body.neededpoints,

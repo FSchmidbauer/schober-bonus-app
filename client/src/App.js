@@ -6,14 +6,19 @@ import { useState } from "react";
 //   NavLink,
 // } from "react-router-dom";
 import styled from "styled-components";
+
 import SchoberLogo from "./images/logo-autohaus-schober.png";
+
 import LoginForm from "./LoginForm.js";
+
 import BossMain from "./BossMain.js";
 import BossEmpOverview from "./BossEmpOverview.js";
 import BossViewEmpPoints from "./BossViewEmpPoints.js";
 import BossViewEmpPointsPublished from "./BossViewEmpPointsPublished.js";
 import BossViewAllVouchers from "./BossViewAllVouchers.js";
+
 import EmployeeMain from "./EmployeeMain.js";
+
 import PartnerMain from "./PartnerMain.js";
 import PartnerNewVoucher from "./PartnerNewVoucher.js";
 import PartnerVoucherCheck from "./PartnerVoucherCheck.js";

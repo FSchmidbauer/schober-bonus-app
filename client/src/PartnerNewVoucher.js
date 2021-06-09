@@ -22,12 +22,12 @@ export default function PartnerNewVoucher({
 
   return (
     <>
-      <h1>GUTSCHEINERSTELLUNG</h1>
+      <h1>NEUER GUTSCHEIN</h1>
       <ActionInfo>
         Bitte tragen Sie die Eckdaten Ihres Gutscheins in das nachfolgende
         Formular ein.
       </ActionInfo>
-      <form>
+      <VoucherForm>
         <VoucherSelect name="vouchertype" onChange={updateVoucher}>
           <option>-- Gutscheinart --</option>
           <option value="Restaurant-Gutschein">Restaurant-Gutschein</option>
@@ -36,6 +36,12 @@ export default function PartnerNewVoucher({
           <option value="Lebensmittel-Gutschein">Lebensmittel-Gutschein</option>
           <option value="Erlebnis-Gutschein">Erlebnis-Gutschein</option>
         </VoucherSelect>
+        <VoucherPartnerInput
+          type="text"
+          name="voucherpartner"
+          placeholder="Partner-Unternehmen"
+          onChange={updateVoucher}
+        />
         <VoucherValue>
           <VoucherValueInput
             type="text"
@@ -62,7 +68,7 @@ export default function PartnerNewVoucher({
           Bonuspunkte
         </p>
         <CheckButton onClick={showVoucherCheck}>Gutschein prüfen</CheckButton>
-      </form>
+      </VoucherForm>
     </>
   );
 }
@@ -71,13 +77,25 @@ const ActionInfo = styled.h4`
   padding: 0 2rem;
 `;
 
+const VoucherForm = styled.form`
+  margin: 1rem 3rem 0;
+`;
+
 const VoucherSelect = styled.select`
   border: none;
   border-bottom: 0.2rem solid black;
   font-size: 1.5rem;
-  padding: 1rem 2.5rem;
-  margin: 1rem;
+  margin-bottom: 2rem;
   cursor: pointer;
+`;
+
+const VoucherPartnerInput = styled.input`
+  border: none;
+  border-bottom: 0.2rem solid black;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: black;
 `;
 
 const VoucherValue = styled.section`
@@ -85,8 +103,7 @@ const VoucherValue = styled.section`
   justify-content: center;
   border: none;
   border-bottom: 0.2rem solid black;
-  padding: 0.75rem;
-  margin: 0 4rem;
+  margin-bottom: 2rem;
   cursor: pointer;
 `;
 
@@ -106,14 +123,13 @@ const VoucherCurrency = styled.select`
 const PointsSelect = styled.select`
   border: none;
   font-size: 1.5rem;
-  padding: 1rem;
-  margin: 0 1rem;
+  padding: 0 0.5rem;
+  margin-bottom: 1rem;
   cursor: pointer;
 `;
 
 const CheckButton = styled.button`
   background-color: red;
-  margin: 2rem 3rem;
   padding: 1rem;
   font-size: 1.5rem;
   color: white;
