@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 import Albert from "./images/albert-neueseite.jpg";
 import Alex from "./images/alex-neueseite.jpg";
@@ -16,7 +15,7 @@ import Niklas from "./images/niklas-neueseite.jpg";
 import Rene from "./images/rene-neueseite.jpg";
 import Sandra from "./images/sandra-neueseite.jpg";
 
-export default function BossViewEmpPoints({
+export default function BossPointsCheck({
   newPointsCounterAlbert,
   newPointsCounterAlex,
   newPointsCounterAndrea,

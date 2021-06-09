@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 import BonusImage from "./images/bonus-image.png";
 import VoucherImage from "./images/voucher-image.png";
@@ -7,17 +6,17 @@ import EmployeesImage from "./images/employees-image.png";
 export default function BossMain({
   createdUser,
   onSetUserIsBoss,
-  onSetBossViewEmployees,
-  onSetBossViewAllVouchers,
+  onSetBossNewPoints,
+  onSetBossVoucherOverview,
 }) {
-  function showBossViewEmployees() {
+  function showBossNewPoints() {
     onSetUserIsBoss(false);
-    onSetBossViewEmployees(true);
+    onSetBossNewPoints(true);
   }
 
-  function showBossViewAllVouchers() {
+  function showBossVoucherOverview() {
     onSetUserIsBoss(false);
-    onSetBossViewAllVouchers(true);
+    onSetBossVoucherOverview(true);
   }
 
   return (
@@ -28,11 +27,11 @@ export default function BossMain({
       </WelcomeMessage>
       <ActionGrid>
         <BonusSection>
-          <ActionImage src={BonusImage} onClick={showBossViewEmployees} />
+          <ActionImage src={BonusImage} onClick={showBossNewPoints} />
           <p>Bonuspunkte vergeben</p>
         </BonusSection>
         <VoucherSection>
-          <ActionImage src={VoucherImage} onClick={showBossViewAllVouchers} />
+          <ActionImage src={VoucherImage} onClick={showBossVoucherOverview} />
           <p>Gutscheine ansehen</p>
         </VoucherSection>
       </ActionGrid>

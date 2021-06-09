@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 
-export default function BossViewAllVouchers({ onSetAllVouchers, allVouchers }) {
+export default function BossVoucherOverview({ onSetAllVouchers, allVouchers }) {
   useEffect(() => {
     fetch("http://localhost:4000/vouchers")
       .then((result) => result.json())

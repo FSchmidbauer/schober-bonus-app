@@ -2,12 +2,12 @@ import { useState } from "react";
 import styled from "styled-components";
 
 export default function PartnerVoucherIsPublished({
-  onSetPartnerCreateNewVoucher,
+  onSetPartnerNewVoucher,
   onSetPartnerVoucherIsPublished,
 }) {
   function createAnotherVoucher() {
     onSetPartnerVoucherIsPublished(false);
-    onSetPartnerCreateNewVoucher(true);
+    onSetPartnerNewVoucher(true);
   }
 
   return (

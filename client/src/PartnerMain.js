@@ -4,11 +4,11 @@ import styled from "styled-components";
 export default function PartnerMain({
   createdUser,
   onSetUserIsPartner,
-  onSetPartnerCreateNewVoucher,
+  onSetPartnerNewVoucher,
 }) {
-  function openVoucherCreator() {
+  function showPartnerNewVoucher() {
     onSetUserIsPartner(false);
-    onSetPartnerCreateNewVoucher(true);
+    onSetPartnerNewVoucher(true);
   }
 
   return (
@@ -17,7 +17,7 @@ export default function PartnerMain({
       <WelcomeMessage>
         Guten Tag {createdUser.name}! Was wollen Sie tun?
       </WelcomeMessage>
-      <NewVoucherSection onClick={openVoucherCreator}>
+      <NewVoucherSection onClick={showPartnerNewVoucher}>
         <ActionImage />
         <p>Gutschein anlegen </p>
       </NewVoucherSection>

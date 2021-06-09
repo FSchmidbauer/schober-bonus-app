@@ -1,13 +1,12 @@
-import { useState } from "react";
 import styled from "styled-components";
 
-export default function BossViewEmpPointsPublished({
-  onSetBossViewEmpPointsArePublished,
-  onSetBossViewEmployees,
+export default function BossPointsArePublished({
+  onSetBossPointsArePublished,
+  onSetBossNewPoints,
 }) {
   function giveMorePoints() {
-    onSetBossViewEmpPointsArePublished(false);
-    onSetBossViewEmployees(true);
+    onSetBossPointsArePublished(false);
+    onSetBossNewPoints(true);
   }
 
   return (

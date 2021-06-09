@@ -12,10 +12,10 @@ import SchoberLogo from "./images/logo-autohaus-schober.png";
 import LoginForm from "./LoginForm.js";
 
 import BossMain from "./BossMain.js";
-import BossEmpOverview from "./BossEmpOverview.js";
-import BossViewEmpPoints from "./BossViewEmpPoints.js";
-import BossViewEmpPointsPublished from "./BossViewEmpPointsPublished.js";
-import BossViewAllVouchers from "./BossViewAllVouchers.js";
+import BossNewPoints from "./BossNewPoints.js";
+import BossPointsCheck from "./BossPointsCheck.js";
+import BossPointsArePublished from "./BossPointsArePublished.js";
+import BossVoucherOverview from "./BossVoucherOverview.js";
 
 import EmployeeMain from "./EmployeeMain.js";
 
@@ -29,11 +29,10 @@ export default function App() {
   const [createdUser, setCreatedUser] = useState(null);
 
   const [userIsBoss, setUserIsBoss] = useState(false);
-  const [bossViewEmployees, setBossViewEmployees] = useState(false);
-  const [bossViewEmpPointsCheck, setBossViewEmpPointsCheck] = useState(false);
-  const [bossViewEmpPointsArePublished, setBossViewEmpPointsArePublished] =
-    useState(false);
-  const [bossViewAllVouchers, setBossViewAllVouchers] = useState(false);
+  const [bossNewPoints, setBossNewPoints] = useState(false);
+  const [bossPointsCheck, setBossPointsCheck] = useState(false);
+  const [bossPointsArePublished, setBossPointsArePublished] = useState(false);
+  const [bossVoucherOverview, setBossVoucherOverview] = useState(false);
 
   const [userIsEmployee, setUserIsEmployee] = useState(false);
 
@@ -43,7 +42,7 @@ export default function App() {
   const [allVouchers, setAllVouchers] = useState([]);
 
   const [userIsPartner, setUserIsPartner] = useState(false);
-  const [partnerCreateNewVoucher, setPartnerCreateNewVoucher] = useState(false);
+  const [partnerNewVoucher, setPartnerNewVoucher] = useState(false);
   const [partnerVoucherCheck, setPartnerVoucherCheck] = useState(false);
   const [partnerVoucherIsPublished, setPartnerVoucherIsPublished] =
     useState(false);
@@ -141,11 +140,9 @@ export default function App() {
     setNewPointsCounterNiklas(0);
     setNewPointsCounterRene(0);
     setNewPointsCounterSandra(0);
-    setBossViewEmpPointsCheck(false);
-    setBossViewEmpPointsArePublished(true);
+    setBossPointsCheck(false);
+    setBossPointsArePublished(true);
   }
-
-  console.log(allPointsCounterAlbert);
 
   return (
     <>
@@ -168,14 +165,14 @@ export default function App() {
           <BossMain
             createdUser={createdUser}
             onSetUserIsBoss={setUserIsBoss}
-            onSetBossViewEmployees={setBossViewEmployees}
-            onSetBossViewAllVouchers={setBossViewAllVouchers}
+            onSetBossNewPoints={setBossNewPoints}
+            onSetBossVoucherOverview={setBossVoucherOverview}
           />
         )}
-        {bossViewEmployees && (
-          <BossEmpOverview
-            onSetBossViewEmployees={setBossViewEmployees}
-            onSetBossViewEmpPointsCheck={setBossViewEmpPointsCheck}
+        {bossNewPoints && (
+          <BossNewPoints
+            onSetBossNewPoints={setBossNewPoints}
+            onSetBossPointsCheck={setBossPointsCheck}
             newPointsCounterAlbert={newPointsCounterAlbert}
             onSetNewPointsCounterAlbert={setNewPointsCounterAlbert}
             newPointsCounterAlex={newPointsCounterAlex}
@@ -208,8 +205,8 @@ export default function App() {
             onSetNewPointsCounterSandra={setNewPointsCounterSandra}
           />
         )}
-        {bossViewEmpPointsCheck && (
-          <BossViewEmpPoints
+        {bossPointsCheck && (
+          <BossPointsCheck
             newPointsCounterAlbert={newPointsCounterAlbert}
             newPointsCounterAlex={newPointsCounterAlex}
             newPointsCounterAndrea={newPointsCounterAndrea}
@@ -228,16 +225,14 @@ export default function App() {
             onConfirmPoints={confirmPoints}
           />
         )}
-        {bossViewEmpPointsArePublished && (
-          <BossViewEmpPointsPublished
-            onSetBossViewEmpPointsArePublished={
-              setBossViewEmpPointsArePublished
-            }
-            onSetBossViewEmployees={setBossViewEmployees}
+        {bossPointsArePublished && (
+          <BossPointsArePublished
+            onSetBossPointsArePublished={setBossPointsArePublished}
+            onSetBossNewPoints={setBossNewPoints}
           />
         )}
-        {bossViewAllVouchers && (
-          <BossViewAllVouchers
+        {bossVoucherOverview && (
+          <BossVoucherOverview
             allVouchers={allVouchers}
             onSetAllVouchers={setAllVouchers}
           />
@@ -247,15 +242,15 @@ export default function App() {
           <PartnerMain
             createdUser={createdUser}
             onSetUserIsPartner={setUserIsPartner}
-            onSetPartnerCreateNewVoucher={setPartnerCreateNewVoucher}
+            onSetPartnerNewVoucher={setPartnerNewVoucher}
           />
         )}
-        {partnerCreateNewVoucher && (
+        {partnerNewVoucher && (
           <PartnerNewVoucher
             createdVoucher={createdVoucher}
             onSetCreatedVoucher={setCreatedVoucher}
             onSetVoucherToConfirm={setVoucherToConfirm}
-            onSetPartnerCreateNewVoucher={setPartnerCreateNewVoucher}
+            onSetPartnerNewVoucher={setPartnerNewVoucher}
             onSetPartnerVoucherCheck={setPartnerVoucherCheck}
           />
         )}
@@ -267,7 +262,7 @@ export default function App() {
         )}
         {partnerVoucherIsPublished && (
           <PartnerVoucherIsPublished
-            onSetPartnerCreateNewVoucher={setPartnerCreateNewVoucher}
+            onSetPartnerNewVoucher={setPartnerNewVoucher}
             onSetPartnerVoucherIsPublished={setPartnerVoucherIsPublished}
           />
         )}

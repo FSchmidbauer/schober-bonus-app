@@ -5,7 +5,7 @@ export default function PartnerNewVoucher({
   createdVoucher,
   onSetCreatedVoucher,
   onSetVoucherToConfirm,
-  onSetPartnerCreateNewVoucher,
+  onSetPartnerNewVoucher,
   onSetPartnerVoucherCheck,
 }) {
   function updateVoucher(event) {
@@ -15,7 +15,7 @@ export default function PartnerNewVoucher({
   }
 
   function showVoucherCheck() {
-    onSetPartnerCreateNewVoucher(false);
+    onSetPartnerNewVoucher(false);
     onSetPartnerVoucherCheck(true);
     onSetVoucherToConfirm(createdVoucher);
   }

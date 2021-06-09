@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 import Albert from "./images/albert-neueseite.jpg";
 import Alex from "./images/alex-neueseite.jpg";
@@ -16,9 +15,9 @@ import Niklas from "./images/niklas-neueseite.jpg";
 import Rene from "./images/rene-neueseite.jpg";
 import Sandra from "./images/sandra-neueseite.jpg";
 
-export default function BossEmpOverview({
-  onSetBossViewEmployees,
-  onSetBossViewEmpPointsCheck,
+export default function BossNewPoints({
+  onSetBossNewPoints,
+  onSetBossPointsCheck,
   newPointsCounterAlbert,
   onSetNewPointsCounterAlbert,
   newPointsCounterAlex,
@@ -62,9 +61,9 @@ export default function BossEmpOverview({
     }
   }
 
-  function showEmpPointsCheck() {
-    onSetBossViewEmployees(false);
-    onSetBossViewEmpPointsCheck(true);
+  function showBossPointsCheck() {
+    onSetBossNewPoints(false);
+    onSetBossPointsCheck(true);
   }
 
   return (
@@ -472,7 +471,7 @@ export default function BossEmpOverview({
           </section>
         </section>
       </EmpGrid>
-      <CheckButton onClick={showEmpPointsCheck}>Punkte prüfen</CheckButton>
+      <CheckButton onClick={showBossPointsCheck}>Punkte prüfen</CheckButton>
     </>
   );
 }
