@@ -170,14 +170,13 @@ const EmpWithNewPoints = styled.section`
   font-weight: bold;
   padding: 0.2rem;
   margin: 1rem;
-  border: 0.2rem solid black;
-  border-radius: 10vw;
 
   img {
     padding: 0.3rem;
     width: 10rem;
     height: 10rem;
     border-radius: 10vw;
+    border: 0.2rem solid black;
   }
 
   p {
