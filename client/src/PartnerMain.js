@@ -14,7 +14,9 @@ export default function PartnerMain({
   return (
     <>
       <h1>HAUPTMENÜ</h1>
-      <h2>Hallo {createdUser.name}! Was willst Du tun?</h2>
+      <WelcomeMessage>
+        Guten Tag {createdUser.name}! Was wollen Sie tun?
+      </WelcomeMessage>
       <NewVoucherSection onClick={openVoucherCreator}>
         <ActionImage />
         <p>Gutschein anlegen </p>
@@ -22,6 +24,10 @@ export default function PartnerMain({
     </>
   );
 }
+
+const WelcomeMessage = styled.h2`
+  padding: 0 2rem;
+`;
 
 const NewVoucherSection = styled.section`
   margin-top: 1.5rem;
@@ -36,6 +42,6 @@ const ActionImage = styled.img`
   width: 10rem;
   height: 8rem;
   border: 0.2rem solid black;
-  border-radius: 10vw;
+  border-radius: 3rem;
   cursor: pointer;
 `;

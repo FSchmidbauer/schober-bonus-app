@@ -4,6 +4,7 @@ import styled from "styled-components";
 export default function PartnerNewVoucher({
   createdVoucher,
   onSetCreatedVoucher,
+  onSetVoucherToConfirm,
   onSetPartnerCreateNewVoucher,
   onSetPartnerVoucherCheck,
 }) {
@@ -16,85 +17,105 @@ export default function PartnerNewVoucher({
   function showVoucherCheck() {
     onSetPartnerCreateNewVoucher(false);
     onSetPartnerVoucherCheck(true);
+    onSetVoucherToConfirm(createdVoucher);
   }
 
   return (
     <>
       <h1>GUTSCHEINERSTELLUNG</h1>
-      <VoucherForm>
-        <select name="vouchertype" onChange={updateVoucher}>
+      <ActionInfo>
+        Bitte tragen Sie die Eckdaten Ihres Gutscheins in das nachfolgende
+        Formular ein.
+      </ActionInfo>
+      <form>
+        <VoucherSelect name="vouchertype" onChange={updateVoucher}>
           <option>-- Gutscheinart --</option>
-          <option value="restaurant">Restaurant-Gutschein</option>
-          <option value="shopping">Shopping-Gutschein</option>
-          <option value="tanken">Tank-Gutschein</option>
-          <option value="lebensmittel">Lebensmittel-Gutschein</option>
-          <option value="erlebnis">Erlebnis-Gutschein</option>
-        </select>
-        <div>
-          <VoucherValue
+          <option value="Restaurant-Gutschein">Restaurant-Gutschein</option>
+          <option value="Shopping-Gutschein">Shopping-Gutschein</option>
+          <option value="Tank-Gutschein">Tank-Gutschein</option>
+          <option value="Lebensmittel-Gutschein">Lebensmittel-Gutschein</option>
+          <option value="Erlebnis-Gutschein">Erlebnis-Gutschein</option>
+        </VoucherSelect>
+        <VoucherValue>
+          <VoucherValueInput
             type="text"
             name="vouchervalue"
-            placeholder="Gutscheinwert"
+            placeholder="Wert in"
             onChange={updateVoucher}
           />
-          <select name="vouchercurrency" onChange={updateVoucher}>
-            <option>-- in --</option>
-            <option value="euro">€</option>
-            <option value="percent">%</option>
-          </select>
-          <p>
-            Zu erwerben für
-            <select name="neededpoints" onChange={updateVoucher}>
-              <option>--</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select>
-            Bonuspunkte
-          </p>
-        </div>
-        <button onClick={showVoucherCheck}>Gutschein prüfen</button>
-      </VoucherForm>
+          <VoucherCurrency name="vouchercurrency" onChange={updateVoucher}>
+            <option>--</option>
+            <option value="€">€</option>
+            <option value="%">%</option>
+          </VoucherCurrency>
+        </VoucherValue>
+        <p>
+          Zu erwerben für
+          <PointsSelect name="neededpoints" onChange={updateVoucher}>
+            <option>--</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+          </PointsSelect>
+          Bonuspunkte
+        </p>
+        <CheckButton onClick={showVoucherCheck}>Gutschein prüfen</CheckButton>
+      </form>
     </>
   );
 }
 
-const VoucherForm = styled.form`
-  border: 0.2rem solid black;
-  border-radius: 10vw;
-
-  select {
-    border: 0.3rem solid black;
-    border-radius: 1rem;
-    font-size: 1.5rem;
-    padding: 1rem;
-    margin: 1rem;
-    cursor: pointer;
-  }
-
-  button {
-    background-color: red;
-    margin: 3rem;
-    padding: 1rem;
-    font-size: 1.5rem;
-    color: white;
-    cursor: pointer;
-  }
+const ActionInfo = styled.h4`
+  padding: 0 2rem;
 `;
 
-const VoucherValue = styled.input`
-  border: 0.3rem solid black;
-  border-radius: 1rem;
+const VoucherSelect = styled.select`
+  border: none;
+  border-bottom: 0.2rem solid black;
   font-size: 1.5rem;
-  padding: 0.75rem;
+  padding: 1rem 2.5rem;
   margin: 1rem;
+  cursor: pointer;
+`;
+
+const VoucherValue = styled.section`
+  display: flex;
+  justify-content: center;
+  border: none;
+  border-bottom: 0.2rem solid black;
+  padding: 0.75rem;
+  margin: 0 4rem;
+  cursor: pointer;
+`;
+
+const VoucherValueInput = styled.input`
+  border: none;
+  font-size: 1.5rem;
   text-align: center;
   color: black;
+`;
+
+const VoucherCurrency = styled.select`
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+`;
+
+const PointsSelect = styled.select`
+  border: none;
+  font-size: 1.5rem;
+  padding: 1rem;
+  margin: 0 1rem;
+  cursor: pointer;
+`;
+
+const CheckButton = styled.button`
+  background-color: red;
+  margin: 2rem 3rem;
+  padding: 1rem;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
 `;

@@ -8,23 +8,31 @@ export default function BossMain({
   createdUser,
   onSetUserIsBoss,
   onSetBossViewEmployees,
+  onSetBossViewAllVouchers,
 }) {
   function showBossViewEmployees() {
     onSetUserIsBoss(false);
     onSetBossViewEmployees(true);
   }
 
+  function showBossViewAllVouchers() {
+    onSetUserIsBoss(false);
+    onSetBossViewAllVouchers(true);
+  }
+
   return (
     <>
       <h1>HAUPTMENÜ</h1>
-      <h2>Hallo {createdUser.name.split(" ")[0]}! Was willst Du tun?</h2>
+      <WelcomeMessage>
+        Hallo {createdUser.name.split(" ")[0]}! Was willst Du tun?
+      </WelcomeMessage>
       <ActionGrid>
         <BonusSection>
           <ActionImage src={BonusImage} onClick={showBossViewEmployees} />
           <p>Bonuspunkte vergeben</p>
         </BonusSection>
         <VoucherSection>
-          <ActionImage src={VoucherImage} />
+          <ActionImage src={VoucherImage} onClick={showBossViewAllVouchers} />
           <p>Gutscheine ansehen</p>
         </VoucherSection>
       </ActionGrid>
@@ -35,6 +43,10 @@ export default function BossMain({
     </>
   );
 }
+
+const WelcomeMessage = styled.h2`
+  padding: 0 2rem;
+`;
 
 const ActionGrid = styled.section`
   display: grid;
@@ -73,6 +85,6 @@ const ActionImage = styled.img`
   width: 10rem;
   height: 8rem;
   border: 0.2rem solid black;
-  border-radius: 10vw;
+  border-radius: 3rem;
   cursor: pointer;
 `;

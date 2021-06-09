@@ -32,11 +32,18 @@ export default function BossViewEmpPoints({
   newPointsCounterNiklas,
   newPointsCounterRene,
   newPointsCounterSandra,
+  onConfirmPoints,
 }) {
+  function jumpOnLastPage() {
+    window.history.go(-1);
+  }
+
   return (
     <>
       <h1>PUNKTE-CHECK</h1>
-      <h4>You gave new bonuspoints to the following employees.</h4>
+      <ActionInfo>
+        Du hast folgenden Mitarbeitern neue Bonuspunkte gegeben:
+      </ActionInfo>
       {newPointsCounterAlbert !== 0 && (
         <EmpWithNewPoints>
           <img src={Albert} />
@@ -157,10 +164,19 @@ export default function BossViewEmpPoints({
           </p>
         </EmpWithNewPoints>
       )}
-      <h4>Confirm?</h4>
+      <ButtonSection>
+        <CorrectButton onClick={() => jumpOnLastPage()}>Anpassen</CorrectButton>
+        <ConfirmButton onClick={() => onConfirmPoints()}>
+          Abschicken
+        </ConfirmButton>
+      </ButtonSection>
     </>
   );
 }
+
+const ActionInfo = styled.h4`
+  padding: 0 2rem;
+`;
 
 const EmpWithNewPoints = styled.section`
   display: flex;
@@ -175,7 +191,7 @@ const EmpWithNewPoints = styled.section`
     padding: 0.3rem;
     width: 10rem;
     height: 10rem;
-    border-radius: 10vw;
+    border-radius: 3rem;
     border: 0.2rem solid black;
   }
 
@@ -184,4 +200,36 @@ const EmpWithNewPoints = styled.section`
       color: red;
     }
   }
+`;
+
+const ButtonSection = styled.section`
+  display: flex;
+  justify-content: space-around;
+  padding: 0 3rem;
+  margin: 0.75rem;
+`;
+
+const CorrectButton = styled.button`
+  border: none;
+  background-color: white;
+  color: red;
+  padding: 1rem;
+  width: 10rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+
+  :hover {
+    background-color: black;
+    color: white;
+  }
+`;
+
+const ConfirmButton = styled.button`
+  border: none;
+  background-color: red;
+  padding: 1rem;
+  width: 10rem;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
 `;

@@ -496,7 +496,7 @@ const EmpImage = styled.img`
   width: 10rem;
   height: 10rem;
   border: 0.2rem solid black;
-  border-radius: 10vw;
+  border-radius: 3rem;
 `;
 
 const MinusButton = styled.button`

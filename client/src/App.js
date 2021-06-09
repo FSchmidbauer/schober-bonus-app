@@ -11,22 +11,37 @@ import LoginForm from "./LoginForm.js";
 import BossMain from "./BossMain.js";
 import BossEmpOverview from "./BossEmpOverview.js";
 import BossViewEmpPoints from "./BossViewEmpPoints.js";
+import BossViewEmpPointsPublished from "./BossViewEmpPointsPublished.js";
+import BossViewAllVouchers from "./BossViewAllVouchers.js";
 import EmployeeMain from "./EmployeeMain.js";
 import PartnerMain from "./PartnerMain.js";
 import PartnerNewVoucher from "./PartnerNewVoucher.js";
 import PartnerVoucherCheck from "./PartnerVoucherCheck.js";
+import PartnerVoucherIsPublished from "./PartnerVoucherIsPublished.js";
 
 export default function App() {
   const [noUser, setNoUser] = useState(true);
   const [createdUser, setCreatedUser] = useState(null);
+
   const [userIsBoss, setUserIsBoss] = useState(false);
   const [bossViewEmployees, setBossViewEmployees] = useState(false);
   const [bossViewEmpPointsCheck, setBossViewEmpPointsCheck] = useState(false);
+  const [bossViewEmpPointsArePublished, setBossViewEmpPointsArePublished] =
+    useState(false);
+  const [bossViewAllVouchers, setBossViewAllVouchers] = useState(false);
+
   const [userIsEmployee, setUserIsEmployee] = useState(false);
+
   const [createdVoucher, setCreatedVoucher] = useState(null);
+  const [voucherToConfirm, setVoucherToConfirm] = useState(null);
+  const [confirmedVouchers, setConfirmedVouchers] = useState([]);
+  const [allVouchers, setAllVouchers] = useState([]);
+
   const [userIsPartner, setUserIsPartner] = useState(false);
   const [partnerCreateNewVoucher, setPartnerCreateNewVoucher] = useState(false);
   const [partnerVoucherCheck, setPartnerVoucherCheck] = useState(false);
+  const [partnerVoucherIsPublished, setPartnerVoucherIsPublished] =
+    useState(false);
 
   const [newPointsCounterAlbert, setNewPointsCounterAlbert] = useState(0);
   const [newPointsCounterAlex, setNewPointsCounterAlex] = useState(0);
@@ -44,10 +59,93 @@ export default function App() {
   const [newPointsCounterRene, setNewPointsCounterRene] = useState(0);
   const [newPointsCounterSandra, setNewPointsCounterSandra] = useState(0);
 
+  const [allPointsCounterAlbert, setAllPointsCounterAlbert] = useState(0);
+  const [allPointsCounterAlex, setAllPointsCounterAlex] = useState(0);
+  const [allPointsCounterAndrea, setAllPointsCounterAndrea] = useState(0);
+  const [allPointsCounterAngelo, setAllPointsCounterAngelo] = useState(0);
+  const [allPointsCounterBerit, setAllPointsCounterBerit] = useState(0);
+  const [allPointsCounterClaudia, setAllPointsCounterClaudia] = useState(0);
+  const [allPointsCounterChristine, setAllPointsCounterChristine] = useState(0);
+  const [allPointsCounterDominic, setAllPointsCounterDominic] = useState(0);
+  const [allPointsCounterErsin, setAllPointsCounterErsin] = useState(0);
+  const [allPointsCounterMartin, setAllPointsCounterMartin] = useState(0);
+  const [allPointsCounterMatthias, setAllPointsCounterMatthias] = useState(0);
+  const [allPointsCounterMichael, setAllPointsCounterMichael] = useState(0);
+  const [allPointsCounterNiklas, setAllPointsCounterNiklas] = useState(0);
+  const [allPointsCounterRene, setAllPointsCounterRene] = useState(0);
+  const [allPointsCounterSandra, setAllPointsCounterSandra] = useState(0);
+
+  function goBackToHome() {
+    setNoUser(true);
+  }
+
+  function confirmVoucher(voucherToBeConfirmed) {
+    fetch("http://localhost:4000/vouchers", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(voucherToBeConfirmed),
+    })
+      .then((result) => result.json())
+      .then(
+        (voucherConfirmed) =>
+          setConfirmedVouchers(...confirmedVouchers, voucherConfirmed),
+        setPartnerVoucherCheck(false),
+        setPartnerVoucherIsPublished(true)
+      )
+      .catch((error) => console.error(error));
+  }
+
+  function confirmPoints() {
+    setAllPointsCounterAlbert(allPointsCounterAlbert + newPointsCounterAlbert);
+    setAllPointsCounterAlex(allPointsCounterAlex + newPointsCounterAlex);
+    setAllPointsCounterAndrea(allPointsCounterAndrea + newPointsCounterAndrea);
+    setAllPointsCounterAngelo(allPointsCounterAngelo + newPointsCounterAngelo);
+    setAllPointsCounterBerit(allPointsCounterBerit + newPointsCounterBerit);
+    setAllPointsCounterChristine(
+      allPointsCounterChristine + newPointsCounterChristine
+    );
+    setAllPointsCounterClaudia(
+      allPointsCounterClaudia + newPointsCounterClaudia
+    );
+    setAllPointsCounterDominic(
+      allPointsCounterDominic + newPointsCounterDominic
+    );
+    setAllPointsCounterErsin(allPointsCounterErsin + newPointsCounterErsin);
+    setAllPointsCounterMartin(allPointsCounterMartin + newPointsCounterMartin);
+    setAllPointsCounterMatthias(
+      allPointsCounterMatthias + newPointsCounterMatthias
+    );
+    setAllPointsCounterMichael(
+      allPointsCounterMichael + newPointsCounterMichael
+    );
+    setAllPointsCounterNiklas(allPointsCounterNiklas + newPointsCounterNiklas);
+    setAllPointsCounterRene(allPointsCounterRene + newPointsCounterRene);
+    setAllPointsCounterSandra(allPointsCounterSandra + newPointsCounterSandra);
+    setNewPointsCounterAlbert(0);
+    setNewPointsCounterAlex(0);
+    setNewPointsCounterAndrea(0);
+    setNewPointsCounterAngelo(0);
+    setNewPointsCounterBerit(0);
+    setNewPointsCounterChristine(0);
+    setNewPointsCounterClaudia(0);
+    setNewPointsCounterDominic(0);
+    setNewPointsCounterErsin(0);
+    setNewPointsCounterMartin(0);
+    setNewPointsCounterMatthias(0);
+    setNewPointsCounterMichael(0);
+    setNewPointsCounterNiklas(0);
+    setNewPointsCounterRene(0);
+    setNewPointsCounterSandra(0);
+    setBossViewEmpPointsCheck(false);
+    setBossViewEmpPointsArePublished(true);
+  }
+
+  console.log(allPointsCounterAlbert);
+
   return (
     <>
       <header>
-        <HeaderImage src={SchoberLogo} />
+        <HeaderImage src={SchoberLogo} onClick={goBackToHome} />
         <HeaderHeadline>BONUS-APP</HeaderHeadline>
       </header>
       <Main>
@@ -66,6 +164,7 @@ export default function App() {
             createdUser={createdUser}
             onSetUserIsBoss={setUserIsBoss}
             onSetBossViewEmployees={setBossViewEmployees}
+            onSetBossViewAllVouchers={setBossViewAllVouchers}
           />
         )}
         {bossViewEmployees && (
@@ -121,6 +220,21 @@ export default function App() {
             newPointsCounterNiklas={newPointsCounterNiklas}
             newPointsCounterRene={newPointsCounterRene}
             newPointsCounterSandra={newPointsCounterSandra}
+            onConfirmPoints={confirmPoints}
+          />
+        )}
+        {bossViewEmpPointsArePublished && (
+          <BossViewEmpPointsPublished
+            onSetBossViewEmpPointsArePublished={
+              setBossViewEmpPointsArePublished
+            }
+            onSetBossViewEmployees={setBossViewEmployees}
+          />
+        )}
+        {bossViewAllVouchers && (
+          <BossViewAllVouchers
+            allVouchers={allVouchers}
+            onSetAllVouchers={setAllVouchers}
           />
         )}
         {userIsEmployee && <EmployeeMain createdUser={createdUser} />}
@@ -135,12 +249,22 @@ export default function App() {
           <PartnerNewVoucher
             createdVoucher={createdVoucher}
             onSetCreatedVoucher={setCreatedVoucher}
+            onSetVoucherToConfirm={setVoucherToConfirm}
             onSetPartnerCreateNewVoucher={setPartnerCreateNewVoucher}
             onSetPartnerVoucherCheck={setPartnerVoucherCheck}
           />
         )}
         {partnerVoucherCheck && (
-          <PartnerVoucherCheck createdVoucher={createdVoucher} />
+          <PartnerVoucherCheck
+            onConfirmVoucher={confirmVoucher}
+            voucherToConfirm={voucherToConfirm}
+          />
+        )}
+        {partnerVoucherIsPublished && (
+          <PartnerVoucherIsPublished
+            onSetPartnerCreateNewVoucher={setPartnerCreateNewVoucher}
+            onSetPartnerVoucherIsPublished={setPartnerVoucherIsPublished}
+          />
         )}
       </Main>
       <Footernav>
@@ -155,6 +279,7 @@ export default function App() {
 const HeaderImage = styled.img`
   width: 10rem;
   padding: 0.5rem 0rem 0rem;
+  cursor: pointer;
 `;
 
 const HeaderHeadline = styled.section`
