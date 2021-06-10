@@ -70,7 +70,8 @@ export default function BossNewPoints({
     <>
       <h1>PUNKTEVERGABE</h1>
       <ActionInfo>
-        Du kannst jedem Deiner Mitarbeiter bis zu fünf Bonuspunkte geben.
+        Du kannst jedem Deiner Mitarbeiter bis zu fünf Bonuspunkte auf einmal
+        geben.
       </ActionInfo>
       <EmpGrid>
         <section>

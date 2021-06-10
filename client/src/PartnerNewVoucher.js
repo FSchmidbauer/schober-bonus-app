@@ -8,6 +8,8 @@ export default function PartnerNewVoucher({
   onSetPartnerNewVoucher,
   onSetPartnerVoucherCheck,
 }) {
+  const [relatedPoints, setRelatedPoints] = useState(0);
+
   function updateVoucher(event) {
     const fieldName = event.target.name;
     let fieldValue = event.target.value;
@@ -18,6 +20,27 @@ export default function PartnerNewVoucher({
     onSetPartnerNewVoucher(false);
     onSetPartnerVoucherCheck(true);
     onSetVoucherToConfirm(createdVoucher);
+  }
+
+  function changePointsNeeded() {
+    if (createdVoucher.vouchervalue <= 25) {
+      setRelatedPoints(2);
+    } else if (
+      createdVoucher.vouchervalue > 25 &&
+      createdVoucher.vouchervalue <= 50
+    ) {
+      setRelatedPoints(4);
+    } else if (
+      createdVoucher.vouchervalue > 50 &&
+      createdVoucher.vouchervalue <= 75
+    ) {
+      setRelatedPoints(6);
+    } else if (
+      createdVoucher.vouchervalue > 75 &&
+      createdVoucher.vouchervalue <= 100
+    ) {
+      setRelatedPoints(8);
+    } else setRelatedPoints(10);
   }
 
   return (
@@ -48,6 +71,7 @@ export default function PartnerNewVoucher({
             name="vouchervalue"
             placeholder="Wert in"
             onChange={updateVoucher}
+            onBlur={changePointsNeeded}
           />
           <VoucherCurrency name="vouchercurrency" onChange={updateVoucher}>
             <option>--</option>
@@ -57,14 +81,11 @@ export default function PartnerNewVoucher({
         </VoucherValue>
         <p>
           Zu erwerben für
-          <PointsSelect name="neededpoints" onChange={updateVoucher}>
-            <option>--</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-            <option value="25">25</option>
-          </PointsSelect>
+          <PointsNeeded
+            name="neededpoints"
+            value={relatedPoints}
+            onChange={updateVoucher}
+          />
           Bonuspunkte
         </p>
         <CheckButton onClick={showVoucherCheck}>Gutschein prüfen</CheckButton>
@@ -120,10 +141,9 @@ const VoucherCurrency = styled.select`
   cursor: pointer;
 `;
 
-const PointsSelect = styled.select`
+const PointsNeeded = styled.input`
   border: none;
   font-size: 1.5rem;
-  padding: 0 0.5rem;
   margin-bottom: 1rem;
   cursor: pointer;
 `;
