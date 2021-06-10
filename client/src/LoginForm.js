@@ -50,7 +50,7 @@ export default function LoginForm({
       <h1>LOGIN</h1>
       <form>
         <LoginRole name="role" onChange={updateUser}>
-          <option>-- Bitte Rolle wählen --</option>
+          <option value="notChosen">-- Bitte Rolle wählen --</option>
           <option value="geschaeftsfuehrer">Geschäftsführer</option>
           <option value="mitarbeiter">Mitarbeiter</option>
           <option value="partnerunternehmen">Partner-Unternehmen</option>
