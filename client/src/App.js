@@ -18,6 +18,7 @@ import BossPointsArePublished from "./BossPointsArePublished.js";
 import BossVoucherOverview from "./BossVoucherOverview.js";
 
 import EmployeeMain from "./EmployeeMain.js";
+import EmployeeVoucherChoice from "./EmployeeVoucherChoice.js";
 
 import PartnerMain from "./PartnerMain.js";
 import PartnerNewVoucher from "./PartnerNewVoucher.js";
@@ -35,11 +36,13 @@ export default function App() {
   const [bossVoucherOverview, setBossVoucherOverview] = useState(false);
 
   const [userIsEmployee, setUserIsEmployee] = useState(false);
+  const [employeeVoucherChoice, setEmployeeVoucherChoice] = useState(false);
 
   const [createdVoucher, setCreatedVoucher] = useState(null);
   const [voucherToConfirm, setVoucherToConfirm] = useState(null);
   const [confirmedVouchers, setConfirmedVouchers] = useState([]);
   const [allVouchers, setAllVouchers] = useState([]);
+  const [chosenVouchers, setChosenVouchers] = useState([]);
 
   const [userIsPartner, setUserIsPartner] = useState(false);
   const [partnerNewVoucher, setPartnerNewVoucher] = useState(false);
@@ -237,7 +240,21 @@ export default function App() {
             onSetAllVouchers={setAllVouchers}
           />
         )}
-        {userIsEmployee && <EmployeeMain createdUser={createdUser} />}
+        {userIsEmployee && (
+          <EmployeeMain
+            createdUser={createdUser}
+            onSetUserIsEmployee={setUserIsEmployee}
+            onSetEmployeeVoucherChoice={setEmployeeVoucherChoice}
+          />
+        )}
+        {employeeVoucherChoice && (
+          <EmployeeVoucherChoice
+            onSetAllVouchers={setAllVouchers}
+            allVouchers={allVouchers}
+            onSetChosenVouchers={setChosenVouchers}
+            chosenVouchers={chosenVouchers}
+          />
+        )}
         {userIsPartner && (
           <PartnerMain
             createdUser={createdUser}

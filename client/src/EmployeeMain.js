@@ -1,6 +1,15 @@
 import styled from "styled-components";
 
-export default function EmployeeMain({ createdUser }) {
+export default function EmployeeMain({
+  createdUser,
+  onSetUserIsEmployee,
+  onSetEmployeeVoucherChoice,
+}) {
+  function showEmployeeVoucherChoice() {
+    onSetUserIsEmployee(false);
+    onSetEmployeeVoucherChoice(true);
+  }
+
   return (
     <>
       <h1>HAUPTMENÜ</h1>
@@ -9,7 +18,7 @@ export default function EmployeeMain({ createdUser }) {
       </WelcomeMessage>
       <ActionGrid>
         <BonusSection>
-          <ActionImage />
+          <ActionImage onClick={showEmployeeVoucherChoice} />
           <p>Bonuspunkte einlösen </p>
         </BonusSection>
         <HistorySection>
