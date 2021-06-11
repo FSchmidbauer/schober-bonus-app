@@ -18,4 +18,19 @@ function getVouchers(req, res) {
   Voucher.find().then((voucher) => res.json(voucher));
 }
 
-export { postVoucher, getVouchers };
+function deleteVouchers(req, res) {
+  const { voucherId } = req.params;
+  Voucher.findByIdAndDelete({ _id: voucherId }, (error, doc) => {
+    if (error) {
+      res.json({ message: "Could not delete this voucher." });
+      return;
+    }
+    res.json({
+      success: true,
+      message: `The voucher ${doc.name} has been deleted.`,
+      data: doc,
+    });
+  });
+}
+
+export { postVoucher, getVouchers, deleteVouchers };
