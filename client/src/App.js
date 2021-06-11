@@ -19,6 +19,8 @@ import BossVoucherOverview from "./BossVoucherOverview.js";
 
 import EmployeeMain from "./EmployeeMain.js";
 import EmployeeVoucherChoice from "./EmployeeVoucherChoice.js";
+import EmployeeVoucherCheck from "./EmployeeVoucherCheck.js";
+import EmployeeVoucherIsAcquired from "./EmployeeVoucherIsAcquired.js";
 
 import PartnerMain from "./PartnerMain.js";
 import PartnerNewVoucher from "./PartnerNewVoucher.js";
@@ -37,6 +39,9 @@ export default function App() {
 
   const [userIsEmployee, setUserIsEmployee] = useState(false);
   const [employeeVoucherChoice, setEmployeeVoucherChoice] = useState(false);
+  const [employeeVoucherCheck, setEmployeeVoucherCheck] = useState(false);
+  const [employeeVoucherIsAcquired, setEmployeeVoucherIsAcquired] =
+    useState(false);
 
   const [createdVoucher, setCreatedVoucher] = useState(null);
   const [voucherToConfirm, setVoucherToConfirm] = useState(null);
@@ -147,6 +152,28 @@ export default function App() {
     setBossPointsArePublished(true);
   }
 
+  function acquireAndDeleteForOthersVoucher(voucherToBeDeleted) {
+    fetch("http://localhost:4000/vouchers/" + voucherToBeDeleted._id, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((result) => result.json())
+      .then((response) => {
+        if (response.data && response.data._id) {
+          const vouchersToKeep = allVouchers.filter(
+            (voucher) => voucher._id !== response.data._id
+          );
+          setAllVouchers(vouchersToKeep);
+        } else {
+          console.log("Voucher could not be deleted.");
+        }
+      });
+    setEmployeeVoucherCheck(false);
+    setEmployeeVoucherIsAcquired(true);
+  }
+
   return (
     <>
       <header>
@@ -253,6 +280,22 @@ export default function App() {
             allVouchers={allVouchers}
             onSetChosenVouchers={setChosenVouchers}
             chosenVouchers={chosenVouchers}
+            onSetEmployeeVoucherChoice={setEmployeeVoucherChoice}
+            onSetEmployeeVoucherCheck={setEmployeeVoucherCheck}
+          />
+        )}
+        {employeeVoucherCheck && (
+          <EmployeeVoucherCheck
+            chosenVouchers={chosenVouchers}
+            onAcquireAndDeleteForOthersVoucher={
+              acquireAndDeleteForOthersVoucher
+            }
+          />
+        )}
+        {employeeVoucherIsAcquired && (
+          <EmployeeVoucherIsAcquired
+            onSetEmployeeVoucherIsAcquired={setEmployeeVoucherIsAcquired}
+            onSetEmployeeVoucherChoice={setEmployeeVoucherChoice}
           />
         )}
         {userIsPartner && (

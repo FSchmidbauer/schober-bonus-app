@@ -6,6 +6,8 @@ export default function EmployeeVoucherChoice({
   allVouchers,
   onSetChosenVouchers,
   chosenVouchers,
+  onSetEmployeeVoucherChoice,
+  onSetEmployeeVoucherCheck,
 }) {
   useEffect(() => {
     fetch("http://localhost:4000/vouchers")
@@ -16,10 +18,14 @@ export default function EmployeeVoucherChoice({
 
   function chooseVoucher(clickedVoucher) {
     const chosenVoucher = allVouchers.find(
-      (voucher) => voucher.index === clickedVoucher.index
+      (voucher) => voucher._id === clickedVoucher._id
     );
-    // onSetChosenVouchers(...chosenVouchers, chosenVoucher);
-    console.log(chosenVoucher);
+    onSetChosenVouchers([...chosenVouchers, chosenVoucher]);
+  }
+
+  function showVoucherCheck() {
+    onSetEmployeeVoucherChoice(false);
+    onSetEmployeeVoucherCheck(true);
   }
 
   return (
@@ -47,6 +53,7 @@ export default function EmployeeVoucherChoice({
           </>
         ))}
       </VoucherSection>
+      <CheckButton onClick={showVoucherCheck}>Auswahl prüfen</CheckButton>
     </>
   );
 }
@@ -57,7 +64,7 @@ const ActionInfo = styled.h4`
 
 const VoucherSection = styled.section`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   place-items: center;
 `;
@@ -97,4 +104,12 @@ const BonusPointBubble = styled.section`
   border-radius: 1rem;
   color: white;
   padding: 1rem;
+`;
+
+const CheckButton = styled.button`
+  background-color: red;
+  padding: 1rem;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
 `;
