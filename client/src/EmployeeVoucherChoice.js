@@ -18,11 +18,20 @@ export default function EmployeeVoucherChoice({
 
   const [choiceErrorMessage, setChoiceErrorMessage] = useState(false);
 
-  function chooseVoucher(clickedVoucher) {
-    const chosenVoucher = allVouchers.find(
+  console.log(chosenVouchers);
+
+  function chooseOrUnChooseVoucher(clickedVoucher) {
+    const chosenOrUnChosenVoucher = allVouchers.find(
       (voucher) => voucher._id === clickedVoucher._id
     );
-    onSetChosenVouchers([...chosenVouchers, chosenVoucher]);
+    if (chosenVouchers.some((voucher) => voucher._id === clickedVoucher._id)) {
+      const remainingChosenVouchers = chosenVouchers.filter(
+        (voucher) => voucher._id !== clickedVoucher._id
+      );
+      onSetChosenVouchers(remainingChosenVouchers);
+    } else {
+      onSetChosenVouchers([...chosenVouchers, chosenOrUnChosenVoucher]);
+    }
   }
 
   function showVoucherCheck() {
@@ -53,7 +62,7 @@ export default function EmployeeVoucherChoice({
               <BonusPointBubble>{voucher.neededpoints} Punkte</BonusPointBubble>
               <ChooseCheckbox
                 type="checkbox"
-                onClick={() => chooseVoucher(voucher)}
+                onClick={() => chooseOrUnChooseVoucher(voucher)}
               />
             </SingleVoucher>
           </>
