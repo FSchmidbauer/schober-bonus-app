@@ -13,11 +13,11 @@ export default function EmployeeVoucherIsAcquired({
     <>
       <h1>VIELEN DANK!</h1>
       <ActionInfo>
-        Dein Gutschein-Erwerb war erfolgreich. Du kannst Dir das / die
-        ausgedruckte(n) Dokument(e) morgen im Chef-Büro abholen.
+        Dein Gutschein-Erwerb war erfolgreich. Du kannst Dir die ausgedruckten
+        Dokumente morgen im Chef-Büro abholen.
       </ActionInfo>
       <NewVoucherButton onClick={aquireAnotherVoucher}>
-        Weitere(n) Gutschein(e) erwerben
+        Weitere Gutscheine erwerben
       </NewVoucherButton>
     </>
   );

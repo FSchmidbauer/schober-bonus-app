@@ -152,24 +152,27 @@ export default function App() {
     setBossPointsArePublished(true);
   }
 
-  function acquireAndDeleteForOthersVoucher(voucherToBeDeleted) {
-    fetch("http://localhost:4000/vouchers/" + voucherToBeDeleted._id, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((result) => result.json())
-      .then((response) => {
-        if (response.data && response.data._id) {
-          const vouchersToKeep = allVouchers.filter(
-            (voucher) => voucher._id !== response.data._id
-          );
-          setAllVouchers(vouchersToKeep);
-        } else {
-          console.log("Voucher could not be deleted.");
-        }
-      });
+  function acquireAndDeleteForOthersVoucher() {
+    chosenVouchers.map((voucherToBeDeleted) => {
+      fetch("http://localhost:4000/vouchers/" + voucherToBeDeleted._id, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((result) => result.json())
+        .then((response) => {
+          if (response.data && response.data._id) {
+            const vouchersToKeep = allVouchers.filter(
+              (voucher) => voucher._id !== response.data._id
+            );
+            setAllVouchers(vouchersToKeep);
+          } else {
+            console.log("Voucher could not be deleted.");
+          }
+        });
+    });
+    setChosenVouchers([]);
     setEmployeeVoucherCheck(false);
     setEmployeeVoucherIsAcquired(true);
   }

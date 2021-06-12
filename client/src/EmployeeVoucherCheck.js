@@ -11,9 +11,7 @@ export default function EmployeeVoucherCheck({
   return (
     <>
       <h1>AUSWAHL-CHECK</h1>
-      <ActionInfo>
-        Du hast folgende(n) Gutschein(e) für Dich ausgewählt:
-      </ActionInfo>
+      <ActionInfo>Du hast folgende Gutscheine für Dich ausgewählt:</ActionInfo>
       <VoucherToConfirmSection>
         {chosenVouchers.map((voucher) => {
           return (
@@ -30,9 +28,7 @@ export default function EmployeeVoucherCheck({
       </VoucherToConfirmSection>
       <ButtonSection>
         <CorrectButton onClick={() => jumpOnLastPage()}>Anpassen</CorrectButton>
-        <ConfirmButton
-          onClick={() => onAcquireAndDeleteForOthersVoucher(chosenVouchers)}
-        >
+        <ConfirmButton onClick={() => onAcquireAndDeleteForOthersVoucher()}>
           Bestätigen
         </ConfirmButton>
       </ButtonSection>

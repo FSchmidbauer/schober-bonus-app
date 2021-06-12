@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.post("/vouchers", postVoucher);
 router.get("/vouchers", getVouchers);
-router.delete("/vouchers", deleteVouchers);
+router.delete("/vouchers/:voucherId", deleteVouchers);
 
 export default router;

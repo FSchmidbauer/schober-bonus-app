@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Albert from "./images/albert-neueseite.jpg";
 import Alex from "./images/alex-neueseite.jpg";
@@ -49,6 +50,8 @@ export default function BossNewPoints({
   newPointsCounterSandra,
   onSetNewPointsCounterSandra,
 }) {
+  const [pointsErrorMessage, setPointsErrorMessage] = useState(false);
+
   function subtractPoints(onSetNewPointsCounter, newPointsCounter) {
     if (newPointsCounter !== 0) {
       onSetNewPointsCounter(newPointsCounter - 1);
@@ -62,8 +65,28 @@ export default function BossNewPoints({
   }
 
   function showBossPointsCheck() {
-    onSetBossNewPoints(false);
-    onSetBossPointsCheck(true);
+    if (
+      newPointsCounterAlbert === 0 &&
+      newPointsCounterAlex === 0 &&
+      newPointsCounterAndrea === 0 &&
+      newPointsCounterAngelo === 0 &&
+      newPointsCounterBerit === 0 &&
+      newPointsCounterChristine === 0 &&
+      newPointsCounterClaudia === 0 &&
+      newPointsCounterDominic === 0 &&
+      newPointsCounterErsin === 0 &&
+      newPointsCounterMartin === 0 &&
+      newPointsCounterMatthias === 0 &&
+      newPointsCounterMichael === 0 &&
+      newPointsCounterNiklas === 0 &&
+      newPointsCounterRene === 0 &&
+      newPointsCounterSandra === 0
+    ) {
+      setPointsErrorMessage(true);
+    } else {
+      onSetBossNewPoints(false);
+      onSetBossPointsCheck(true);
+    }
   }
 
   return (
@@ -473,6 +496,11 @@ export default function BossNewPoints({
         </section>
       </EmpGrid>
       <CheckButton onClick={showBossPointsCheck}>Punkte prüfen</CheckButton>
+      {pointsErrorMessage && (
+        <PointsError>
+          Du musst zuerst Bonuspunkte vergeben, bevor Du auf diese Seite kannst.
+        </PointsError>
+      )}
     </>
   );
 }
@@ -533,4 +561,10 @@ const EmpInputfield = styled.input`
   text-align: center;
   width: 3rem;
   font-size: 1.5rem;
+`;
+
+const PointsError = styled.div`
+  background-color: red;
+  color: white;
+  padding: 0.5rem;
 `;

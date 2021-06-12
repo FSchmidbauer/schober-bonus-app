@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 
 export default function EmployeeVoucherChoice({
@@ -16,6 +16,8 @@ export default function EmployeeVoucherChoice({
       .then((error) => console.error(error));
   }, []);
 
+  const [choiceErrorMessage, setChoiceErrorMessage] = useState(false);
+
   function chooseVoucher(clickedVoucher) {
     const chosenVoucher = allVouchers.find(
       (voucher) => voucher._id === clickedVoucher._id
@@ -24,8 +26,12 @@ export default function EmployeeVoucherChoice({
   }
 
   function showVoucherCheck() {
-    onSetEmployeeVoucherChoice(false);
-    onSetEmployeeVoucherCheck(true);
+    if (chosenVouchers.length === 0) {
+      setChoiceErrorMessage(true);
+    } else {
+      onSetEmployeeVoucherChoice(false);
+      onSetEmployeeVoucherCheck(true);
+    }
   }
 
   return (
@@ -54,6 +60,11 @@ export default function EmployeeVoucherChoice({
         ))}
       </VoucherSection>
       <CheckButton onClick={showVoucherCheck}>Auswahl prüfen</CheckButton>
+      {choiceErrorMessage && (
+        <ChoiceError>
+          Du musst zuerst eine Auswahl treffen, bevor Du auf diese Seite kannst.
+        </ChoiceError>
+      )}
     </>
   );
 }
@@ -112,4 +123,10 @@ const CheckButton = styled.button`
   font-size: 1.5rem;
   color: white;
   cursor: pointer;
+`;
+
+const ChoiceError = styled.div`
+  background-color: red;
+  color: white;
+  padding: 0.5rem;
 `;
