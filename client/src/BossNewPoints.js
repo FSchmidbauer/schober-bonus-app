@@ -511,56 +511,56 @@ const ActionInfo = styled.h4`
 
 const CheckButton = styled.button`
   background-color: red;
-  margin: 3rem;
-  padding: 1rem;
-  font-size: 1.5rem;
   color: white;
   cursor: pointer;
+  font-size: 1.5rem;
+  margin: 3rem;
+  padding: 1rem;
 `;
 
 const EmpGrid = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin: 1.5rem 0rem 0rem;
   place-items: center;
   row-gap: 3rem;
-  margin: 1.5rem 0rem 0rem;
 `;
 
 const EmpImage = styled.img`
-  padding: 0.3rem;
-  width: 10rem;
-  height: 10rem;
   border: 0.2rem solid black;
   border-radius: 3rem;
+  height: 10rem;
+  width: 10rem;
+  padding: 0.3rem;
 `;
 
 const MinusButton = styled.button`
   background: red;
-  color: white;
-  font-size: 1.5rem;
   border: 0.2rem solid red;
   border-radius: 10vw;
-  width: 3rem;
-  height: 3rem;
+  color: white;
   cursor: pointer;
+  font-size: 1.5rem;
+  height: 3rem;
+  width: 3rem;
 `;
 
 const PlusButton = styled.button`
   background: green;
-  color: white;
-  font-size: 1.5rem;
   border: 0.2rem solid green;
   border-radius: 10vw;
-  width: 3rem;
-  height: 3rem;
+  color: white;
   cursor: pointer;
+  font-size: 1.5rem;
+  height: 3rem;
+  width: 3rem;
 `;
 
 const EmpInputfield = styled.input`
   border: none;
+  font-size: 1.5rem;
   text-align: center;
   width: 3rem;
-  font-size: 1.5rem;
 `;
 
 const PointsError = styled.div`

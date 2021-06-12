@@ -76,27 +76,27 @@ const ValidError = styled.div`
 const LoginRole = styled.select`
   border: 0.3rem solid black;
   border-radius: 1rem;
-  font-size: 1.5rem;
-  padding: 1rem;
-  margin: 1rem;
   cursor: pointer;
+  font-size: 1.5rem;
+  margin: 1rem;
+  padding: 1rem;
 `;
 
 const LoginName = styled.input`
   border: 0.3rem solid black;
   border-radius: 1rem;
-  font-size: 1.5rem;
-  padding: 0.75rem;
-  margin: 1rem;
-  text-align: center;
   color: black;
+  font-size: 1.5rem;
+  margin: 1rem;
+  padding: 0.75rem;
+  text-align: center;
 `;
 
 const LoginButton = styled.button`
   background-color: red;
-  margin: 3rem;
-  padding: 1rem;
-  font-size: 1.5rem;
   color: white;
   cursor: pointer;
+  font-size: 1.5rem;
+  margin: 3rem;
+  padding: 1rem;
 `;

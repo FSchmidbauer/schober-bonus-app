@@ -18,10 +18,8 @@ export default function EmployeeVoucherChoice({
 
   const [choiceErrorMessage, setChoiceErrorMessage] = useState(false);
 
-  console.log(chosenVouchers);
-
   function chooseOrUnChooseVoucher(clickedVoucher) {
-    const chosenOrUnChosenVoucher = allVouchers.find(
+    const selectedVoucher = allVouchers.find(
       (voucher) => voucher._id === clickedVoucher._id
     );
     if (chosenVouchers.some((voucher) => voucher._id === clickedVoucher._id)) {
@@ -30,7 +28,7 @@ export default function EmployeeVoucherChoice({
       );
       onSetChosenVouchers(remainingChosenVouchers);
     } else {
-      onSetChosenVouchers([...chosenVouchers, chosenOrUnChosenVoucher]);
+      onSetChosenVouchers([...chosenVouchers, selectedVoucher]);
     }
   }
 
@@ -94,16 +92,16 @@ const ChooseCheckbox = styled.input`
 `;
 
 const SingleVoucher = styled.section`
-  position: relative;
-  margin: 1.5rem 3rem;
   border: 0.2rem solid red;
   border-radius: 3rem;
+  margin: 1.5rem 3rem;
+  position: relative;
 `;
 
 const VoucherTitle = styled.p`
-  padding-top: 1rem;
-  font-weight: bold;
   font-size: 1.5rem;
+  font-weight: bold;
+  padding-top: 1rem;
 `;
 
 const VoucherValue = styled.p`
@@ -112,26 +110,26 @@ const VoucherValue = styled.p`
 `;
 
 const VoucherPartner = styled.p`
-  font-weight: bold;
   font-size: 1.2rem;
+  font-weight: bold;
 `;
 
 const BonusPointBubble = styled.section`
-  position: absolute;
-  left: 20rem;
-  bottom: 11rem;
   background-color: red;
   border-radius: 1rem;
   color: white;
   padding: 1rem;
+  position: absolute;
+  bottom: 11rem;
+  left: 20rem;
 `;
 
 const CheckButton = styled.button`
   background-color: red;
-  padding: 1rem;
-  font-size: 1.5rem;
   color: white;
   cursor: pointer;
+  font-size: 1.5rem;
+  padding: 1rem;
 `;
 
 const ChoiceError = styled.div`
