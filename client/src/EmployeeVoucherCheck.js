@@ -11,7 +11,9 @@ export default function EmployeeVoucherCheck({
   return (
     <>
       <h1>AUSWAHL-CHECK</h1>
-      <ActionInfo>Du hast folgende Gutscheine für Dich ausgewählt:</ActionInfo>
+      <ActionInfo>
+        Du hast folgende Gutscheine für Dich vorausgewählt:
+      </ActionInfo>
       <VoucherToConfirmSection>
         {chosenVouchers.map((voucher) => {
           return (
