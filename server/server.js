@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import voucherRoutes from "./routes/voucher.routes.js";
+import empPointsRoutes from "./routes/emppoints.routes.js";
 
 const connectionString =
   "mongodb+srv://elflocogrande:ElFloco88!@cluster0.ly74u.mongodb.net/bonusvouchers?retryWrites=true&w=majority";
@@ -16,6 +17,7 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 server.use(voucherRoutes);
+server.use(empPointsRoutes);
 
 server.listen(4000);
 
