@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import BonusImage from "./images/bonus-image.png";
-import VoucherImage from "./images/voucher-image.png";
-import EmployeesImage from "./images/employees-image.png";
+import BonusImage from "../images/bonus-image.png";
+import VoucherImage from "../images/voucher-image.png";
+import EmployeesImage from "../images/employees-image.png";
 
 export default function BossMain({
   createdUser,

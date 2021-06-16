@@ -11,21 +11,21 @@ import SchoberLogo from "./images/logo-autohaus-schober.png";
 
 import LoginForm from "./LoginForm.js";
 
-import BossMain from "./BossMain.js";
-import BossNewPoints from "./BossNewPoints.js";
-import BossPointsCheck from "./BossPointsCheck.js";
-import BossPointsArePublished from "./BossPointsArePublished.js";
-import BossVoucherOverview from "./BossVoucherOverview.js";
+import BossMain from "./boss_pages/BossMain.js";
+import BossNewPoints from "./boss_pages/BossNewPoints.js";
+import BossPointsCheck from "./boss_pages/BossPointsCheck.js";
+import BossPointsArePublished from "./boss_pages/BossPointsArePublished.js";
+import BossVoucherOverview from "./boss_pages/BossVoucherOverview.js";
 
-import EmployeeMain from "./EmployeeMain.js";
-import EmployeeVoucherChoice from "./EmployeeVoucherChoice.js";
-import EmployeeVoucherCheck from "./EmployeeVoucherCheck.js";
-import EmployeeVoucherIsAcquired from "./EmployeeVoucherIsAcquired.js";
+import EmployeeMain from "./employee_pages/EmployeeMain.js";
+import EmployeeVoucherChoice from "./employee_pages/EmployeeVoucherChoice.js";
+import EmployeeVoucherCheck from "./employee_pages/EmployeeVoucherCheck.js";
+import EmployeeVoucherIsAcquired from "./employee_pages/EmployeeVoucherIsAcquired.js";
 
-import PartnerMain from "./PartnerMain.js";
-import PartnerNewVoucher from "./PartnerNewVoucher.js";
-import PartnerVoucherCheck from "./PartnerVoucherCheck.js";
-import PartnerVoucherIsPublished from "./PartnerVoucherIsPublished.js";
+import PartnerMain from "./partner_pages/PartnerMain.js";
+import PartnerNewVoucher from "./partner_pages/PartnerNewVoucher.js";
+import PartnerVoucherCheck from "./partner_pages/PartnerVoucherCheck.js";
+import PartnerVoucherIsPublished from "./partner_pages/PartnerVoucherIsPublished.js";
 
 export default function App() {
   const [noUser, setNoUser] = useState(true);
@@ -49,46 +49,18 @@ export default function App() {
   const [allVouchers, setAllVouchers] = useState([]);
   const [chosenVouchers, setChosenVouchers] = useState([]);
 
+  const [createdEmployees, setCreatedEmployees] = useState([]);
+  const [employeesWithPoints, setEmployeesWithPoints] = useState({});
+
   const [userIsPartner, setUserIsPartner] = useState(false);
   const [partnerNewVoucher, setPartnerNewVoucher] = useState(false);
   const [partnerVoucherCheck, setPartnerVoucherCheck] = useState(false);
   const [partnerVoucherIsPublished, setPartnerVoucherIsPublished] =
     useState(false);
 
-  const [newPointsCounterAlbert, setNewPointsCounterAlbert] = useState(0);
-  const [newPointsCounterAlex, setNewPointsCounterAlex] = useState(0);
-  const [newPointsCounterAndrea, setNewPointsCounterAndrea] = useState(0);
-  const [newPointsCounterAngelo, setNewPointsCounterAngelo] = useState(0);
-  const [newPointsCounterBerit, setNewPointsCounterBerit] = useState(0);
-  const [newPointsCounterClaudia, setNewPointsCounterClaudia] = useState(0);
-  const [newPointsCounterChristine, setNewPointsCounterChristine] = useState(0);
-  const [newPointsCounterDominic, setNewPointsCounterDominic] = useState(0);
-  const [newPointsCounterErsin, setNewPointsCounterErsin] = useState(0);
-  const [newPointsCounterMartin, setNewPointsCounterMartin] = useState(0);
-  const [newPointsCounterMatthias, setNewPointsCounterMatthias] = useState(0);
-  const [newPointsCounterMichael, setNewPointsCounterMichael] = useState(0);
-  const [newPointsCounterNiklas, setNewPointsCounterNiklas] = useState(0);
-  const [newPointsCounterRene, setNewPointsCounterRene] = useState(0);
-  const [newPointsCounterSandra, setNewPointsCounterSandra] = useState(0);
-
-  const [allPointsCounterAlbert, setAllPointsCounterAlbert] = useState(0);
-  const [allPointsCounterAlex, setAllPointsCounterAlex] = useState(0);
-  const [allPointsCounterAndrea, setAllPointsCounterAndrea] = useState(0);
-  const [allPointsCounterAngelo, setAllPointsCounterAngelo] = useState(0);
-  const [allPointsCounterBerit, setAllPointsCounterBerit] = useState(0);
-  const [allPointsCounterClaudia, setAllPointsCounterClaudia] = useState(0);
-  const [allPointsCounterChristine, setAllPointsCounterChristine] = useState(0);
-  const [allPointsCounterDominic, setAllPointsCounterDominic] = useState(0);
-  const [allPointsCounterErsin, setAllPointsCounterErsin] = useState(0);
-  const [allPointsCounterMartin, setAllPointsCounterMartin] = useState(0);
-  const [allPointsCounterMatthias, setAllPointsCounterMatthias] = useState(0);
-  const [allPointsCounterMichael, setAllPointsCounterMichael] = useState(0);
-  const [allPointsCounterNiklas, setAllPointsCounterNiklas] = useState(0);
-  const [allPointsCounterRene, setAllPointsCounterRene] = useState(0);
-  const [allPointsCounterSandra, setAllPointsCounterSandra] = useState(0);
-
   function goBackToHome() {
     setNoUser(true);
+    // setActivePage("login");
   }
 
   function confirmVoucher(voucherToBeConfirmed) {
@@ -107,47 +79,58 @@ export default function App() {
       .catch((error) => console.error(error));
   }
 
-  function confirmPoints() {
-    setAllPointsCounterAlbert(allPointsCounterAlbert + newPointsCounterAlbert);
-    setAllPointsCounterAlex(allPointsCounterAlex + newPointsCounterAlex);
-    setAllPointsCounterAndrea(allPointsCounterAndrea + newPointsCounterAndrea);
-    setAllPointsCounterAngelo(allPointsCounterAngelo + newPointsCounterAngelo);
-    setAllPointsCounterBerit(allPointsCounterBerit + newPointsCounterBerit);
-    setAllPointsCounterChristine(
-      allPointsCounterChristine + newPointsCounterChristine
-    );
-    setAllPointsCounterClaudia(
-      allPointsCounterClaudia + newPointsCounterClaudia
-    );
-    setAllPointsCounterDominic(
-      allPointsCounterDominic + newPointsCounterDominic
-    );
-    setAllPointsCounterErsin(allPointsCounterErsin + newPointsCounterErsin);
-    setAllPointsCounterMartin(allPointsCounterMartin + newPointsCounterMartin);
-    setAllPointsCounterMatthias(
-      allPointsCounterMatthias + newPointsCounterMatthias
-    );
-    setAllPointsCounterMichael(
-      allPointsCounterMichael + newPointsCounterMichael
-    );
-    setAllPointsCounterNiklas(allPointsCounterNiklas + newPointsCounterNiklas);
-    setAllPointsCounterRene(allPointsCounterRene + newPointsCounterRene);
-    setAllPointsCounterSandra(allPointsCounterSandra + newPointsCounterSandra);
-    setNewPointsCounterAlbert(0);
-    setNewPointsCounterAlex(0);
-    setNewPointsCounterAndrea(0);
-    setNewPointsCounterAngelo(0);
-    setNewPointsCounterBerit(0);
-    setNewPointsCounterChristine(0);
-    setNewPointsCounterClaudia(0);
-    setNewPointsCounterDominic(0);
-    setNewPointsCounterErsin(0);
-    setNewPointsCounterMartin(0);
-    setNewPointsCounterMatthias(0);
-    setNewPointsCounterMichael(0);
-    setNewPointsCounterNiklas(0);
-    setNewPointsCounterRene(0);
-    setNewPointsCounterSandra(0);
+  function confirmPoints(createdEmp) {
+    fetch("http://localhost:4000/emppoints", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(createdEmp),
+    })
+      .then((result) => result.json())
+      .then((newCreatedEmployee) =>
+        setCreatedEmployees(...createdEmployees, newCreatedEmployee)
+      )
+      .catch((error) => console.error(error));
+    // setAllPointsCounterAlbert(allPointsCounterAlbert + newPointsCounterAlbert);
+    // setAllPointsCounterAlex(allPointsCounterAlex + newPointsCounterAlex);
+    // setAllPointsCounterAndrea(allPointsCounterAndrea + newPointsCounterAndrea);
+    // setAllPointsCounterAngelo(allPointsCounterAngelo + newPointsCounterAngelo);
+    // setAllPointsCounterBerit(allPointsCounterBerit + newPointsCounterBerit);
+    // setAllPointsCounterChristine(
+    //   allPointsCounterChristine + newPointsCounterChristine
+    // );
+    // setAllPointsCounterClaudia(
+    //   allPointsCounterClaudia + newPointsCounterClaudia
+    // );
+    // setAllPointsCounterDominic(
+    //   allPointsCounterDominic + newPointsCounterDominic
+    // );
+    // setAllPointsCounterErsin(allPointsCounterErsin + newPointsCounterErsin);
+    // setAllPointsCounterMartin(allPointsCounterMartin + newPointsCounterMartin);
+    // setAllPointsCounterMatthias(
+    //   allPointsCounterMatthias + newPointsCounterMatthias
+    // );
+    // setAllPointsCounterMichael(
+    //   allPointsCounterMichael + newPointsCounterMichael
+    // );
+    // setAllPointsCounterNiklas(allPointsCounterNiklas + newPointsCounterNiklas);
+    // setAllPointsCounterRene(allPointsCounterRene + newPointsCounterRene);
+    // setAllPointsCounterSandra(allPointsCounterSandra + newPointsCounterSandra);
+    // setNewPointsCounterAlbert(0);
+    // setNewPointsCounterAlex(0);
+    // setNewPointsCounterAndrea(0);
+    // setNewPointsCounterAngelo(0);
+    // setNewPointsCounterBerit(0);
+    // setNewPointsCounterChristine(0);
+    // setNewPointsCounterClaudia(0);
+    // setNewPointsCounterDominic(0);
+    // setNewPointsCounterErsin(0);
+    // setNewPointsCounterMartin(0);
+    // setNewPointsCounterMatthias(0);
+    // setNewPointsCounterMichael(0);
+    // setNewPointsCounterNiklas(0);
+    // setNewPointsCounterRene(0);
+    // setNewPointsCounterSandra(0);
+    // Object.keys(employees).map((name) => (employees[name].points = 0));
     setBossPointsCheck(false);
     setBossPointsArePublished(true);
   }
@@ -204,57 +187,15 @@ export default function App() {
         )}
         {bossNewPoints && (
           <BossNewPoints
+            onSetEmployeesWithPoints={setEmployeesWithPoints}
+            employeesWithPoints={employeesWithPoints}
             onSetBossNewPoints={setBossNewPoints}
             onSetBossPointsCheck={setBossPointsCheck}
-            newPointsCounterAlbert={newPointsCounterAlbert}
-            onSetNewPointsCounterAlbert={setNewPointsCounterAlbert}
-            newPointsCounterAlex={newPointsCounterAlex}
-            onSetNewPointsCounterAlex={setNewPointsCounterAlex}
-            newPointsCounterAndrea={newPointsCounterAndrea}
-            onSetNewPointsCounterAndrea={setNewPointsCounterAndrea}
-            newPointsCounterAngelo={newPointsCounterAngelo}
-            onSetNewPointsCounterAngelo={setNewPointsCounterAngelo}
-            newPointsCounterBerit={newPointsCounterBerit}
-            onSetNewPointsCounterBerit={setNewPointsCounterBerit}
-            newPointsCounterChristine={newPointsCounterChristine}
-            onSetNewPointsCounterChristine={setNewPointsCounterChristine}
-            newPointsCounterClaudia={newPointsCounterClaudia}
-            onSetNewPointsCounterClaudia={setNewPointsCounterClaudia}
-            newPointsCounterDominic={newPointsCounterDominic}
-            onSetNewPointsCounterDominic={setNewPointsCounterDominic}
-            newPointsCounterErsin={newPointsCounterErsin}
-            onSetNewPointsCounterErsin={setNewPointsCounterErsin}
-            newPointsCounterMartin={newPointsCounterMartin}
-            onSetNewPointsCounterMartin={setNewPointsCounterMartin}
-            newPointsCounterMatthias={newPointsCounterMatthias}
-            onSetNewPointsCounterMatthias={setNewPointsCounterMatthias}
-            newPointsCounterMichael={newPointsCounterMichael}
-            onSetNewPointsCounterMichael={setNewPointsCounterMichael}
-            newPointsCounterNiklas={newPointsCounterNiklas}
-            onSetNewPointsCounterNiklas={setNewPointsCounterNiklas}
-            newPointsCounterRene={newPointsCounterRene}
-            onSetNewPointsCounterRene={setNewPointsCounterRene}
-            newPointsCounterSandra={newPointsCounterSandra}
-            onSetNewPointsCounterSandra={setNewPointsCounterSandra}
           />
         )}
         {bossPointsCheck && (
           <BossPointsCheck
-            newPointsCounterAlbert={newPointsCounterAlbert}
-            newPointsCounterAlex={newPointsCounterAlex}
-            newPointsCounterAndrea={newPointsCounterAndrea}
-            newPointsCounterAngelo={newPointsCounterAngelo}
-            newPointsCounterBerit={newPointsCounterBerit}
-            newPointsCounterChristine={newPointsCounterChristine}
-            newPointsCounterClaudia={newPointsCounterClaudia}
-            newPointsCounterDominic={newPointsCounterDominic}
-            newPointsCounterErsin={newPointsCounterErsin}
-            newPointsCounterMartin={newPointsCounterMartin}
-            newPointsCounterMatthias={newPointsCounterMatthias}
-            newPointsCounterMichael={newPointsCounterMichael}
-            newPointsCounterNiklas={newPointsCounterNiklas}
-            newPointsCounterRene={newPointsCounterRene}
-            newPointsCounterSandra={newPointsCounterSandra}
+            employeesWithPoints={employeesWithPoints}
             onConfirmPoints={confirmPoints}
           />
         )}
