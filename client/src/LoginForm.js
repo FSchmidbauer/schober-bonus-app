@@ -4,12 +4,15 @@ import styled from "styled-components";
 export default function LoginForm({
   onSetCreatedUser,
   createdUser,
-  onSetNoUser,
-  onSetUserIsBoss,
-  onSetUserIsEmployee,
-  onSetUserIsPartner,
+  onSetIsNoUser,
+  onSetIsUserIsBoss,
+  onSetIsUserIsEmployee,
+  onSetIsUserIsPartner,
+  allEmployeesWithPoints,
+  onSetIsThisUserOnApi,
+  onSetShowPointsThisUserOnApi,
 }) {
-  const [validErrorMessage, setValidErrorMessage] = useState(false);
+  const [isValidErrorMessage, setIsValidErrorMessage] = useState(false);
 
   function updateUser(event) {
     const fieldName = event.target.name;
@@ -17,38 +20,66 @@ export default function LoginForm({
     onSetCreatedUser({ ...createdUser, [fieldName]: fieldValue });
   }
 
+  function checkPointsThisUserOnApi() {
+    if (
+      Object.keys(allEmployeesWithPoints).find(
+        (employee) =>
+          allEmployeesWithPoints[employee].name ===
+          createdUser.name.split(" ")[0].toLowerCase()
+      )
+    ) {
+      const pointsOfUser = Object.values(
+        allEmployeesWithPoints[
+          Object.keys(allEmployeesWithPoints).find(
+            (employee) =>
+              allEmployeesWithPoints[employee].name ===
+              createdUser.name.split(" ")[0].toLowerCase()
+          )
+        ]
+      )[2];
+      onSetIsThisUserOnApi(true);
+      onSetShowPointsThisUserOnApi(pointsOfUser);
+    } else {
+      return;
+    }
+  }
+
   function showMainMenues(event) {
     if (
       createdUser.role === "geschaeftsfuehrer" &&
       createdUser.name === "Joachim Schober"
     ) {
-      onSetNoUser(false);
-      onSetUserIsBoss(true);
+      onSetIsNoUser(false);
+      onSetIsUserIsBoss(true);
     } else if (
       createdUser.role === "mitarbeiter" &&
-      createdUser.name === "Florian Schmidbauer"
+      (createdUser.name === "Albert Maier" ||
+        createdUser.name === "Alexander Mayer" ||
+        createdUser.name === "Andrea Breitenwinkler" ||
+        createdUser.name === "Angelo Brandi")
     ) {
-      onSetNoUser(false);
-      onSetUserIsEmployee(true);
+      checkPointsThisUserOnApi();
+      onSetIsNoUser(false);
+      onSetIsUserIsEmployee(true);
     } else if (createdUser.role === "partnerunternehmen") {
-      onSetNoUser(false);
-      onSetUserIsPartner(true);
+      onSetIsNoUser(false);
+      onSetIsUserIsPartner(true);
     } else {
       event.preventDefault();
-      setValidErrorMessage(true);
+      setIsValidErrorMessage(true);
     }
   }
 
   return (
     <>
-      {validErrorMessage && (
+      {isValidErrorMessage && (
         <ValidError>
           Dieser Nutzer ist leider nicht hinterlegt.<br></br>Bitte überprüfe
           Deine Eingabe.
         </ValidError>
       )}
       <h1>LOGIN</h1>
-      <form>
+      <form onSubmit={showMainMenues}>
         <LoginRole name="role" onChange={updateUser}>
           <option value="notChosen">-- Bitte Rolle wählen --</option>
           <option value="geschaeftsfuehrer">Geschäftsführer</option>

@@ -2,19 +2,25 @@ import { useState } from "react";
 import styled from "styled-components";
 
 export default function PartnerNewVoucher({
-  createdVoucher,
-  onSetCreatedVoucher,
   onSetVoucherToConfirm,
-  onSetPartnerNewVoucher,
-  onSetPartnerVoucherCheck,
+  onSetIsPartnerNewVoucher,
+  onSetIsPartnerVoucherCheck,
 }) {
-  const [voucherErrorMessage, setVoucherErrorMessage] = useState(false);
-  const [relatedPoints, setRelatedPoints] = useState(0);
+  const emptyVoucher = {
+    vouchertype: "",
+    voucherpartner: "",
+    vouchervalue: "",
+    vouchercurrency: "",
+    neededpoints: 0,
+  };
+
+  const [isVoucherErrorMessage, setIsVoucherErrorMessage] = useState(false);
+  const [createdVoucher, setCreatedVoucher] = useState(emptyVoucher);
 
   function updateVoucher(event) {
     const fieldName = event.target.name;
     let fieldValue = event.target.value;
-    onSetCreatedVoucher({ ...createdVoucher, [fieldName]: fieldValue });
+    setCreatedVoucher({ ...createdVoucher, [fieldName]: fieldValue });
   }
 
   function showVoucherCheck(event) {
@@ -26,43 +32,45 @@ export default function PartnerNewVoucher({
       createdVoucher.vouchercurrency === "notChosen"
     ) {
       event.preventDefault();
-      setVoucherErrorMessage(true);
+      setIsVoucherErrorMessage(true);
     } else {
-      onSetPartnerNewVoucher(false);
-      onSetPartnerVoucherCheck(true);
+      onSetIsPartnerNewVoucher(false);
+      onSetIsPartnerVoucherCheck(true);
       onSetVoucherToConfirm(createdVoucher);
+      setCreatedVoucher(emptyVoucher);
     }
   }
 
   function changePointsNeeded() {
     if (createdVoucher.vouchervalue <= 0) {
-      setRelatedPoints(0);
+      setCreatedVoucher({ ...createdVoucher, [neededpoints]: 0 });
     } else if (
       createdVoucher.vouchervalue > 0 &&
       createdVoucher.vouchervalue <= 25
     ) {
-      setRelatedPoints(2);
-    } else if (
-      createdVoucher.vouchervalue > 25 &&
-      createdVoucher.vouchervalue <= 50
-    ) {
-      setRelatedPoints(4);
-    } else if (
-      createdVoucher.vouchervalue > 50 &&
-      createdVoucher.vouchervalue <= 75
-    ) {
-      setRelatedPoints(6);
-    } else if (
-      createdVoucher.vouchervalue > 75 &&
-      createdVoucher.vouchervalue <= 100
-    ) {
-      setRelatedPoints(8);
-    } else setRelatedPoints(10);
+      setCreatedVoucher({ ...createdVoucher, [neededpoints]: 2 });
+    }
+    // } else if (
+    //   createdVoucher.vouchervalue > 25 &&
+    //   createdVoucher.vouchervalue <= 50
+    // ) {
+    //   setRelatedPoints(4);
+    // } else if (
+    //   createdVoucher.vouchervalue > 50 &&
+    //   createdVoucher.vouchervalue <= 75
+    // ) {
+    //   setRelatedPoints(6);
+    // } else if (
+    //   createdVoucher.vouchervalue > 75 &&
+    //   createdVoucher.vouchervalue <= 100
+    // ) {
+    //   setRelatedPoints(8);
+    // } else setRelatedPoints(10);
   }
 
   return (
     <>
-      {voucherErrorMessage && (
+      {isVoucherErrorMessage && (
         <VoucherError>
           Der Gutschein ist leider nicht komplett oder fehlerhaft.<br></br>Bitte
           ergänzen Sie ihn um die fehlenden Eingaben.
@@ -74,7 +82,11 @@ export default function PartnerNewVoucher({
         Formular ein.
       </ActionInfo>
       <VoucherForm>
-        <VoucherSelect name="vouchertype" onChange={updateVoucher}>
+        <VoucherSelect
+          name="vouchertype"
+          value={createdVoucher.vouchertype}
+          onChange={updateVoucher}
+        >
           <option value="notChosen">-- Gutscheinart --</option>
           <option value="Restaurant-Gutschein">Restaurant-Gutschein</option>
           <option value="Shopping-Gutschein">Shopping-Gutschein</option>
@@ -86,6 +98,7 @@ export default function PartnerNewVoucher({
           type="text"
           name="voucherpartner"
           placeholder="Partner-Unternehmen"
+          value={createdVoucher.voucherpartner}
           onChange={updateVoucher}
         />
         <VoucherValue>
@@ -93,10 +106,15 @@ export default function PartnerNewVoucher({
             type="text"
             name="vouchervalue"
             placeholder="Wert in"
+            value={createdVoucher.vouchervalue}
             onChange={updateVoucher}
             onBlur={changePointsNeeded}
           />
-          <VoucherCurrency name="vouchercurrency" onChange={updateVoucher}>
+          <VoucherCurrency
+            name="vouchercurrency"
+            value={createdVoucher.currency}
+            onChange={updateVoucher}
+          >
             <option value="notChosen">--</option>
             <option value="€">€</option>
             <option value="%">%</option>
@@ -106,7 +124,7 @@ export default function PartnerNewVoucher({
           Zu erwerben für
           <PointsNeeded
             name="neededpoints"
-            value={relatedPoints}
+            value={createdVoucher.neededpoints}
             onChange={updateVoucher}
           />{" "}
           Bonuspunkte

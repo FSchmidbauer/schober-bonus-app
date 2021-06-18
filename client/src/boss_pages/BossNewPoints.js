@@ -19,14 +19,14 @@ import Sandra from "../images/sandra-neueseite.jpg";
 export default function BossNewPoints({
   onSetEmployeesWithPoints,
   employeesWithPoints,
-  onSetBossNewPoints,
-  onSetBossPointsCheck,
+  onSetIsBossNewPoints,
+  onSetIsBossPointsCheck,
 }) {
-  const [pointsErrorMessage, setPointsErrorMessage] = useState(false);
+  const [isPointsErrorMessage, setIsPointsErrorMessage] = useState(false);
 
   const employees = {
     albert: { name: "Albert", points: 0, image: Albert },
-    alex: { name: "Alex", points: 0, image: Alex },
+    alex: { name: "Alexander", points: 0, image: Alex },
     andrea: { name: "Andrea", points: 0, image: Andrea },
     angelo: { name: "Angelo", points: 0, image: Angelo },
     berit: { name: "Berit", points: 0, image: Berit },
@@ -97,10 +97,10 @@ export default function BossNewPoints({
 
   function showBossPointsCheck() {
     if (Object.keys(employeesWithPoints).length !== 0) {
-      onSetBossNewPoints(false);
-      onSetBossPointsCheck(true);
+      onSetIsBossNewPoints(false);
+      onSetIsBossPointsCheck(true);
     } else {
-      setPointsErrorMessage(true);
+      setIsPointsErrorMessage(true);
     }
   }
 
@@ -136,7 +136,7 @@ export default function BossNewPoints({
         ))}
       </EmpGrid>
       <CheckButton onClick={showBossPointsCheck}>Punkte prüfen</CheckButton>
-      {pointsErrorMessage && (
+      {isPointsErrorMessage && (
         <PointsError>
           Du musst zuerst Bonuspunkte vergeben, bevor Du auf diese Seite kannst.
         </PointsError>

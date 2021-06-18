@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export default function PartnerVoucherIsPublished({
-  onSetPartnerNewVoucher,
-  onSetPartnerVoucherIsPublished,
+  onSetIsPartnerNewVoucher,
+  onSetIsPartnerVoucherIsPublished,
 }) {
   function createAnotherVoucher() {
-    onSetPartnerVoucherIsPublished(false);
-    onSetPartnerNewVoucher(true);
+    onSetIsPartnerVoucherIsPublished(false);
+    onSetIsPartnerNewVoucher(true);
   }
 
   return (

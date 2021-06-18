@@ -5,18 +5,18 @@ import EmployeesImage from "../images/employees-image.png";
 
 export default function BossMain({
   createdUser,
-  onSetUserIsBoss,
-  onSetBossNewPoints,
-  onSetBossVoucherOverview,
+  onSetIsUserIsBoss,
+  onSetIsBossNewPoints,
+  onSetIsBossVoucherOverview,
 }) {
   function showBossNewPoints() {
-    onSetUserIsBoss(false);
-    onSetBossNewPoints(true);
+    onSetIsUserIsBoss(false);
+    onSetIsBossNewPoints(true);
   }
 
   function showBossVoucherOverview() {
-    onSetUserIsBoss(false);
-    onSetBossVoucherOverview(true);
+    onSetIsUserIsBoss(false);
+    onSetIsBossVoucherOverview(true);
   }
 
   return (

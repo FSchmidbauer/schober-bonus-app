@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
 export default function EmployeeVoucherIsAcquired({
-  onSetEmployeeVoucherIsAcquired,
-  onSetEmployeeVoucherChoice,
+  onSetChosenVouchers,
+  onSetIsEmployeeVoucherIsAcquired,
+  onSetIsEmployeeVoucherChoice,
 }) {
   function aquireAnotherVoucher() {
-    onSetEmployeeVoucherIsAcquired(false);
-    onSetEmployeeVoucherChoice(true);
+    onSetChosenVouchers([]);
+    onSetIsEmployeeVoucherIsAcquired(false);
+    onSetIsEmployeeVoucherChoice(true);
   }
 
   return (

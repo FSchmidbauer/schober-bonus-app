@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import {
 //   BrowserRouter as Router,
 //   Switch,
@@ -28,40 +28,51 @@ import PartnerVoucherCheck from "./partner_pages/PartnerVoucherCheck.js";
 import PartnerVoucherIsPublished from "./partner_pages/PartnerVoucherIsPublished.js";
 
 export default function App() {
-  const [noUser, setNoUser] = useState(true);
+  const [isNoUser, setIsNoUser] = useState(true);
   const [createdUser, setCreatedUser] = useState(null);
+  const [isThisUserOnApi, setIsThisUserOnApi] = useState(false);
+  const [showPointsThisUserOnApi, setShowPointsThisUserOnApi] = useState();
 
-  const [userIsBoss, setUserIsBoss] = useState(false);
-  const [bossNewPoints, setBossNewPoints] = useState(false);
-  const [bossPointsCheck, setBossPointsCheck] = useState(false);
-  const [bossPointsArePublished, setBossPointsArePublished] = useState(false);
-  const [bossVoucherOverview, setBossVoucherOverview] = useState(false);
+  const [isUserIsBoss, setIsUserIsBoss] = useState(false);
+  const [isBossNewPoints, setIsBossNewPoints] = useState(false);
+  const [isBossPointsCheck, setIsBossPointsCheck] = useState(false);
+  const [isBossPointsArePublished, setIsBossPointsArePublished] =
+    useState(false);
+  const [isBossVoucherOverview, setIsBossVoucherOverview] = useState(false);
 
-  const [userIsEmployee, setUserIsEmployee] = useState(false);
-  const [employeeVoucherChoice, setEmployeeVoucherChoice] = useState(false);
-  const [employeeVoucherCheck, setEmployeeVoucherCheck] = useState(false);
-  const [employeeVoucherIsAcquired, setEmployeeVoucherIsAcquired] =
+  const [isUserIsEmployee, setIsUserIsEmployee] = useState(false);
+  const [isEmployeeVoucherChoice, setIsEmployeeVoucherChoice] = useState(false);
+  const [isEmployeeVoucherCheck, setIsEmployeeVoucherCheck] = useState(false);
+  const [isEmployeeVoucherIsAcquired, setIsEmployeeVoucherIsAcquired] =
     useState(false);
 
-  const [createdVoucher, setCreatedVoucher] = useState(null);
   const [voucherToConfirm, setVoucherToConfirm] = useState(null);
   const [confirmedVouchers, setConfirmedVouchers] = useState([]);
   const [allVouchers, setAllVouchers] = useState([]);
   const [chosenVouchers, setChosenVouchers] = useState([]);
 
-  const [createdEmployees, setCreatedEmployees] = useState([]);
   const [employeesWithPoints, setEmployeesWithPoints] = useState({});
+  const [confirmedEmployeesWithPoints, setConfirmedEmployeesWithPoints] =
+    useState([]);
+  const [allEmployeesWithPoints, setAllEmployeesWithPoints] = useState({});
 
-  const [userIsPartner, setUserIsPartner] = useState(false);
-  const [partnerNewVoucher, setPartnerNewVoucher] = useState(false);
-  const [partnerVoucherCheck, setPartnerVoucherCheck] = useState(false);
-  const [partnerVoucherIsPublished, setPartnerVoucherIsPublished] =
+  const [isUserIsPartner, setIsUserIsPartner] = useState(false);
+  const [isPartnerNewVoucher, setIsPartnerNewVoucher] = useState(false);
+  const [isPartnerVoucherCheck, setIsPartnerVoucherCheck] = useState(false);
+  const [isPartnerVoucherIsPublished, setIsPartnerVoucherIsPublished] =
     useState(false);
 
   function goBackToHome() {
-    setNoUser(true);
+    setIsNoUser(true);
     // setActivePage("login");
   }
+
+  useEffect(() => {
+    fetch("http://localhost:4000/emppoints")
+      .then((result) => result.json())
+      .then((apiEmployees) => setAllEmployeesWithPoints(apiEmployees))
+      .then((error) => console.error(error));
+  }, []);
 
   function confirmVoucher(voucherToBeConfirmed) {
     fetch("http://localhost:4000/vouchers", {
@@ -70,69 +81,30 @@ export default function App() {
       body: JSON.stringify(voucherToBeConfirmed),
     })
       .then((result) => result.json())
-      .then(
-        (voucherConfirmed) =>
-          setConfirmedVouchers(...confirmedVouchers, voucherConfirmed),
-        setPartnerVoucherCheck(false),
-        setPartnerVoucherIsPublished(true)
+      .then((voucherConfirmed) =>
+        setConfirmedVouchers(...confirmedVouchers, voucherConfirmed)
       )
       .catch((error) => console.error(error));
+    setIsPartnerVoucherCheck(false);
+    setIsPartnerVoucherIsPublished(true);
   }
 
-  function confirmPoints(createdEmp) {
+  function confirmPoints(awardedEmp) {
     fetch("http://localhost:4000/emppoints", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(createdEmp),
+      body: JSON.stringify(awardedEmp),
     })
       .then((result) => result.json())
-      .then((newCreatedEmployee) =>
-        setCreatedEmployees(...createdEmployees, newCreatedEmployee)
+      .then((newConfirmedEmployeesWithPoints) =>
+        setConfirmedEmployeesWithPoints(
+          ...confirmedEmployeesWithPoints,
+          newConfirmedEmployeesWithPoints
+        )
       )
       .catch((error) => console.error(error));
-    // setAllPointsCounterAlbert(allPointsCounterAlbert + newPointsCounterAlbert);
-    // setAllPointsCounterAlex(allPointsCounterAlex + newPointsCounterAlex);
-    // setAllPointsCounterAndrea(allPointsCounterAndrea + newPointsCounterAndrea);
-    // setAllPointsCounterAngelo(allPointsCounterAngelo + newPointsCounterAngelo);
-    // setAllPointsCounterBerit(allPointsCounterBerit + newPointsCounterBerit);
-    // setAllPointsCounterChristine(
-    //   allPointsCounterChristine + newPointsCounterChristine
-    // );
-    // setAllPointsCounterClaudia(
-    //   allPointsCounterClaudia + newPointsCounterClaudia
-    // );
-    // setAllPointsCounterDominic(
-    //   allPointsCounterDominic + newPointsCounterDominic
-    // );
-    // setAllPointsCounterErsin(allPointsCounterErsin + newPointsCounterErsin);
-    // setAllPointsCounterMartin(allPointsCounterMartin + newPointsCounterMartin);
-    // setAllPointsCounterMatthias(
-    //   allPointsCounterMatthias + newPointsCounterMatthias
-    // );
-    // setAllPointsCounterMichael(
-    //   allPointsCounterMichael + newPointsCounterMichael
-    // );
-    // setAllPointsCounterNiklas(allPointsCounterNiklas + newPointsCounterNiklas);
-    // setAllPointsCounterRene(allPointsCounterRene + newPointsCounterRene);
-    // setAllPointsCounterSandra(allPointsCounterSandra + newPointsCounterSandra);
-    // setNewPointsCounterAlbert(0);
-    // setNewPointsCounterAlex(0);
-    // setNewPointsCounterAndrea(0);
-    // setNewPointsCounterAngelo(0);
-    // setNewPointsCounterBerit(0);
-    // setNewPointsCounterChristine(0);
-    // setNewPointsCounterClaudia(0);
-    // setNewPointsCounterDominic(0);
-    // setNewPointsCounterErsin(0);
-    // setNewPointsCounterMartin(0);
-    // setNewPointsCounterMatthias(0);
-    // setNewPointsCounterMichael(0);
-    // setNewPointsCounterNiklas(0);
-    // setNewPointsCounterRene(0);
-    // setNewPointsCounterSandra(0);
-    // Object.keys(employees).map((name) => (employees[name].points = 0));
-    setBossPointsCheck(false);
-    setBossPointsArePublished(true);
+    setIsBossPointsCheck(false);
+    setIsBossPointsArePublished(true);
   }
 
   function acquireAndDeleteForOthersVoucher() {
@@ -155,9 +127,8 @@ export default function App() {
           }
         });
     });
-    setChosenVouchers([]);
-    setEmployeeVoucherCheck(false);
-    setEmployeeVoucherIsAcquired(true);
+    setIsEmployeeVoucherCheck(false);
+    setIsEmployeeVoucherIsAcquired(true);
   }
 
   return (
@@ -167,68 +138,76 @@ export default function App() {
         <HeaderHeadline>BONUS-APP</HeaderHeadline>
       </header>
       <Main>
-        {noUser && (
+        {isNoUser && (
           <LoginForm
             onSetCreatedUser={setCreatedUser}
             createdUser={createdUser}
-            onSetNoUser={setNoUser}
-            onSetUserIsBoss={setUserIsBoss}
-            onSetUserIsEmployee={setUserIsEmployee}
-            onSetUserIsPartner={setUserIsPartner}
+            onSetIsNoUser={setIsNoUser}
+            onSetIsUserIsBoss={setIsUserIsBoss}
+            onSetIsUserIsEmployee={setIsUserIsEmployee}
+            onSetIsUserIsPartner={setIsUserIsPartner}
+            allEmployeesWithPoints={allEmployeesWithPoints}
+            onSetIsThisUserOnApi={setIsThisUserOnApi}
+            onSetShowPointsThisUserOnApi={setShowPointsThisUserOnApi}
           />
         )}
-        {userIsBoss && (
+        {isUserIsBoss && (
           <BossMain
             createdUser={createdUser}
-            onSetUserIsBoss={setUserIsBoss}
-            onSetBossNewPoints={setBossNewPoints}
-            onSetBossVoucherOverview={setBossVoucherOverview}
+            onSetIsUserIsBoss={setIsUserIsBoss}
+            onSetIsBossNewPoints={setIsBossNewPoints}
+            onSetIsBossVoucherOverview={setIsBossVoucherOverview}
           />
         )}
-        {bossNewPoints && (
+        {isBossNewPoints && (
           <BossNewPoints
             onSetEmployeesWithPoints={setEmployeesWithPoints}
             employeesWithPoints={employeesWithPoints}
-            onSetBossNewPoints={setBossNewPoints}
-            onSetBossPointsCheck={setBossPointsCheck}
+            onSetIsBossNewPoints={setIsBossNewPoints}
+            onSetIsBossPointsCheck={setIsBossPointsCheck}
           />
         )}
-        {bossPointsCheck && (
+        {isBossPointsCheck && (
           <BossPointsCheck
             employeesWithPoints={employeesWithPoints}
             onConfirmPoints={confirmPoints}
           />
         )}
-        {bossPointsArePublished && (
+        {isBossPointsArePublished && (
           <BossPointsArePublished
-            onSetBossPointsArePublished={setBossPointsArePublished}
-            onSetBossNewPoints={setBossNewPoints}
+            onSetEmployeesWithPoints={setEmployeesWithPoints}
+            onSetIsBossPointsArePublished={setIsBossPointsArePublished}
+            onSetIsBossNewPoints={setIsBossNewPoints}
           />
         )}
-        {bossVoucherOverview && (
+        {isBossVoucherOverview && (
           <BossVoucherOverview
             allVouchers={allVouchers}
             onSetAllVouchers={setAllVouchers}
           />
         )}
-        {userIsEmployee && (
+        {isUserIsEmployee && (
           <EmployeeMain
             createdUser={createdUser}
-            onSetUserIsEmployee={setUserIsEmployee}
-            onSetEmployeeVoucherChoice={setEmployeeVoucherChoice}
+            onSetIsUserIsEmployee={setIsUserIsEmployee}
+            onSetIsEmployeeVoucherChoice={setIsEmployeeVoucherChoice}
+            isThisUserOnApi={isThisUserOnApi}
+            showPointsThisUserOnApi={showPointsThisUserOnApi}
           />
         )}
-        {employeeVoucherChoice && (
+        {isEmployeeVoucherChoice && (
           <EmployeeVoucherChoice
             onSetAllVouchers={setAllVouchers}
             allVouchers={allVouchers}
             onSetChosenVouchers={setChosenVouchers}
             chosenVouchers={chosenVouchers}
-            onSetEmployeeVoucherChoice={setEmployeeVoucherChoice}
-            onSetEmployeeVoucherCheck={setEmployeeVoucherCheck}
+            onSetIsEmployeeVoucherChoice={setIsEmployeeVoucherChoice}
+            onSetIsEmployeeVoucherCheck={setIsEmployeeVoucherCheck}
+            isThisUserOnApi={isThisUserOnApi}
+            showPointsThisUserOnApi={showPointsThisUserOnApi}
           />
         )}
-        {employeeVoucherCheck && (
+        {isEmployeeVoucherCheck && (
           <EmployeeVoucherCheck
             chosenVouchers={chosenVouchers}
             onAcquireAndDeleteForOthersVoucher={
@@ -236,45 +215,44 @@ export default function App() {
             }
           />
         )}
-        {employeeVoucherIsAcquired && (
+        {isEmployeeVoucherIsAcquired && (
           <EmployeeVoucherIsAcquired
-            onSetEmployeeVoucherIsAcquired={setEmployeeVoucherIsAcquired}
-            onSetEmployeeVoucherChoice={setEmployeeVoucherChoice}
+            onSetChosenVouchers={setChosenVouchers}
+            onSetIsEmployeeVoucherIsAcquired={setIsEmployeeVoucherIsAcquired}
+            onSetIsEmployeeVoucherChoice={setIsEmployeeVoucherChoice}
           />
         )}
-        {userIsPartner && (
+        {isUserIsPartner && (
           <PartnerMain
             createdUser={createdUser}
-            onSetUserIsPartner={setUserIsPartner}
-            onSetPartnerNewVoucher={setPartnerNewVoucher}
+            onSetIsUserIsPartner={setIsUserIsPartner}
+            onSetIsPartnerNewVoucher={setIsPartnerNewVoucher}
           />
         )}
-        {partnerNewVoucher && (
+        {isPartnerNewVoucher && (
           <PartnerNewVoucher
-            createdVoucher={createdVoucher}
-            onSetCreatedVoucher={setCreatedVoucher}
             onSetVoucherToConfirm={setVoucherToConfirm}
-            onSetPartnerNewVoucher={setPartnerNewVoucher}
-            onSetPartnerVoucherCheck={setPartnerVoucherCheck}
+            onSetIsPartnerNewVoucher={setIsPartnerNewVoucher}
+            onSetIsPartnerVoucherCheck={setIsPartnerVoucherCheck}
           />
         )}
-        {partnerVoucherCheck && (
+        {isPartnerVoucherCheck && (
           <PartnerVoucherCheck
             onConfirmVoucher={confirmVoucher}
             voucherToConfirm={voucherToConfirm}
           />
         )}
-        {partnerVoucherIsPublished && (
+        {isPartnerVoucherIsPublished && (
           <PartnerVoucherIsPublished
-            onSetPartnerNewVoucher={setPartnerNewVoucher}
-            onSetPartnerVoucherIsPublished={setPartnerVoucherIsPublished}
+            onSetIsPartnerNewVoucher={setIsPartnerNewVoucher}
+            onSetIsPartnerVoucherIsPublished={setIsPartnerVoucherIsPublished}
           />
         )}
       </Main>
       <Footernav>
-        {!noUser && <FooternavButton>Hauptmenü</FooternavButton>}
-        {!noUser && <FooternavButton>Logout</FooternavButton>}
-        {noUser && <FooternavText>© by Florian Schmidbauer</FooternavText>}
+        {!isNoUser && <FooternavButton>Hauptmenü</FooternavButton>}
+        {!isNoUser && <FooternavButton>Logout</FooternavButton>}
+        {isNoUser && <FooternavText>© by Florian Schmidbauer</FooternavText>}
       </Footernav>
     </>
   );

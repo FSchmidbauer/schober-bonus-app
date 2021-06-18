@@ -8,6 +8,8 @@ export default function BossPointsCheck({
     window.history.go(-1);
   }
 
+  console.log(employeesWithPoints);
+
   return (
     <>
       <h1>PUNKTE-CHECK</h1>
@@ -31,7 +33,7 @@ export default function BossPointsCheck({
       ))}
       <ButtonSection>
         <CorrectButton onClick={() => jumpOnLastPage()}>Anpassen</CorrectButton>
-        <ConfirmButton onClick={() => onConfirmPoints()}>
+        <ConfirmButton onClick={() => onConfirmPoints(employeesWithPoints)}>
           Bestätigen
         </ConfirmButton>
       </ButtonSection>

@@ -1,14 +1,16 @@
 import EmpPoints from "../models/emppoints.model.js";
 
 function postEmpPoints(req, res) {
-  const empPoints = new EmpPoints({
-    name: req.body.name,
-    points: req.body.value,
+  const employeesWithPoints = Object.keys(req.body).map((name) => {
+    return { name, points: req.body[name].points };
   });
-  empPoints
-    .save()
-    .then((empPointsSaved) => res.json(empPointsSaved))
-    .catch((error) => res.json(error));
+
+  EmpPoints.insertMany(employeesWithPoints, (error, docs) => {
+    if (error) {
+      return res.json(error);
+    }
+    res.json(docs);
+  });
 }
 
 function getEmpPoints(req, res) {

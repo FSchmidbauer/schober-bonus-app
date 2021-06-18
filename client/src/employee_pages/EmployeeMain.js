@@ -1,20 +1,26 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 
 export default function EmployeeMain({
   createdUser,
-  onSetUserIsEmployee,
-  onSetEmployeeVoucherChoice,
+  onSetIsUserIsEmployee,
+  onSetIsEmployeeVoucherChoice,
+  isThisUserOnApi,
+  showPointsThisUserOnApi,
 }) {
   function showEmployeeVoucherChoice() {
-    onSetUserIsEmployee(false);
-    onSetEmployeeVoucherChoice(true);
+    onSetIsUserIsEmployee(false);
+    onSetIsEmployeeVoucherChoice(true);
   }
 
   return (
     <>
       <h1>HAUPTMENÜ</h1>
       <WelcomeMessage>
-        Hallo {createdUser.name.split(" ")[0]}! Was willst Du tun?
+        Hallo {createdUser.name.split(" ")[0]}! Du hast aktuell
+        <br />
+        <span>{isThisUserOnApi ? showPointsThisUserOnApi : "0"}</span>{" "}
+        Bonuspunkte. <br /> Was willst Du tun?
       </WelcomeMessage>
       <ActionGrid>
         <BonusSection>
@@ -32,6 +38,10 @@ export default function EmployeeMain({
 
 const WelcomeMessage = styled.h2`
   padding: 0 2rem;
+
+  span {
+    color: red;
+  }
 `;
 
 const ActionGrid = styled.section`

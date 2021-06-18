@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 export default function PartnerMain({
   createdUser,
-  onSetUserIsPartner,
-  onSetPartnerNewVoucher,
+  onSetIsUserIsPartner,
+  onSetIsPartnerNewVoucher,
 }) {
   function showPartnerNewVoucher() {
-    onSetUserIsPartner(false);
-    onSetPartnerNewVoucher(true);
+    onSetIsUserIsPartner(false);
+    onSetIsPartnerNewVoucher(true);
   }
 
   return (

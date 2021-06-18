@@ -6,8 +6,10 @@ export default function EmployeeVoucherChoice({
   allVouchers,
   onSetChosenVouchers,
   chosenVouchers,
-  onSetEmployeeVoucherChoice,
-  onSetEmployeeVoucherCheck,
+  onSetIsEmployeeVoucherChoice,
+  onSetIsEmployeeVoucherCheck,
+  isThisUserOnApi,
+  showPointsThisUserOnApi,
 }) {
   useEffect(() => {
     fetch("http://localhost:4000/vouchers")
@@ -16,7 +18,7 @@ export default function EmployeeVoucherChoice({
       .then((error) => console.error(error));
   }, []);
 
-  const [choiceErrorMessage, setChoiceErrorMessage] = useState(false);
+  const [isChoiceErrorMessage, setIsChoiceErrorMessage] = useState(false);
 
   function chooseOrUnChooseVoucher(clickedVoucher) {
     const selectedVoucher = allVouchers.find(
@@ -34,10 +36,10 @@ export default function EmployeeVoucherChoice({
 
   function showVoucherCheck() {
     if (chosenVouchers.length === 0) {
-      setChoiceErrorMessage(true);
+      setIsChoiceErrorMessage(true);
     } else {
-      onSetEmployeeVoucherChoice(false);
-      onSetEmployeeVoucherCheck(true);
+      onSetIsEmployeeVoucherChoice(false);
+      onSetIsEmployeeVoucherCheck(true);
     }
   }
 
@@ -46,7 +48,12 @@ export default function EmployeeVoucherChoice({
       <h1>GUTSCHEINAUSWAHL</h1>
       <ActionInfo>
         Wenn Du genügend Bonuspunkte hast, kannst Du Dir jetzt per Klick einen
-        oder mehrere dieser Gutscheine für Dich aussuchen:
+        oder mehrere dieser Gutscheine für Dich aussuchen. <br />
+        <br />
+        Aktuell verfügbar:{" "}
+        <span>
+          {isThisUserOnApi ? showPointsThisUserOnApi : "0"}
+        </span> Punkte{" "}
       </ActionInfo>
       <VoucherSection>
         {allVouchers.map((voucher, index) => (
@@ -59,6 +66,7 @@ export default function EmployeeVoucherChoice({
               <VoucherPartner>von {voucher.voucherpartner}</VoucherPartner>
               <BonusPointBubble>{voucher.neededpoints} Punkte</BonusPointBubble>
               <ChooseCheckbox
+                disabled={showPointsThisUserOnApi < voucher.neededpoints}
                 type="checkbox"
                 onClick={() => chooseOrUnChooseVoucher(voucher)}
               />
@@ -67,7 +75,7 @@ export default function EmployeeVoucherChoice({
         ))}
       </VoucherSection>
       <CheckButton onClick={showVoucherCheck}>Auswahl prüfen</CheckButton>
-      {choiceErrorMessage && (
+      {isChoiceErrorMessage && (
         <ChoiceError>
           Du musst zuerst eine Auswahl treffen, bevor Du auf diese Seite kannst.
         </ChoiceError>
@@ -78,6 +86,11 @@ export default function EmployeeVoucherChoice({
 
 const ActionInfo = styled.h4`
   padding: 0 2rem;
+
+  span {
+    color: red;
+    font-size: 2rem;
+  }
 `;
 
 const VoucherSection = styled.section`
