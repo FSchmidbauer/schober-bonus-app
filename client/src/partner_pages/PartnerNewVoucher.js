@@ -43,29 +43,42 @@ export default function PartnerNewVoucher({
 
   function changePointsNeeded() {
     if (createdVoucher.vouchervalue <= 0) {
-      setCreatedVoucher({ ...createdVoucher, [neededpoints]: 0 });
+      const fieldName = "neededpoints";
+      let fieldValue = 0;
+      setCreatedVoucher({ ...createdVoucher, [fieldName]: fieldValue });
     } else if (
       createdVoucher.vouchervalue > 0 &&
       createdVoucher.vouchervalue <= 25
     ) {
-      setCreatedVoucher({ ...createdVoucher, [neededpoints]: 2 });
+      const fieldName = "neededpoints";
+      let fieldValue = 2;
+      setCreatedVoucher({ ...createdVoucher, [fieldName]: fieldValue });
+    } else if (
+      createdVoucher.vouchervalue > 25 &&
+      createdVoucher.vouchervalue <= 50
+    ) {
+      const fieldName = "neededpoints";
+      let fieldValue = 4;
+      setCreatedVoucher({ ...createdVoucher, [fieldName]: fieldValue });
+    } else if (
+      createdVoucher.vouchervalue > 50 &&
+      createdVoucher.vouchervalue <= 75
+    ) {
+      const fieldName = "neededpoints";
+      let fieldValue = 6;
+      setCreatedVoucher({ ...createdVoucher, [fieldName]: fieldValue });
+    } else if (
+      createdVoucher.vouchervalue > 75 &&
+      createdVoucher.vouchervalue <= 100
+    ) {
+      const fieldName = "neededpoints";
+      let fieldValue = 8;
+      setCreatedVoucher({ ...createdVoucher, [fieldName]: fieldValue });
+    } else {
+      const fieldName = "neededpoints";
+      let fieldValue = 10;
+      setCreatedVoucher({ ...createdVoucher, [fieldName]: fieldValue });
     }
-    // } else if (
-    //   createdVoucher.vouchervalue > 25 &&
-    //   createdVoucher.vouchervalue <= 50
-    // ) {
-    //   setRelatedPoints(4);
-    // } else if (
-    //   createdVoucher.vouchervalue > 50 &&
-    //   createdVoucher.vouchervalue <= 75
-    // ) {
-    //   setRelatedPoints(6);
-    // } else if (
-    //   createdVoucher.vouchervalue > 75 &&
-    //   createdVoucher.vouchervalue <= 100
-    // ) {
-    //   setRelatedPoints(8);
-    // } else setRelatedPoints(10);
   }
 
   return (
@@ -125,7 +138,6 @@ export default function PartnerNewVoucher({
           <PointsNeeded
             name="neededpoints"
             value={createdVoucher.neededpoints}
-            onChange={updateVoucher}
           />{" "}
           Bonuspunkte
         </p>

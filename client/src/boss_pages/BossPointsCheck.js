@@ -8,8 +8,6 @@ export default function BossPointsCheck({
     window.history.go(-1);
   }
 
-  console.log(employeesWithPoints);
-
   return (
     <>
       <h1>PUNKTE-CHECK</h1>

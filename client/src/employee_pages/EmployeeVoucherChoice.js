@@ -133,7 +133,7 @@ const BonusPointBubble = styled.section`
   color: white;
   padding: 1rem;
   position: absolute;
-  bottom: 11rem;
+  bottom: 13rem;
   left: 20rem;
 `;
 

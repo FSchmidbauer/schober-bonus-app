@@ -92,7 +92,7 @@ export default function LoginForm({
           placeholder="Dein Name"
           onChange={updateUser}
         />
-        <LoginButton onClick={showMainMenues}>Login</LoginButton>
+        <LoginButton>Login</LoginButton>
       </form>
     </>
   );
