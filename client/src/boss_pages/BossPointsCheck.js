@@ -3,10 +3,29 @@ import styled from "styled-components";
 export default function BossPointsCheck({
   employeesWithPoints,
   onConfirmPoints,
+  onSetIsBossPointsCheck,
+  onSetIsBossNewPoints,
 }) {
   function jumpOnLastPage() {
-    window.history.go(-1);
+    onSetIsBossPointsCheck(false);
+    onSetIsBossNewPoints(true);
   }
+
+  // function changePoints(playerToChange) {
+  //   const noChangePlayers = players.filter(
+  //     (player) => player._id !== playerToChange._id
+  //   );
+  //   fetch("http://localhost:4000/players/" + playerToChange._id, {
+  //     method: "PUT",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(playerToChange),
+  //   })
+  //     .then((result) => result.json())
+  //     .then((changedPlayer) => setPlayers([...noChangePlayers, changedPlayer]))
+  //     .catch((error) => console.error(error));
+  // }
 
   return (
     <>
@@ -30,7 +49,7 @@ export default function BossPointsCheck({
         </>
       ))}
       <ButtonSection>
-        <CorrectButton onClick={() => jumpOnLastPage()}>Anpassen</CorrectButton>
+        <CorrectButton onClick={jumpOnLastPage}>Anpassen</CorrectButton>
         <ConfirmButton onClick={() => onConfirmPoints(employeesWithPoints)}>
           Bestätigen
         </ConfirmButton>

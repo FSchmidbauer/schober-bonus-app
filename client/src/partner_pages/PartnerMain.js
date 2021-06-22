@@ -29,7 +29,7 @@ const WelcomeMessage = styled.h2`
 `;
 
 const NewVoucherSection = styled.section`
-  margin-top: 1.5rem;
+  margin-top: 4rem;
   cursor: pointer;
   p {
     font-weight: bold;

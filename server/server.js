@@ -3,9 +3,12 @@ import mongoose from "mongoose";
 import cors from "cors";
 import voucherRoutes from "./routes/voucher.routes.js";
 import empPointsRoutes from "./routes/emppoints.routes.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const connectionString =
-  "mongodb+srv://elflocogrande:ElFloco88!@cluster0.ly74u.mongodb.net/bonusvouchers?retryWrites=true&w=majority";
+  process.env.DB_CONNECTION || "mongodb://localhost:27017/bonusvouchers";
 mongoose.connect(connectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

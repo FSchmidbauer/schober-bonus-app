@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
 export default function EmployeeVoucherCheck({
+  onSetChosenVouchers,
   chosenVouchers,
   onAcquireAndDeleteForOthersVoucher,
+  onSetIsEmployeeVoucherCheck,
+  onSetIsEmployeeVoucherChoice,
 }) {
   function jumpOnLastPage() {
-    window.history.go(-1);
+    onSetIsEmployeeVoucherCheck(false);
+    onSetIsEmployeeVoucherChoice(true);
   }
 
   return (

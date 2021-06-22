@@ -22,16 +22,16 @@ export default function EmployeeMain({
         <span>{isThisUserOnApi ? showPointsThisUserOnApi : "0"}</span>{" "}
         Bonuspunkte. <br /> Was willst Du tun?
       </WelcomeMessage>
-      <ActionGrid>
-        <BonusSection>
-          <ActionImage onClick={showEmployeeVoucherChoice} />
-          <p>Bonuspunkte einlösen </p>
-        </BonusSection>
-        <HistorySection>
+      {/* <ActionGrid> */}
+      <BonusSection>
+        <ActionImage onClick={showEmployeeVoucherChoice} />
+        <p>Bonuspunkte einlösen </p>
+      </BonusSection>
+      {/* <HistorySection>
           <ActionImage />
           <p>Historie ansehen</p>
         </HistorySection>
-      </ActionGrid>
+      </ActionGrid> */}
     </>
   );
 }
@@ -44,16 +44,17 @@ const WelcomeMessage = styled.h2`
   }
 `;
 
-const ActionGrid = styled.section`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 1.5rem 0rem 0rem;
-`;
+// const ActionGrid = styled.section`
+//   display: grid;
+//   grid-template-columns: 1fr 1fr;
+//   margin: 1.5rem 0rem 0rem;
+// `;
 
 const BonusSection = styled.section`
   grid-column: 1;
   grid-row: 1;
   cursor: pointer;
+  margin-top: 4rem;
   p {
     font-weight: bold;
   }

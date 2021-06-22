@@ -64,7 +64,56 @@ export default function App() {
 
   function goBackToHome() {
     setIsNoUser(true);
+    setIsUserIsBoss(false);
+    setIsBossNewPoints(false);
+    setIsBossPointsCheck(false);
+    setIsBossPointsArePublished(false);
+    setIsBossVoucherOverview(false);
+    setIsUserIsEmployee(false);
+    setIsEmployeeVoucherChoice(false);
+    setIsEmployeeVoucherCheck(false);
+    setIsEmployeeVoucherIsAcquired(false);
+    setIsUserIsPartner(false);
+    setIsPartnerNewVoucher(false);
+    setIsPartnerVoucherCheck(false);
+    setIsPartnerVoucherIsPublished(false);
     // setActivePage("login");
+  }
+
+  function goBackToMain() {
+    if (
+      isUserIsBoss ||
+      isBossNewPoints ||
+      isBossPointsCheck ||
+      isBossPointsArePublished ||
+      isBossVoucherOverview
+    ) {
+      setIsBossNewPoints(false);
+      setIsBossPointsCheck(false);
+      setIsBossPointsArePublished(false);
+      setIsBossVoucherOverview(false);
+      setIsUserIsBoss(true);
+    } else if (
+      isUserIsEmployee ||
+      isEmployeeVoucherChoice ||
+      isEmployeeVoucherCheck ||
+      isEmployeeVoucherIsAcquired
+    ) {
+      setIsEmployeeVoucherChoice(false);
+      setIsEmployeeVoucherCheck(false);
+      setIsEmployeeVoucherIsAcquired(false);
+      setIsUserIsEmployee(true);
+    } else if (
+      isUserIsPartner ||
+      isPartnerNewVoucher ||
+      isPartnerVoucherCheck ||
+      isPartnerVoucherIsPublished
+    ) {
+      setIsPartnerNewVoucher(false);
+      setIsPartnerVoucherCheck(false);
+      setIsPartnerVoucherIsPublished(false);
+      setIsUserIsPartner(true);
+    }
   }
 
   useEffect(() => {
@@ -171,6 +220,8 @@ export default function App() {
           <BossPointsCheck
             employeesWithPoints={employeesWithPoints}
             onConfirmPoints={confirmPoints}
+            onSetIsBossPointsCheck={setIsBossPointsCheck}
+            onSetIsBossNewPoints={setIsBossNewPoints}
           />
         )}
         {isBossPointsArePublished && (
@@ -209,10 +260,13 @@ export default function App() {
         )}
         {isEmployeeVoucherCheck && (
           <EmployeeVoucherCheck
+            onSetChosenVouchers={chosenVouchers}
             chosenVouchers={chosenVouchers}
             onAcquireAndDeleteForOthersVoucher={
               acquireAndDeleteForOthersVoucher
             }
+            onSetIsEmployeeVoucherCheck={setIsEmployeeVoucherCheck}
+            onSetIsEmployeeVoucherChoice={setIsEmployeeVoucherChoice}
           />
         )}
         {isEmployeeVoucherIsAcquired && (
@@ -240,6 +294,8 @@ export default function App() {
           <PartnerVoucherCheck
             onConfirmVoucher={confirmVoucher}
             voucherToConfirm={voucherToConfirm}
+            onSetIsPartnerVoucherCheck={setIsPartnerVoucherCheck}
+            onSetIsPartnerNewVoucher={setIsPartnerNewVoucher}
           />
         )}
         {isPartnerVoucherIsPublished && (
@@ -250,8 +306,12 @@ export default function App() {
         )}
       </Main>
       <Footernav>
-        {!isNoUser && <FooternavButton>Hauptmenü</FooternavButton>}
-        {!isNoUser && <FooternavButton>Logout</FooternavButton>}
+        {!isNoUser && (
+          <FooternavButton onClick={goBackToMain}>Hauptmenü</FooternavButton>
+        )}
+        {!isNoUser && (
+          <FooternavButton onClick={goBackToHome}>Logout</FooternavButton>
+        )}
         {isNoUser && <FooternavText>© by Florian Schmidbauer</FooternavText>}
       </Footernav>
     </>

@@ -74,8 +74,9 @@ export default function LoginForm({
     <>
       {isValidErrorMessage && (
         <ValidError>
-          Dieser Nutzer ist leider nicht hinterlegt.<br></br>Bitte überprüfe
-          Deine Eingabe.
+          Dieser Nutzer ist leider nicht hinterlegt.
+          <br />
+          Bitte überprüfe Deine Eingabe.
         </ValidError>
       )}
       <h1>LOGIN</h1>

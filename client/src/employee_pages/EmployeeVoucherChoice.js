@@ -15,22 +15,40 @@ export default function EmployeeVoucherChoice({
     fetch("http://localhost:4000/vouchers")
       .then((result) => result.json())
       .then((apiVouchers) => onSetAllVouchers(apiVouchers))
+      .then(onSetChosenVouchers([]))
       .then((error) => console.error(error));
   }, []);
 
   const [isChoiceErrorMessage, setIsChoiceErrorMessage] = useState(false);
+  const [pointsAfterVoucher, setPointsAfterVoucher] = useState(
+    showPointsThisUserOnApi
+  );
 
   function chooseOrUnChooseVoucher(clickedVoucher) {
     const selectedVoucher = allVouchers.find(
       (voucher) => voucher._id === clickedVoucher._id
     );
-    if (chosenVouchers.some((voucher) => voucher._id === clickedVoucher._id)) {
+    if (chosenVouchers.length === 0) {
+      onSetChosenVouchers([...chosenVouchers, selectedVoucher]);
+      const subtractedPoints = pointsAfterVoucher - clickedVoucher.neededpoints;
+      setPointsAfterVoucher(subtractedPoints);
+    } else if (
+      chosenVouchers.length > 0 &&
+      !chosenVouchers.some((voucher) => voucher._id === clickedVoucher._id)
+    ) {
+      onSetChosenVouchers([...chosenVouchers, selectedVoucher]);
+      const subtractedAgainPoints =
+        pointsAfterVoucher - clickedVoucher.neededpoints;
+      setPointsAfterVoucher(subtractedAgainPoints);
+    } else if (
+      chosenVouchers.some((voucher) => voucher._id === clickedVoucher._id)
+    ) {
       const remainingChosenVouchers = chosenVouchers.filter(
         (voucher) => voucher._id !== clickedVoucher._id
       );
       onSetChosenVouchers(remainingChosenVouchers);
-    } else {
-      onSetChosenVouchers([...chosenVouchers, selectedVoucher]);
+      const addedPoints = pointsAfterVoucher + clickedVoucher.neededpoints;
+      setPointsAfterVoucher(addedPoints);
     }
   }
 
@@ -51,9 +69,7 @@ export default function EmployeeVoucherChoice({
         oder mehrere dieser Gutscheine für Dich aussuchen. <br />
         <br />
         Aktuell verfügbar:{" "}
-        <span>
-          {isThisUserOnApi ? showPointsThisUserOnApi : "0"}
-        </span> Punkte{" "}
+        <span>{isThisUserOnApi ? pointsAfterVoucher : "0"}</span> Punkte{" "}
       </ActionInfo>
       <VoucherSection>
         {allVouchers.map((voucher, index) => (
@@ -66,7 +82,12 @@ export default function EmployeeVoucherChoice({
               <VoucherPartner>von {voucher.voucherpartner}</VoucherPartner>
               <BonusPointBubble>{voucher.neededpoints} Punkte</BonusPointBubble>
               <ChooseCheckbox
-                disabled={showPointsThisUserOnApi < voucher.neededpoints}
+                disabled={
+                  pointsAfterVoucher < voucher.neededpoints &&
+                  !chosenVouchers.some(
+                    (chosenvoucher) => chosenvoucher._id === voucher._id
+                  )
+                }
                 type="checkbox"
                 onClick={() => chooseOrUnChooseVoucher(voucher)}
               />

@@ -35,10 +35,10 @@ export default function BossMain({
           <p>Gutscheine ansehen</p>
         </VoucherSection>
       </ActionGrid>
-      <EmployeeSection>
+      {/* <EmployeeSection>
         <ActionImage src={EmployeesImage} />
         <p>Mitarbeiter verwalten</p>
-      </EmployeeSection>
+      </EmployeeSection> */}
     </>
   );
 }
@@ -50,7 +50,7 @@ const WelcomeMessage = styled.h2`
 const ActionGrid = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin: 1.5rem 0rem 0rem;
+  margin: 4rem 0rem 0rem;
 `;
 
 const BonusSection = styled.section`
@@ -71,13 +71,13 @@ const VoucherSection = styled.section`
   }
 `;
 
-const EmployeeSection = styled.section`
-  margin-top: 1.5rem;
-  cursor: pointer;
-  p {
-    font-weight: bold;
-  }
-`;
+// const EmployeeSection = styled.section`
+//   margin-top: 1.5rem;
+//   cursor: pointer;
+//   p {
+//     font-weight: bold;
+//   }
+// `;
 
 const ActionImage = styled.img`
   padding: 0.3rem;

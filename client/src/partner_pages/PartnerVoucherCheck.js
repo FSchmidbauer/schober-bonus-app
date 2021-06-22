@@ -3,9 +3,12 @@ import styled from "styled-components";
 export default function PartnerVoucherCheck({
   onConfirmVoucher,
   voucherToConfirm,
+  onSetIsPartnerVoucherCheck,
+  onSetIsPartnerNewVoucher,
 }) {
   function jumpOnLastPage() {
-    window.history.go(-1);
+    onSetIsPartnerVoucherCheck(false);
+    onSetIsPartnerNewVoucher(true);
   }
 
   return (
