@@ -8,8 +8,8 @@ export default function EmployeeVoucherChoice({
   chosenByEmployeeVouchers,
   onSetIsEmployeeVoucherChoice,
   onSetIsEmployeeVoucherCheck,
-  isThisUserOnApi,
-  showPointsThisUserOnApi,
+  isThisEmployeeOnApi,
+  pointsThisEmployeeOnApi,
 }) {
   useEffect(() => {
     fetch("http://localhost:4000/vouchers")
@@ -21,7 +21,7 @@ export default function EmployeeVoucherChoice({
 
   const [isChoiceErrorMessage, setIsChoiceErrorMessage] = useState(false);
   const [pointsAfterVoucher, setPointsAfterVoucher] = useState(
-    showPointsThisUserOnApi
+    pointsThisEmployeeOnApi
   );
 
   function chooseOrUnChooseVoucher(clickedVoucher) {
@@ -79,7 +79,9 @@ export default function EmployeeVoucherChoice({
         oder mehrere dieser Gutscheine für Dich aussuchen. <br />
         <br />
         Aktuell verfügbar:{" "}
-        <span>{isThisUserOnApi ? pointsAfterVoucher : "0"}</span> Punkte{" "}
+        <span>
+          {isThisEmployeeOnApi ? pointsAfterVoucher : "0"}
+        </span> Punkte{" "}
       </ActionInfo>
       <VoucherSection>
         {vouchersOnApi.map((voucher, index) => (

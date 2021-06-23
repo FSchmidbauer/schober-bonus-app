@@ -36,17 +36,20 @@ export default function EmployeeVoucherCheck({
           }
         });
     });
-    updatePointsOfEmps(loggedInUser.name.split(" ")[0].toLowerCase());
+    reducePointsOfEmployeeWithPointsOnApi(
+      loggedInUser.name.split(" ")[0].toLowerCase()
+    );
     onSetIsEmployeeVoucherCheck(false);
     onSetIsEmployeeVoucherIsAcquired(true);
   }
 
-  function updatePointsOfEmps(empToBeUpdated) {
+  function reducePointsOfEmployeeWithPointsOnApi(empToGetReducedPoints) {
     const noChangeEmps = employeesWithPointsOnApi.filter(
-      (employee) => employee.name !== empToBeUpdated
+      (employee) => employee.name !== empToGetReducedPoints
     );
     const empToChangeOnApi = Object.keys(employeesWithPointsOnApi).find(
-      (employee) => employeesWithPointsOnApi[employee].name === empToBeUpdated
+      (employee) =>
+        employeesWithPointsOnApi[employee].name === empToGetReducedPoints
     );
 
     const IdOfEmpToChangeOnApi = Object.values(

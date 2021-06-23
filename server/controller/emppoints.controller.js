@@ -27,23 +27,6 @@ async function postEmpPoints(req, res) {
   res.json(await insertOrUpdateEmployeesWithPoints(employeesWithPoints));
 }
 
-// function giveMoreEmpPoints(req, res) {
-//   const { employeeId } = req.params;
-//   const updatedEmpPoints = req.body;
-//   EmpPoints.findByIdAndUpdate(
-//     { _id: employeeId },
-//     updatedEmpPoints,
-//     { new: true },
-//     (error, doc) => {
-//       if (error) {
-//         res.json({ message: "could not give more points to this employee." });
-//         return;
-//       }
-//       res.json(doc);
-//     }
-//   );
-// }
-
 function subtractVoucherPoints(req, res) {
   const { employeeId } = req.params;
   const { pointsOfSelectedVouchers } = req.body;

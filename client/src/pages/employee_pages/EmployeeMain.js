@@ -1,12 +1,11 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 
 export default function EmployeeMain({
   loggedInUser,
   onSetIsUserIsEmployee,
   onSetIsEmployeeVoucherChoice,
-  isThisUserOnApi,
-  showPointsThisUserOnApi,
+  isThisEmployeeOnApi,
+  pointsThisEmployeeOnApi,
 }) {
   function showEmployeeVoucherChoice() {
     onSetIsUserIsEmployee(false);
@@ -19,7 +18,7 @@ export default function EmployeeMain({
       <WelcomeMessage>
         Hallo {loggedInUser.name.split(" ")[0]}! Du hast aktuell
         <br />
-        <span>{isThisUserOnApi ? showPointsThisUserOnApi : "0"}</span>{" "}
+        <span>{isThisEmployeeOnApi ? pointsThisEmployeeOnApi : "0"}</span>{" "}
         Bonuspunkte. <br /> Was willst Du tun?
       </WelcomeMessage>
       {/* <ActionGrid> */}

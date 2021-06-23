@@ -1,12 +1,13 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 
 export default function EmployeeVoucherIsAcquired({
   onSetChosenByEmployeeVouchers,
   onSetIsEmployeeVoucherIsAcquired,
   onSetIsEmployeeVoucherChoice,
+  onCheckPointsThisEmployeeOnApi,
 }) {
   function aquireAnotherVoucher() {
+    onCheckPointsThisEmployeeOnApi();
     onSetChosenByEmployeeVouchers([]);
     onSetIsEmployeeVoucherIsAcquired(false);
     onSetIsEmployeeVoucherChoice(true);

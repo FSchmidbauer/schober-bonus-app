@@ -8,9 +8,7 @@ export default function LoginForm({
   onSetIsUserIsBoss,
   onSetIsUserIsEmployee,
   onSetIsUserIsPartner,
-  employeesWithPointsOnApi,
-  onSetIsThisUserOnApi,
-  onSetShowPointsThisUserOnApi,
+  onCheckPointsThisEmployeeOnApi,
 }) {
   const [isValidErrorMessage, setIsValidErrorMessage] = useState(false);
 
@@ -18,23 +16,6 @@ export default function LoginForm({
     const fieldName = event.target.name;
     let fieldValue = event.target.value;
     onSetLoggedInUser({ ...loggedInUser, [fieldName]: fieldValue });
-  }
-
-  function existingUser(employeesWithPointsOnApi, loggedInUser) {
-    return employeesWithPointsOnApi.find(
-      (employee) =>
-        employee.name === loggedInUser.name.split(" ")[0].toLowerCase()
-    );
-  }
-
-  function checkPointsThisUserOnApi() {
-    const user = existingUser(employeesWithPointsOnApi, loggedInUser);
-    if (user) {
-      onSetIsThisUserOnApi(true);
-      onSetShowPointsThisUserOnApi(user.points);
-    } else {
-      return;
-    }
   }
 
   function showMainMenues(event) {
@@ -49,9 +30,10 @@ export default function LoginForm({
       (loggedInUser.name === "Albert Maier" ||
         loggedInUser.name === "Alexander Mayer" ||
         loggedInUser.name === "Andrea Breitenwinkler" ||
-        loggedInUser.name === "Angelo Brandi")
+        loggedInUser.name === "Angelo Brandi" ||
+        loggedInUser.name === "Christine Schick")
     ) {
-      checkPointsThisUserOnApi();
+      onCheckPointsThisEmployeeOnApi();
       onSetIsNoUser(false);
       onSetIsUserIsEmployee(true);
     } else if (loggedInUser.role === "partnerunternehmen") {

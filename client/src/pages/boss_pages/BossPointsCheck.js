@@ -5,19 +5,21 @@ export default function BossPointsCheck({
   onSetIsBossPointsCheck,
   onSetIsBossPointsArePublished,
   onSetIsBossNewPoints,
+  onSetEmployeesWithPointsOnApi,
 }) {
   function jumpOnLastPage() {
     onSetIsBossPointsCheck(false);
     onSetIsBossNewPoints(true);
   }
 
-  function confirmPoints(awardedEmp) {
+  function confirmPoints(awardedEmps) {
     fetch("http://localhost:4000/emppoints", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(awardedEmp),
+      body: JSON.stringify(awardedEmps),
     })
       .then((result) => result.json())
+      .then((updatedEmpData) => onSetEmployeesWithPointsOnApi(updatedEmpData))
       .catch((error) => console.error(error));
     onSetIsBossPointsCheck(false);
     onSetIsBossPointsArePublished(true);

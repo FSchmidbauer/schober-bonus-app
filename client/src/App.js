@@ -24,8 +24,8 @@ import PartnerVoucherIsPublished from "./pages/partner_pages/PartnerVoucherIsPub
 export default function App() {
   const [isNoUser, setIsNoUser] = useState(true);
   const [loggedInUser, setLoggedInUser] = useState(null);
-  const [isThisUserOnApi, setIsThisUserOnApi] = useState(false);
-  const [showPointsThisUserOnApi, setShowPointsThisUserOnApi] = useState(null);
+  const [isThisEmployeeOnApi, setIsThisEmployeeOnApi] = useState(false);
+  const [pointsThisEmployeeOnApi, setPointsThisEmployeeOnApi] = useState(null);
 
   const [isUserIsBoss, setIsUserIsBoss] = useState(false);
   const [isBossNewPoints, setIsBossNewPoints] = useState(false);
@@ -103,6 +103,7 @@ export default function App() {
       isEmployeeVoucherCheck ||
       isEmployeeVoucherIsAcquired
     ) {
+      checkPointsThisEmployeeOnApi();
       setIsEmployeeVoucherChoice(false);
       setIsEmployeeVoucherCheck(false);
       setIsEmployeeVoucherIsAcquired(false);
@@ -120,6 +121,23 @@ export default function App() {
     }
   }
 
+  function checkPointsThisEmployeeOnApi() {
+    const user = existingUser(employeesWithPointsOnApi, loggedInUser);
+    if (user) {
+      setIsThisEmployeeOnApi(true);
+      setPointsThisEmployeeOnApi(user.points);
+    } else {
+      return;
+    }
+  }
+
+  function existingUser(employeesWithPointsOnApi, loggedInUser) {
+    return employeesWithPointsOnApi.find(
+      (employee) =>
+        employee.name === loggedInUser.name.split(" ")[0].toLowerCase()
+    );
+  }
+
   return (
     <>
       <header>
@@ -135,9 +153,7 @@ export default function App() {
             onSetIsUserIsBoss={setIsUserIsBoss}
             onSetIsUserIsEmployee={setIsUserIsEmployee}
             onSetIsUserIsPartner={setIsUserIsPartner}
-            employeesWithPointsOnApi={employeesWithPointsOnApi}
-            onSetIsThisUserOnApi={setIsThisUserOnApi}
-            onSetShowPointsThisUserOnApi={setShowPointsThisUserOnApi}
+            onCheckPointsThisEmployeeOnApi={checkPointsThisEmployeeOnApi}
           />
         )}
         {isUserIsBoss && (
@@ -168,6 +184,7 @@ export default function App() {
             onSetIsBossPointsCheck={setIsBossPointsCheck}
             onSetIsBossPointsArePublished={setIsBossPointsArePublished}
             onSetIsBossNewPoints={setIsBossNewPoints}
+            onSetEmployeesWithPointsOnApi={setEmployeesWithPointsOnApi}
           />
         )}
         {isBossPointsArePublished && (
@@ -190,8 +207,8 @@ export default function App() {
             loggedInUser={loggedInUser}
             onSetIsUserIsEmployee={setIsUserIsEmployee}
             onSetIsEmployeeVoucherChoice={setIsEmployeeVoucherChoice}
-            isThisUserOnApi={isThisUserOnApi}
-            showPointsThisUserOnApi={showPointsThisUserOnApi}
+            isThisEmployeeOnApi={isThisEmployeeOnApi}
+            pointsThisEmployeeOnApi={pointsThisEmployeeOnApi}
           />
         )}
         {isEmployeeVoucherChoice && (
@@ -202,13 +219,13 @@ export default function App() {
             chosenByEmployeeVouchers={chosenByEmployeeVouchers}
             onSetIsEmployeeVoucherChoice={setIsEmployeeVoucherChoice}
             onSetIsEmployeeVoucherCheck={setIsEmployeeVoucherCheck}
-            isThisUserOnApi={isThisUserOnApi}
-            showPointsThisUserOnApi={showPointsThisUserOnApi}
+            isThisEmployeeOnApi={isThisEmployeeOnApi}
+            pointsThisEmployeeOnApi={pointsThisEmployeeOnApi}
           />
         )}
         {isEmployeeVoucherCheck && (
           <EmployeeVoucherCheck
-            onSetChosenByEmployeeVouchers={chosenByEmployeeVouchers}
+            onSetChosenByEmployeeVouchers={setChosenByEmployeeVouchers}
             chosenByEmployeeVouchers={chosenByEmployeeVouchers}
             onSetIsEmployeeVoucherChoice={setIsEmployeeVoucherChoice}
             onSetIsEmployeeVoucherCheck={setIsEmployeeVoucherCheck}
@@ -225,6 +242,7 @@ export default function App() {
             onSetChosenByEmployeeVouchers={setChosenByEmployeeVouchers}
             onSetIsEmployeeVoucherIsAcquired={setIsEmployeeVoucherIsAcquired}
             onSetIsEmployeeVoucherChoice={setIsEmployeeVoucherChoice}
+            onCheckPointsThisEmployeeOnApi={checkPointsThisEmployeeOnApi}
           />
         )}
         {isUserIsPartner && (
