@@ -1,15 +1,74 @@
 import styled from "styled-components";
 
 export default function EmployeeVoucherCheck({
-  onSetChosenVouchers,
-  chosenVouchers,
-  onAcquireAndDeleteForOthersVoucher,
-  onSetIsEmployeeVoucherCheck,
+  chosenByEmployeeVouchers,
   onSetIsEmployeeVoucherChoice,
+  onSetIsEmployeeVoucherCheck,
+  onSetIsEmployeeVoucherIsAcquired,
+  onSetVouchersOnApi,
+  vouchersOnApi,
+  loggedInUser,
+  onSetEmployeesWithPointsOnApi,
+  employeesWithPointsOnApi,
 }) {
   function jumpOnLastPage() {
     onSetIsEmployeeVoucherCheck(false);
     onSetIsEmployeeVoucherChoice(true);
+  }
+
+  function acquireAndDeleteForOthersVoucher() {
+    chosenByEmployeeVouchers.map((voucherToBeDeleted) => {
+      fetch("http://localhost:4000/vouchers/" + voucherToBeDeleted._id, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((result) => result.json())
+        .then((response) => {
+          if (response.data && response.data._id) {
+            const vouchersToKeep = vouchersOnApi.filter(
+              (voucher) => voucher._id !== response.data._id
+            );
+            onSetVouchersOnApi(vouchersToKeep);
+          } else {
+            console.log("Voucher could not be deleted.");
+          }
+        });
+    });
+    updatePointsOfEmps(loggedInUser.name.split(" ")[0].toLowerCase());
+    onSetIsEmployeeVoucherCheck(false);
+    onSetIsEmployeeVoucherIsAcquired(true);
+  }
+
+  function updatePointsOfEmps(empToBeUpdated) {
+    const noChangeEmps = employeesWithPointsOnApi.filter(
+      (employee) => employee.name !== empToBeUpdated
+    );
+    const empToChangeOnApi = Object.keys(employeesWithPointsOnApi).find(
+      (employee) => employeesWithPointsOnApi[employee].name === empToBeUpdated
+    );
+
+    const IdOfEmpToChangeOnApi = Object.values(
+      employeesWithPointsOnApi[empToChangeOnApi]
+    )[0];
+
+    const pointsOfSelectedVouchers = chosenByEmployeeVouchers.map(
+      (voucher) => voucher.neededpoints
+    );
+
+    fetch("http://localhost:4000/emppoints/" + IdOfEmpToChangeOnApi, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ pointsOfSelectedVouchers }),
+    })
+      .then((result) => result.json())
+      .then((updatedEmpData) =>
+        onSetEmployeesWithPointsOnApi([...noChangeEmps, updatedEmpData])
+      )
+      .catch((error) => console.error(error));
   }
 
   return (
@@ -19,7 +78,7 @@ export default function EmployeeVoucherCheck({
         Du hast folgende Gutscheine für Dich vorausgewählt:
       </ActionInfo>
       <VoucherToConfirmSection>
-        {chosenVouchers.map((voucher) => {
+        {chosenByEmployeeVouchers.map((voucher) => {
           return (
             <VoucherToConfirm>
               <VoucherTitle>{voucher.vouchertype}</VoucherTitle>
@@ -34,7 +93,7 @@ export default function EmployeeVoucherCheck({
       </VoucherToConfirmSection>
       <ButtonSection>
         <CorrectButton onClick={() => jumpOnLastPage()}>Anpassen</CorrectButton>
-        <ConfirmButton onClick={() => onAcquireAndDeleteForOthersVoucher()}>
+        <ConfirmButton onClick={() => acquireAndDeleteForOthersVoucher()}>
           Bestätigen
         </ConfirmButton>
       </ButtonSection>

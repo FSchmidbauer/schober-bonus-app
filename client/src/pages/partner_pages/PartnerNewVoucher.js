@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 export default function PartnerNewVoucher({
-  onSetVoucherToConfirm,
+  onSetNewPartnerVoucherForConfirmation,
   onSetIsPartnerNewVoucher,
   onSetIsPartnerVoucherCheck,
 }) {
@@ -15,69 +15,91 @@ export default function PartnerNewVoucher({
   };
 
   const [isVoucherErrorMessage, setIsVoucherErrorMessage] = useState(false);
-  const [createdVoucher, setCreatedVoucher] = useState(emptyVoucher);
+  const [createdByPartnerVoucher, setCreatedByPartnerVoucher] =
+    useState(emptyVoucher);
 
-  function updateVoucher(event) {
+  function updateCreatedByPartnerVoucher(event) {
     const fieldName = event.target.name;
     let fieldValue = event.target.value;
-    setCreatedVoucher({ ...createdVoucher, [fieldName]: fieldValue });
+    setCreatedByPartnerVoucher({
+      ...createdByPartnerVoucher,
+      [fieldName]: fieldValue,
+    });
   }
 
   function showVoucherCheck(event) {
     if (
-      // createdVoucher.length !== 4 ||
-      createdVoucher.vouchertype === "notChosen" ||
-      createdVoucher.vouchervalue === "0" ||
-      createdVoucher.vouchervalue.includes("-") ||
-      createdVoucher.vouchercurrency === "notChosen"
+      // createdByPartnerVoucher.length !== 4 ||
+      createdByPartnerVoucher.vouchertype === "notChosen" ||
+      createdByPartnerVoucher.vouchervalue === "0" ||
+      createdByPartnerVoucher.vouchervalue.includes("-") ||
+      createdByPartnerVoucher.vouchercurrency === "notChosen"
     ) {
       event.preventDefault();
       setIsVoucherErrorMessage(true);
     } else {
       onSetIsPartnerNewVoucher(false);
       onSetIsPartnerVoucherCheck(true);
-      onSetVoucherToConfirm(createdVoucher);
-      setCreatedVoucher(emptyVoucher);
+      onSetNewPartnerVoucherForConfirmation(createdByPartnerVoucher);
+      setCreatedByPartnerVoucher(emptyVoucher);
     }
   }
 
   function changePointsNeeded() {
-    if (createdVoucher.vouchervalue <= 0) {
+    if (createdByPartnerVoucher.vouchervalue <= 0) {
       const fieldName = "neededpoints";
       let fieldValue = 0;
-      setCreatedVoucher({ ...createdVoucher, [fieldName]: fieldValue });
+      setCreatedByPartnerVoucher({
+        ...createdByPartnerVoucher,
+        [fieldName]: fieldValue,
+      });
     } else if (
-      createdVoucher.vouchervalue > 0 &&
-      createdVoucher.vouchervalue <= 25
+      createdByPartnerVoucher.vouchervalue > 0 &&
+      createdByPartnerVoucher.vouchervalue <= 25
     ) {
       const fieldName = "neededpoints";
       let fieldValue = 2;
-      setCreatedVoucher({ ...createdVoucher, [fieldName]: fieldValue });
+      setCreatedByPartnerVoucher({
+        ...createdByPartnerVoucher,
+        [fieldName]: fieldValue,
+      });
     } else if (
-      createdVoucher.vouchervalue > 25 &&
-      createdVoucher.vouchervalue <= 50
+      createdByPartnerVoucher.vouchervalue > 25 &&
+      createdByPartnerVoucher.vouchervalue <= 50
     ) {
       const fieldName = "neededpoints";
       let fieldValue = 4;
-      setCreatedVoucher({ ...createdVoucher, [fieldName]: fieldValue });
+      setCreatedByPartnerVoucher({
+        ...createdByPartnerVoucher,
+        [fieldName]: fieldValue,
+      });
     } else if (
-      createdVoucher.vouchervalue > 50 &&
-      createdVoucher.vouchervalue <= 75
+      createdByPartnerVoucher.vouchervalue > 50 &&
+      createdByPartnerVoucher.vouchervalue <= 75
     ) {
       const fieldName = "neededpoints";
       let fieldValue = 6;
-      setCreatedVoucher({ ...createdVoucher, [fieldName]: fieldValue });
+      setCreatedByPartnerVoucher({
+        ...createdByPartnerVoucher,
+        [fieldName]: fieldValue,
+      });
     } else if (
-      createdVoucher.vouchervalue > 75 &&
-      createdVoucher.vouchervalue <= 100
+      createdByPartnerVoucher.vouchervalue > 75 &&
+      createdByPartnerVoucher.vouchervalue <= 100
     ) {
       const fieldName = "neededpoints";
       let fieldValue = 8;
-      setCreatedVoucher({ ...createdVoucher, [fieldName]: fieldValue });
+      setCreatedByPartnerVoucher({
+        ...createdByPartnerVoucher,
+        [fieldName]: fieldValue,
+      });
     } else {
       const fieldName = "neededpoints";
       let fieldValue = 10;
-      setCreatedVoucher({ ...createdVoucher, [fieldName]: fieldValue });
+      setCreatedByPartnerVoucher({
+        ...createdByPartnerVoucher,
+        [fieldName]: fieldValue,
+      });
     }
   }
 
@@ -97,8 +119,8 @@ export default function PartnerNewVoucher({
       <VoucherForm>
         <VoucherSelect
           name="vouchertype"
-          value={createdVoucher.vouchertype}
-          onChange={updateVoucher}
+          value={createdByPartnerVoucher.vouchertype}
+          onChange={updateCreatedByPartnerVoucher}
         >
           <option value="notChosen">-- Gutscheinart --</option>
           <option value="Restaurant-Gutschein">Restaurant-Gutschein</option>
@@ -111,22 +133,22 @@ export default function PartnerNewVoucher({
           type="text"
           name="voucherpartner"
           placeholder="Partner-Unternehmen"
-          value={createdVoucher.voucherpartner}
-          onChange={updateVoucher}
+          value={createdByPartnerVoucher.voucherpartner}
+          onChange={updateCreatedByPartnerVoucher}
         />
         <VoucherValue>
           <VoucherValueInput
             type="text"
             name="vouchervalue"
             placeholder="Wert in"
-            value={createdVoucher.vouchervalue}
-            onChange={updateVoucher}
+            value={createdByPartnerVoucher.vouchervalue}
+            onChange={updateCreatedByPartnerVoucher}
             onBlur={changePointsNeeded}
           />
           <VoucherCurrency
             name="vouchercurrency"
-            value={createdVoucher.currency}
-            onChange={updateVoucher}
+            value={createdByPartnerVoucher.currency}
+            onChange={updateCreatedByPartnerVoucher}
           >
             <option value="notChosen">--</option>
             <option value="€">€</option>
@@ -137,7 +159,7 @@ export default function PartnerNewVoucher({
           Zu erwerben für
           <PointsNeeded
             name="neededpoints"
-            value={createdVoucher.neededpoints}
+            value={createdByPartnerVoucher.neededpoints}
           />{" "}
           Bonuspunkte
         </p>

@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export default function BossPointsArePublished({
-  onSetEmployeesWithPoints,
+  onSetNewEmployeesWithPointsForConfirmation,
   onSetIsBossPointsArePublished,
   onSetIsBossNewPoints,
 }) {
   function giveMorePoints() {
-    onSetEmployeesWithPoints({});
+    onSetNewEmployeesWithPointsForConfirmation({});
     onSetIsBossPointsArePublished(false);
     onSetIsBossNewPoints(true);
   }

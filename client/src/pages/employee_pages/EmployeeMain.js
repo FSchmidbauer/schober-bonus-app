@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 
 export default function EmployeeMain({
-  createdUser,
+  loggedInUser,
   onSetIsUserIsEmployee,
   onSetIsEmployeeVoucherChoice,
   isThisUserOnApi,
@@ -17,7 +17,7 @@ export default function EmployeeMain({
     <>
       <h1>HAUPTMENÜ</h1>
       <WelcomeMessage>
-        Hallo {createdUser.name.split(" ")[0]}! Du hast aktuell
+        Hallo {loggedInUser.name.split(" ")[0]}! Du hast aktuell
         <br />
         <span>{isThisUserOnApi ? showPointsThisUserOnApi : "0"}</span>{" "}
         Bonuspunkte. <br /> Was willst Du tun?

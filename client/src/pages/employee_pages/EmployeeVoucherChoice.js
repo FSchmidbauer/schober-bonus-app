@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 
 export default function EmployeeVoucherChoice({
-  onSetAllVouchers,
-  allVouchers,
-  onSetChosenVouchers,
-  chosenVouchers,
+  onSetVouchersOnApi,
+  vouchersOnApi,
+  onSetChosenByEmployeeVouchers,
+  chosenByEmployeeVouchers,
   onSetIsEmployeeVoucherChoice,
   onSetIsEmployeeVoucherCheck,
   isThisUserOnApi,
@@ -14,8 +14,8 @@ export default function EmployeeVoucherChoice({
   useEffect(() => {
     fetch("http://localhost:4000/vouchers")
       .then((result) => result.json())
-      .then((apiVouchers) => onSetAllVouchers(apiVouchers))
-      .then(onSetChosenVouchers([]))
+      .then((apiVouchers) => onSetVouchersOnApi(apiVouchers))
+      .then(onSetChosenByEmployeeVouchers([]))
       .then((error) => console.error(error));
   }, []);
 
@@ -25,35 +25,45 @@ export default function EmployeeVoucherChoice({
   );
 
   function chooseOrUnChooseVoucher(clickedVoucher) {
-    const selectedVoucher = allVouchers.find(
+    const selectedVoucher = vouchersOnApi.find(
       (voucher) => voucher._id === clickedVoucher._id
     );
-    if (chosenVouchers.length === 0) {
-      onSetChosenVouchers([...chosenVouchers, selectedVoucher]);
+    if (chosenByEmployeeVouchers.length === 0) {
+      onSetChosenByEmployeeVouchers([
+        ...chosenByEmployeeVouchers,
+        selectedVoucher,
+      ]);
       const subtractedPoints = pointsAfterVoucher - clickedVoucher.neededpoints;
       setPointsAfterVoucher(subtractedPoints);
     } else if (
-      chosenVouchers.length > 0 &&
-      !chosenVouchers.some((voucher) => voucher._id === clickedVoucher._id)
+      chosenByEmployeeVouchers.length > 0 &&
+      !chosenByEmployeeVouchers.some(
+        (voucher) => voucher._id === clickedVoucher._id
+      )
     ) {
-      onSetChosenVouchers([...chosenVouchers, selectedVoucher]);
+      onSetChosenByEmployeeVouchers([
+        ...chosenByEmployeeVouchers,
+        selectedVoucher,
+      ]);
       const subtractedAgainPoints =
         pointsAfterVoucher - clickedVoucher.neededpoints;
       setPointsAfterVoucher(subtractedAgainPoints);
     } else if (
-      chosenVouchers.some((voucher) => voucher._id === clickedVoucher._id)
+      chosenByEmployeeVouchers.some(
+        (voucher) => voucher._id === clickedVoucher._id
+      )
     ) {
-      const remainingChosenVouchers = chosenVouchers.filter(
+      const remainingChosenByEmployeeVouchers = chosenByEmployeeVouchers.filter(
         (voucher) => voucher._id !== clickedVoucher._id
       );
-      onSetChosenVouchers(remainingChosenVouchers);
+      onSetChosenByEmployeeVouchers(remainingChosenByEmployeeVouchers);
       const addedPoints = pointsAfterVoucher + clickedVoucher.neededpoints;
       setPointsAfterVoucher(addedPoints);
     }
   }
 
   function showVoucherCheck() {
-    if (chosenVouchers.length === 0) {
+    if (chosenByEmployeeVouchers.length === 0) {
       setIsChoiceErrorMessage(true);
     } else {
       onSetIsEmployeeVoucherChoice(false);
@@ -72,7 +82,7 @@ export default function EmployeeVoucherChoice({
         <span>{isThisUserOnApi ? pointsAfterVoucher : "0"}</span> Punkte{" "}
       </ActionInfo>
       <VoucherSection>
-        {allVouchers.map((voucher, index) => (
+        {vouchersOnApi.map((voucher, index) => (
           <>
             <SingleVoucher key={index}>
               <VoucherTitle>{voucher.vouchertype}</VoucherTitle>
@@ -84,7 +94,7 @@ export default function EmployeeVoucherChoice({
               <ChooseCheckbox
                 disabled={
                   pointsAfterVoucher < voucher.neededpoints &&
-                  !chosenVouchers.some(
+                  !chosenByEmployeeVouchers.some(
                     (chosenvoucher) => chosenvoucher._id === voucher._id
                   )
                 }

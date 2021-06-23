@@ -2,13 +2,13 @@ import { useState } from "react";
 import styled from "styled-components";
 
 export default function LoginForm({
-  onSetCreatedUser,
-  createdUser,
+  onSetLoggedInUser,
+  loggedInUser,
   onSetIsNoUser,
   onSetIsUserIsBoss,
   onSetIsUserIsEmployee,
   onSetIsUserIsPartner,
-  allEmployeesWithPoints,
+  employeesWithPointsOnApi,
   onSetIsThisUserOnApi,
   onSetShowPointsThisUserOnApi,
 }) {
@@ -17,28 +17,21 @@ export default function LoginForm({
   function updateUser(event) {
     const fieldName = event.target.name;
     let fieldValue = event.target.value;
-    onSetCreatedUser({ ...createdUser, [fieldName]: fieldValue });
+    onSetLoggedInUser({ ...loggedInUser, [fieldName]: fieldValue });
+  }
+
+  function existingUser(employeesWithPointsOnApi, loggedInUser) {
+    return employeesWithPointsOnApi.find(
+      (employee) =>
+        employee.name === loggedInUser.name.split(" ")[0].toLowerCase()
+    );
   }
 
   function checkPointsThisUserOnApi() {
-    if (
-      Object.keys(allEmployeesWithPoints).find(
-        (employee) =>
-          allEmployeesWithPoints[employee].name ===
-          createdUser.name.split(" ")[0].toLowerCase()
-      )
-    ) {
-      const pointsOfUser = Object.values(
-        allEmployeesWithPoints[
-          Object.keys(allEmployeesWithPoints).find(
-            (employee) =>
-              allEmployeesWithPoints[employee].name ===
-              createdUser.name.split(" ")[0].toLowerCase()
-          )
-        ]
-      )[2];
+    const user = existingUser(employeesWithPointsOnApi, loggedInUser);
+    if (user) {
       onSetIsThisUserOnApi(true);
-      onSetShowPointsThisUserOnApi(pointsOfUser);
+      onSetShowPointsThisUserOnApi(user.points);
     } else {
       return;
     }
@@ -46,22 +39,22 @@ export default function LoginForm({
 
   function showMainMenues(event) {
     if (
-      createdUser.role === "geschaeftsfuehrer" &&
-      createdUser.name === "Joachim Schober"
+      loggedInUser.role === "geschaeftsfuehrer" &&
+      loggedInUser.name === "Joachim Schober"
     ) {
       onSetIsNoUser(false);
       onSetIsUserIsBoss(true);
     } else if (
-      createdUser.role === "mitarbeiter" &&
-      (createdUser.name === "Albert Maier" ||
-        createdUser.name === "Alexander Mayer" ||
-        createdUser.name === "Andrea Breitenwinkler" ||
-        createdUser.name === "Angelo Brandi")
+      loggedInUser.role === "mitarbeiter" &&
+      (loggedInUser.name === "Albert Maier" ||
+        loggedInUser.name === "Alexander Mayer" ||
+        loggedInUser.name === "Andrea Breitenwinkler" ||
+        loggedInUser.name === "Angelo Brandi")
     ) {
       checkPointsThisUserOnApi();
       onSetIsNoUser(false);
       onSetIsUserIsEmployee(true);
-    } else if (createdUser.role === "partnerunternehmen") {
+    } else if (loggedInUser.role === "partnerunternehmen") {
       onSetIsNoUser(false);
       onSetIsUserIsPartner(true);
     } else {

@@ -1,16 +1,30 @@
 import EmpPoints from "../models/emppoints.model.js";
 
-function postEmpPoints(req, res) {
-  const employeesWithPoints = Object.keys(req.body).map((name) => {
-    return { name, points: req.body[name].points };
-  });
+async function insertOrUpdateEmployeesWithPoints(employeesWithPoints) {
+  return Promise.all(
+    employeesWithPoints.map(
+      async (employeeWithPoints) =>
+        await EmpPoints.findOneAndUpdate(
+          { name: employeeWithPoints.name },
+          {
+            name: employeeWithPoints.name,
+            $inc: { points: employeeWithPoints.points },
+          },
+          {
+            upsert: true,
+            new: true,
+          }
+        )
+    )
+  );
+}
 
-  EmpPoints.insertMany(employeesWithPoints, (error, docs) => {
-    if (error) {
-      return res.json(error);
-    }
-    res.json(docs);
-  });
+async function postEmpPoints(req, res) {
+  const employeesWithPoints = Object.keys(req.body).map((name) => ({
+    name,
+    points: req.body[name].points,
+  }));
+  res.json(await insertOrUpdateEmployeesWithPoints(employeesWithPoints));
 }
 
 // function giveMoreEmpPoints(req, res) {
@@ -32,19 +46,26 @@ function postEmpPoints(req, res) {
 
 function subtractVoucherPoints(req, res) {
   const { employeeId } = req.params;
-  const pointsAfterSubtractedVoucher = req.body;
-  EmpPoints.findByIdAndUpdate(
-    { _id: employeeId },
-    pointsAfterSubtractedVoucher,
-    { new: true },
-    (error, doc) => {
-      if (error) {
-        res.json({ message: "could not subtract these voucher points." });
-        return;
-      }
-      res.json(doc);
+  const { pointsOfSelectedVouchers } = req.body;
+
+  EmpPoints.findById(employeeId, (error, doc) => {
+    if (error) {
+      res.json({ message: "could not find employee with this id." });
+      return;
     }
-  );
+    pointsOfSelectedVouchers.forEach((points) => {
+      doc.points = doc.points - points;
+    });
+    EmpPoints.findOneAndUpdate(
+      { _id: employeeId },
+      doc,
+      { new: true },
+      (error, doc) => {
+        // @TODO error
+        res.json(doc);
+      }
+    );
+  });
 }
 
 function getEmpPoints(req, res) {

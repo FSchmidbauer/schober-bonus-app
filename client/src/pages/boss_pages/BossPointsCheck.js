@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export default function BossPointsCheck({
-  employeesWithPoints,
-  onConfirmPoints,
+  newEmployeesWithPointsForConfirmation,
   onSetIsBossPointsCheck,
+  onSetIsBossPointsArePublished,
   onSetIsBossNewPoints,
 }) {
   function jumpOnLastPage() {
@@ -11,21 +11,17 @@ export default function BossPointsCheck({
     onSetIsBossNewPoints(true);
   }
 
-  // function changePoints(playerToChange) {
-  //   const noChangePlayers = players.filter(
-  //     (player) => player._id !== playerToChange._id
-  //   );
-  //   fetch("http://localhost:4000/players/" + playerToChange._id, {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(playerToChange),
-  //   })
-  //     .then((result) => result.json())
-  //     .then((changedPlayer) => setPlayers([...noChangePlayers, changedPlayer]))
-  //     .catch((error) => console.error(error));
-  // }
+  function confirmPoints(awardedEmp) {
+    fetch("http://localhost:4000/emppoints", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(awardedEmp),
+    })
+      .then((result) => result.json())
+      .catch((error) => console.error(error));
+    onSetIsBossPointsCheck(false);
+    onSetIsBossPointsArePublished(true);
+  }
 
   return (
     <>
@@ -33,12 +29,15 @@ export default function BossPointsCheck({
       <ActionInfo>
         Du hast folgenden Mitarbeitern neue Bonuspunkte gegeben:
       </ActionInfo>
-      {Object.keys(employeesWithPoints).map((employee) => (
+      {Object.keys(newEmployeesWithPointsForConfirmation).map((employee) => (
         <>
           <EmpWithNewPoints>
-            <img src={employeesWithPoints[employee].image} />
+            <img src={newEmployeesWithPointsForConfirmation[employee].image} />
             <p>
-              <span>{employeesWithPoints[employee].points}</span> Punkt(e)
+              <span>
+                {newEmployeesWithPointsForConfirmation[employee].points}
+              </span>{" "}
+              Punkt(e)
             </p>
           </EmpWithNewPoints>
           <EmpCommentInput
@@ -50,7 +49,9 @@ export default function BossPointsCheck({
       ))}
       <ButtonSection>
         <CorrectButton onClick={jumpOnLastPage}>Anpassen</CorrectButton>
-        <ConfirmButton onClick={() => onConfirmPoints(employeesWithPoints)}>
+        <ConfirmButton
+          onClick={() => confirmPoints(newEmployeesWithPointsForConfirmation)}
+        >
           Bestätigen
         </ConfirmButton>
       </ButtonSection>

@@ -1,12 +1,13 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 
 export default function EmployeeVoucherIsAcquired({
-  onSetChosenVouchers,
+  onSetChosenByEmployeeVouchers,
   onSetIsEmployeeVoucherIsAcquired,
   onSetIsEmployeeVoucherChoice,
 }) {
   function aquireAnotherVoucher() {
-    onSetChosenVouchers([]);
+    onSetChosenByEmployeeVouchers([]);
     onSetIsEmployeeVoucherIsAcquired(false);
     onSetIsEmployeeVoucherChoice(true);
   }

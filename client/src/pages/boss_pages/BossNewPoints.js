@@ -1,29 +1,29 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import Albert from "../images/albert-neueseite.jpg";
-import Alex from "../images/alex-neueseite.jpg";
-import Andrea from "../images/andrea-neueseite.jpg";
-import Angelo from "../images/angelo-neueseite.jpg";
-import Berit from "../images/berit-neueseite.jpg";
-import Christine from "../images/christine-neueseite.jpg";
-import Claudia from "../images/claudia-neueseite.jpg";
-import Dominic from "../images/dominic-neueseite.jpg";
-import Ersin from "../images/ersin-neueseite.jpg";
-import Martin from "../images/martin-neueseite.jpg";
-import Matthias from "../images/matthias-neueseite.jpg";
-import Michael from "../images/michael-neueseite.jpg";
-import Niklas from "../images/niklas-neueseite.jpg";
-import Rene from "../images/rene-neueseite.jpg";
-import Sandra from "../images/sandra-neueseite.jpg";
+import Albert from "../../images/albert-neueseite.jpg";
+import Alex from "../../images/alex-neueseite.jpg";
+import Andrea from "../../images/andrea-neueseite.jpg";
+import Angelo from "../../images/angelo-neueseite.jpg";
+import Berit from "../../images/berit-neueseite.jpg";
+import Christine from "../../images/christine-neueseite.jpg";
+import Claudia from "../../images/claudia-neueseite.jpg";
+import Dominic from "../../images/dominic-neueseite.jpg";
+import Ersin from "../../images/ersin-neueseite.jpg";
+import Martin from "../../images/martin-neueseite.jpg";
+import Matthias from "../../images/matthias-neueseite.jpg";
+import Michael from "../../images/michael-neueseite.jpg";
+import Niklas from "../../images/niklas-neueseite.jpg";
+import Rene from "../../images/rene-neueseite.jpg";
+import Sandra from "../../images/sandra-neueseite.jpg";
 
 export default function BossNewPoints({
-  onSetEmployeesWithPoints,
-  employeesWithPoints,
+  onSetNewEmployeesWithPointsForConfirmation,
+  newEmployeesWithPointsForConfirmation,
   onSetIsBossNewPoints,
   onSetIsBossPointsCheck,
 }) {
   useEffect(() => {
-    onSetEmployeesWithPoints({});
+    onSetNewEmployeesWithPointsForConfirmation({});
   }, []);
 
   const [isPointsErrorMessage, setIsPointsErrorMessage] = useState(false);
@@ -47,21 +47,22 @@ export default function BossNewPoints({
   };
 
   function addPoints(employee) {
-    if (!employeesWithPoints[employee]) {
+    if (!newEmployeesWithPointsForConfirmation[employee]) {
       const employeeGetsFirstPoint = employees[employee];
       employeeGetsFirstPoint.points += 1;
-      onSetEmployeesWithPoints({
-        ...employeesWithPoints,
+      onSetNewEmployeesWithPointsForConfirmation({
+        ...newEmployeesWithPointsForConfirmation,
         [employee]: employeeGetsFirstPoint,
       });
     } else if (
-      employeesWithPoints[employee] &&
-      employeesWithPoints[employee].points !== 5
+      newEmployeesWithPointsForConfirmation[employee] &&
+      newEmployeesWithPointsForConfirmation[employee].points !== 5
     ) {
-      const employeeGetsMorePoints = employeesWithPoints[employee];
+      const employeeGetsMorePoints =
+        newEmployeesWithPointsForConfirmation[employee];
       employeeGetsMorePoints.points = employeeGetsMorePoints.points + 1;
-      onSetEmployeesWithPoints({
-        ...employeesWithPoints,
+      onSetNewEmployeesWithPointsForConfirmation({
+        ...newEmployeesWithPointsForConfirmation,
         [employee]: employeeGetsMorePoints,
       });
     } else {
@@ -70,37 +71,41 @@ export default function BossNewPoints({
   }
 
   function subtractPoints(employee) {
-    if (!employeesWithPoints[employee]) {
+    if (!newEmployeesWithPointsForConfirmation[employee]) {
       return;
     } else if (
-      employeesWithPoints[employee] &&
-      employeesWithPoints[employee].points !== 1
+      newEmployeesWithPointsForConfirmation[employee] &&
+      newEmployeesWithPointsForConfirmation[employee].points !== 1
     ) {
-      const employeeLoosesPoints = employeesWithPoints[employee];
+      const employeeLoosesPoints =
+        newEmployeesWithPointsForConfirmation[employee];
       employeeLoosesPoints.points = employeeLoosesPoints.points - 1;
-      onSetEmployeesWithPoints({
-        ...employeesWithPoints,
+      onSetNewEmployeesWithPointsForConfirmation({
+        ...newEmployeesWithPointsForConfirmation,
         [employee]: employeeLoosesPoints,
       });
-    } else if (employeesWithPoints[employee].points === 1) {
-      const employeeToRemove = employeesWithPoints[employee];
-      const remainingEmployees = Object.keys(employeesWithPoints)
+    } else if (newEmployeesWithPointsForConfirmation[employee].points === 1) {
+      const employeeToRemove = newEmployeesWithPointsForConfirmation[employee];
+      const remainingEmployees = Object.keys(
+        newEmployeesWithPointsForConfirmation
+      )
         .filter(
           (employee) =>
-            employeesWithPoints[employee].name !== employeeToRemove.name
+            newEmployeesWithPointsForConfirmation[employee].name !==
+            employeeToRemove.name
         )
         .reduce((obj, employee) => {
           return {
             ...obj,
-            [employee]: employeesWithPoints[employee],
+            [employee]: newEmployeesWithPointsForConfirmation[employee],
           };
         }, {});
-      onSetEmployeesWithPoints(remainingEmployees);
+      onSetNewEmployeesWithPointsForConfirmation(remainingEmployees);
     }
   }
 
   function showBossPointsCheck() {
-    if (Object.keys(employeesWithPoints).length !== 0) {
+    if (Object.keys(newEmployeesWithPointsForConfirmation).length !== 0) {
       onSetIsBossNewPoints(false);
       onSetIsBossPointsCheck(true);
     } else {
@@ -128,8 +133,8 @@ export default function BossNewPoints({
                   type="text"
                   name={employees[employee].name}
                   value={
-                    employeesWithPoints[employee]
-                      ? employeesWithPoints[employee].points
+                    newEmployeesWithPointsForConfirmation[employee]
+                      ? newEmployeesWithPointsForConfirmation[employee].points
                       : employees[employee].points
                   }
                 />

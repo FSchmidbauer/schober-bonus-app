@@ -1,11 +1,14 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 
-export default function BossVoucherOverview({ onSetAllVouchers, allVouchers }) {
+export default function BossVoucherOverview({
+  onSetVouchersOnApi,
+  vouchersOnApi,
+}) {
   useEffect(() => {
     fetch("http://localhost:4000/vouchers")
       .then((result) => result.json())
-      .then((apiVouchers) => onSetAllVouchers(apiVouchers))
+      .then((apiVouchers) => onSetVouchersOnApi(apiVouchers))
       .then((error) => console.error(error));
   }, []);
 
@@ -16,7 +19,7 @@ export default function BossVoucherOverview({ onSetAllVouchers, allVouchers }) {
         Folgende Gutscheine sind im Moment für Deine Mitarbeiter verfügbar:
       </ActionInfo>
       <VoucherSection>
-        {allVouchers.map((voucher) => (
+        {vouchersOnApi.map((voucher) => (
           <SingleVoucher>
             <VoucherTitle>{voucher.vouchertype}</VoucherTitle>
             <VoucherValue>

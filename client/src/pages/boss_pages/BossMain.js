@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import BonusImage from "../images/bonus-image.png";
-import VoucherImage from "../images/voucher-image.png";
-import EmployeesImage from "../images/employees-image.png";
+import BonusImage from "../../images/bonus-image.png";
+import VoucherImage from "../../images/voucher-image.png";
+// import EmployeesImage from "../../images/employees-image.png";
 
 export default function BossMain({
-  createdUser,
+  loggedInUser,
   onSetIsUserIsBoss,
   onSetIsBossNewPoints,
   onSetIsBossVoucherOverview,
@@ -23,7 +23,7 @@ export default function BossMain({
     <>
       <h1>HAUPTMENÜ</h1>
       <WelcomeMessage>
-        Hallo {createdUser.name.split(" ")[0]}! Was willst Du tun?
+        Hallo {loggedInUser.name.split(" ")[0]}! Was willst Du tun?
       </WelcomeMessage>
       <ActionGrid>
         <BonusSection>

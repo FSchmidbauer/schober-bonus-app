@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export default function PartnerMain({
-  createdUser,
+  loggedInUser,
   onSetIsUserIsPartner,
   onSetIsPartnerNewVoucher,
 }) {
@@ -14,7 +14,7 @@ export default function PartnerMain({
     <>
       <h1>HAUPTMENÜ</h1>
       <WelcomeMessage>
-        Guten Tag {createdUser.name}! Was wollen Sie tun?
+        Guten Tag {loggedInUser.name}! Was wollen Sie tun?
       </WelcomeMessage>
       <NewVoucherSection onClick={showPartnerNewVoucher}>
         <ActionImage />
