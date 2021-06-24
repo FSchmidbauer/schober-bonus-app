@@ -19,6 +19,7 @@ export default function LoginForm({
   }
 
   function showMainMenues(event) {
+    event.preventDefault();
     if (
       loggedInUser.role === "geschaeftsfuehrer" &&
       loggedInUser.name === "Joachim Schober"
@@ -40,7 +41,6 @@ export default function LoginForm({
       onSetIsNoUser(false);
       onSetIsUserIsPartner(true);
     } else {
-      event.preventDefault();
       setIsValidErrorMessage(true);
     }
   }
