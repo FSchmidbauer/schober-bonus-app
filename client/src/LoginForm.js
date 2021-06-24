@@ -51,7 +51,7 @@ export default function LoginForm({
         <ValidError>
           Dieser Nutzer ist leider nicht hinterlegt.
           <br />
-          Bitte überprüfe Deine Eingabe.
+          Bitte Eingabe überprüfen.
         </ValidError>
       )}
       <h1>LOGIN</h1>
@@ -83,13 +83,15 @@ const ValidError = styled.div`
 const LoginFormMask = styled.form`
   display: flex;
   flex-direction: column;
-  margin: 0 3rem;
+  margin: 0 4rem;
 `;
 
 const LoginRole = styled.select`
   border: 0.3rem solid black;
   border-radius: 1rem;
   cursor: pointer;
+  font-size: 1.5rem;
+  height: 5rem;
   margin: 1rem 0;
   padding: 1rem;
 `;
@@ -98,6 +100,8 @@ const LoginName = styled.input`
   border: 0.3rem solid black;
   border-radius: 1rem;
   color: black;
+  font-size: 1.5rem;
+  height: 5rem;
   margin: 1rem 0;
   padding: 0.75rem;
   text-align: center;

@@ -23,6 +23,11 @@ const server = express();
 
 server.use(cors());
 server.use(express.json());
+
+server.get("/health", (req, res) => {
+  res.json({ status: "Server is running!" });
+});
+
 server.use(voucherRoutes);
 server.use(empPointsRoutes);
 
@@ -33,7 +38,3 @@ server.get("/*", (req, res) => {
 
 const port = process.env.PORT || 4000;
 server.listen(port);
-
-server.get("/health", (req, res) => {
-  res.json({ status: "Server is running!" });
-});
