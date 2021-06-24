@@ -63,11 +63,11 @@ export default function App() {
     fetch("/emppoints")
       .then((result) => result.json())
       .then((apiEmployees) => setEmployeesWithPointsOnApi(apiEmployees))
-      .then(setLoggedInUser())
       .then((error) => console.error(error));
   }, []);
 
   function goBackToHome() {
+    setLoggedInUser();
     setIsNoUser(true);
     setIsUserIsBoss(false);
     setIsBossNewPoints(false);
