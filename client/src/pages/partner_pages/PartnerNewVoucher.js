@@ -89,8 +89,8 @@ export default function PartnerNewVoucher({
   }
 
   function showVoucherCheck(event) {
-    if (voucherNotValid()) {
-      event.preventDefault();
+    event.preventDefault();
+    if (notAValidVoucher()) {
       setIsVoucherErrorMessage(true);
     } else {
       onSetIsPartnerNewVoucher(false);
@@ -100,7 +100,7 @@ export default function PartnerNewVoucher({
     }
   }
 
-  function voucherNotValid() {
+  function notAValidVoucher() {
     return (
       createdByPartnerVoucher.vouchertype === "" ||
       createdByPartnerVoucher.vouchertype === "notChosen" ||
@@ -127,7 +127,7 @@ export default function PartnerNewVoucher({
         Bitte tragen Sie die Eckdaten Ihres Gutscheins in das nachfolgende
         Formular ein.
       </ActionInfo>
-      <VoucherForm>
+      <VoucherForm onSubmit={showVoucherCheck}>
         <VoucherSelect
           name="vouchertype"
           value={createdByPartnerVoucher.vouchertype}
@@ -174,7 +174,7 @@ export default function PartnerNewVoucher({
           />{" "}
           Bonuspunkte
         </p>
-        <CheckButton onClick={showVoucherCheck}>Gutschein prüfen</CheckButton>
+        <CheckButton>Gutschein prüfen</CheckButton>
       </VoucherForm>
     </>
   );

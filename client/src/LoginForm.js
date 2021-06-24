@@ -20,6 +20,14 @@ export default function LoginForm({
 
   function showMainMenues(event) {
     event.preventDefault();
+    if (loggedInUser) {
+      decideWhichMenuToShow();
+    } else {
+      setIsValidErrorMessage(true);
+    }
+  }
+
+  function decideWhichMenuToShow() {
     if (
       loggedInUser.role === "geschaeftsfuehrer" &&
       loggedInUser.name === "Joachim Schober"
@@ -40,8 +48,6 @@ export default function LoginForm({
     } else if (loggedInUser.role === "partnerunternehmen") {
       onSetIsNoUser(false);
       onSetIsUserIsPartner(true);
-    } else {
-      setIsValidErrorMessage(true);
     }
   }
 
