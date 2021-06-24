@@ -42,7 +42,7 @@ export default function LoginForm({
         loggedInUser.name === "Angelo Brandi" ||
         loggedInUser.name === "Christine Schick")
     ) {
-      onCheckPointsThisEmployeeOnApi();
+      // checkPointsThisEmployeeOnApi();
       onSetIsNoUser(false);
       onSetIsUserIsEmployee(true);
     } else if (loggedInUser.role === "partnerunternehmen") {
