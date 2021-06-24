@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 
 export default function EmployeeVoucherChoice({
+  loggedInUser,
   onSetVouchersOnApi,
   vouchersOnApi,
   onSetChosenByEmployeeVouchers,
@@ -76,13 +77,12 @@ export default function EmployeeVoucherChoice({
       <h1>GUTSCHEINAUSWAHL</h1>
       <ActionInfo>
         Wenn Du genügend Bonuspunkte hast, kannst Du Dir jetzt per Klick einen
-        oder mehrere dieser Gutscheine für Dich aussuchen. <br />
-        <br />
-        Aktuell verfügbar:{" "}
-        <span>
-          {isThisEmployeeOnApi ? pointsAfterVoucher : "0"}
-        </span> Punkte{" "}
+        oder mehrere dieser Gutscheine für Dich aussuchen.
       </ActionInfo>
+      <PointsInfo>
+        {loggedInUser.name.split(" ")[0]}:{" "}
+        <span>{isThisEmployeeOnApi ? pointsAfterVoucher : "0"}</span>{" "}
+      </PointsInfo>
       <VoucherSection>
         {vouchersOnApi.map((voucher, index) => (
           <>
@@ -119,10 +119,19 @@ export default function EmployeeVoucherChoice({
 
 const ActionInfo = styled.h4`
   padding: 0 2rem;
+`;
+
+const PointsInfo = styled.p`
+  background: lightgrey;
+  border-radius: 3rem;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.5rem 2rem;
+  margin: 1rem 6rem 3rem;
 
   span {
     color: red;
-    font-size: 2rem;
   }
 `;
 

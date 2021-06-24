@@ -189,6 +189,7 @@ export default function App() {
         )}
         {isBossPointsArePublished && (
           <BossPointsArePublished
+            loggedInUser={loggedInUser}
             onSetNewEmployeesWithPointsForConfirmation={
               setNewEmployeesWithPointsForConfirmation
             }
@@ -213,6 +214,7 @@ export default function App() {
         )}
         {isEmployeeVoucherChoice && (
           <EmployeeVoucherChoice
+            loggedInUser={loggedInUser}
             onSetVouchersOnApi={setVouchersOnApi}
             vouchersOnApi={vouchersOnApi}
             onSetChosenByEmployeeVouchers={setChosenByEmployeeVouchers}
@@ -239,6 +241,7 @@ export default function App() {
         )}
         {isEmployeeVoucherIsAcquired && (
           <EmployeeVoucherIsAcquired
+            loggedInUser={loggedInUser}
             onSetChosenByEmployeeVouchers={setChosenByEmployeeVouchers}
             onSetIsEmployeeVoucherIsAcquired={setIsEmployeeVoucherIsAcquired}
             onSetIsEmployeeVoucherChoice={setIsEmployeeVoucherChoice}
@@ -271,6 +274,7 @@ export default function App() {
         )}
         {isPartnerVoucherIsPublished && (
           <PartnerVoucherIsPublished
+            loggedInUser={loggedInUser}
             onSetIsPartnerNewVoucher={setIsPartnerNewVoucher}
             onSetIsPartnerVoucherIsPublished={setIsPartnerVoucherIsPublished}
           />

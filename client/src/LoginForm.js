@@ -55,7 +55,7 @@ export default function LoginForm({
         </ValidError>
       )}
       <h1>LOGIN</h1>
-      <form onSubmit={showMainMenues}>
+      <LoginFormMask onSubmit={showMainMenues}>
         <LoginRole name="role" onChange={updateUser}>
           <option value="notChosen">-- Bitte Rolle wählen --</option>
           <option value="geschaeftsfuehrer">Geschäftsführer</option>
@@ -69,7 +69,7 @@ export default function LoginForm({
           onChange={updateUser}
         />
         <LoginButton>Login</LoginButton>
-      </form>
+      </LoginFormMask>
     </>
   );
 }
@@ -80,12 +80,17 @@ const ValidError = styled.div`
   padding: 0.5rem;
 `;
 
+const LoginFormMask = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin: 0 3rem;
+`;
+
 const LoginRole = styled.select`
   border: 0.3rem solid black;
   border-radius: 1rem;
   cursor: pointer;
-  font-size: 1.5rem;
-  margin: 1rem;
+  margin: 1rem 0;
   padding: 1rem;
 `;
 
@@ -93,8 +98,7 @@ const LoginName = styled.input`
   border: 0.3rem solid black;
   border-radius: 1rem;
   color: black;
-  font-size: 1.5rem;
-  margin: 1rem;
+  margin: 1rem 0;
   padding: 0.75rem;
   text-align: center;
 `;
@@ -103,7 +107,6 @@ const LoginButton = styled.button`
   background-color: red;
   color: white;
   cursor: pointer;
-  font-size: 1.5rem;
-  margin: 3rem;
+  margin: 2rem 4rem;
   padding: 1rem;
 `;

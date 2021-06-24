@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export default function PartnerVoucherIsPublished({
+  loggedInUser,
   onSetIsPartnerNewVoucher,
   onSetIsPartnerVoucherIsPublished,
 }) {
@@ -11,7 +12,7 @@ export default function PartnerVoucherIsPublished({
 
   return (
     <>
-      <h1>VIELEN DANK!</h1>
+      <h1>VIELEN DANK, {loggedInUser.name.toUpperCase()}!</h1>
       <ActionInfo>Ihr Gutschein wurde erfolgreich generiert.</ActionInfo>
       <NewVoucherButton onClick={createAnotherVoucher}>
         Weiteren Gutschein erstellen

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export default function EmployeeVoucherIsAcquired({
+  loggedInUser,
   onSetChosenByEmployeeVouchers,
   onSetIsEmployeeVoucherIsAcquired,
   onSetIsEmployeeVoucherChoice,
@@ -15,7 +16,7 @@ export default function EmployeeVoucherIsAcquired({
 
   return (
     <>
-      <h1>VIELEN DANK!</h1>
+      <h1>VIELEN DANK, {loggedInUser.name.split(" ")[0].toUpperCase()}!</h1>
       <ActionInfo>
         Dein Gutschein-Erwerb war erfolgreich. Du kannst Dir die ausgedruckten
         Dokumente morgen im Chef-Büro abholen.

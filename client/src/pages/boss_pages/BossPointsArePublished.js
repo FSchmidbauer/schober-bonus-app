@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export default function BossPointsArePublished({
+  loggedInUser,
   onSetNewEmployeesWithPointsForConfirmation,
   onSetIsBossPointsArePublished,
   onSetIsBossNewPoints,
@@ -13,7 +14,7 @@ export default function BossPointsArePublished({
 
   return (
     <>
-      <h1>VIELEN DANK!</h1>
+      <h1>VIELEN DANK, {loggedInUser.name.split(" ")[0].toUpperCase()}!</h1>
       <ActionInfo>Deine Bonuspunkte wurden erfolgreich vergeben.</ActionInfo>
       <MorePointsButton onClick={giveMorePoints}>
         Weitere Punkte vergeben
