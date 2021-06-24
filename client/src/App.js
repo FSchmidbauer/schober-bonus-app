@@ -23,9 +23,9 @@ import PartnerVoucherIsPublished from "./pages/partner_pages/PartnerVoucherIsPub
 
 export default function App() {
   const [isNoUser, setIsNoUser] = useState(true);
-  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState();
   const [isThisEmployeeOnApi, setIsThisEmployeeOnApi] = useState(false);
-  const [pointsThisEmployeeOnApi, setPointsThisEmployeeOnApi] = useState(null);
+  const [pointsThisEmployeeOnApi, setPointsThisEmployeeOnApi] = useState();
 
   const [isUserIsBoss, setIsUserIsBoss] = useState(false);
   const [isBossNewPoints, setIsBossNewPoints] = useState(false);
