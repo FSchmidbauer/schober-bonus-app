@@ -60,7 +60,7 @@ export default function App() {
   const [employeesWithPointsOnApi, setEmployeesWithPointsOnApi] = useState({});
 
   useEffect(() => {
-    fetch("http://localhost:4000/emppoints")
+    fetch("/emppoints")
       .then((result) => result.json())
       .then((apiEmployees) => setEmployeesWithPointsOnApi(apiEmployees))
       .then((error) => console.error(error));

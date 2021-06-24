@@ -12,7 +12,7 @@ export default function PartnerVoucherCheck({
   }
 
   function confirmVoucher(voucherToBeConfirmed) {
-    fetch("http://localhost:4000/vouchers", {
+    fetch("/vouchers", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(voucherToBeConfirmed),

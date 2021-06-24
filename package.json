@@ -1,0 +1,28 @@
+{
+  "name": "schober-bonus-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "cd ./client && npm install && cd ../server && npm install",
+    "build": "cd ./client && npm run build",
+    "client": "cd ./client && npm start",
+    "dev": " concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd ./server && npm start",
+    "start": "node ./server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FSchmidbauer/schober-bonus-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FSchmidbauer/schober-bonus-app/issues"
+  },
+  "homepage": "https://github.com/FSchmidbauer/schober-bonus-app#readme",
+  "dependencies": {
+    "concurrently": "^6.2.0"
+  }
+}

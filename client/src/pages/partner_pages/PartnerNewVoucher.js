@@ -6,10 +6,6 @@ export default function PartnerNewVoucher({
   onSetIsPartnerNewVoucher,
   onSetIsPartnerVoucherCheck,
 }) {
-  const [isVoucherErrorMessage, setIsVoucherErrorMessage] = useState(false);
-  const [createdByPartnerVoucher, setCreatedByPartnerVoucher] =
-    useState(emptyVoucher);
-
   const emptyVoucher = {
     vouchertype: "",
     voucherpartner: "",
@@ -17,6 +13,10 @@ export default function PartnerNewVoucher({
     vouchercurrency: "",
     neededpoints: 0,
   };
+
+  const [isVoucherErrorMessage, setIsVoucherErrorMessage] = useState(false);
+  const [createdByPartnerVoucher, setCreatedByPartnerVoucher] =
+    useState(emptyVoucher);
 
   function updateCreatedByPartnerVoucher(event) {
     const fieldName = event.target.name;

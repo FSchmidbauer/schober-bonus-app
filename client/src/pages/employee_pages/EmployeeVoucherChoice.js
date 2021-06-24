@@ -13,7 +13,7 @@ export default function EmployeeVoucherChoice({
   pointsThisEmployeeOnApi,
 }) {
   useEffect(() => {
-    fetch("http://localhost:4000/vouchers")
+    fetch("/vouchers")
       .then((result) => result.json())
       .then((apiVouchers) => onSetVouchersOnApi(apiVouchers))
       .then(onSetChosenByEmployeeVouchers([]))

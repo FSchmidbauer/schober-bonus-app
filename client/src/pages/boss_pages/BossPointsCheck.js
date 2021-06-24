@@ -13,7 +13,7 @@ export default function BossPointsCheck({
   }
 
   function confirmPoints(awardedEmps) {
-    fetch("http://localhost:4000/emppoints", {
+    fetch("/emppoints", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(awardedEmps),

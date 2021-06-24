@@ -18,7 +18,7 @@ export default function EmployeeVoucherCheck({
 
   function acquireAndDeleteForOthersVoucher() {
     chosenByEmployeeVouchers.map((voucherToBeDeleted) => {
-      fetch("http://localhost:4000/vouchers/" + voucherToBeDeleted._id, {
+      fetch("/vouchers/" + voucherToBeDeleted._id, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export default function EmployeeVoucherCheck({
       (voucher) => voucher.neededpoints
     );
 
-    fetch("http://localhost:4000/emppoints/" + IdOfEmpToChangeOnApi, {
+    fetch("/emppoints/" + IdOfEmpToChangeOnApi, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

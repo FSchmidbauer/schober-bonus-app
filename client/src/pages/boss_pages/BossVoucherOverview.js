@@ -6,7 +6,7 @@ export default function BossVoucherOverview({
   vouchersOnApi,
 }) {
   useEffect(() => {
-    fetch("http://localhost:4000/vouchers")
+    fetch("/vouchers")
       .then((result) => result.json())
       .then((apiVouchers) => onSetVouchersOnApi(apiVouchers))
       .then((error) => console.error(error));
