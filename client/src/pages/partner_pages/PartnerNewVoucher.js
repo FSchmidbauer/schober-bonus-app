@@ -6,6 +6,10 @@ export default function PartnerNewVoucher({
   onSetIsPartnerNewVoucher,
   onSetIsPartnerVoucherCheck,
 }) {
+  const [isVoucherErrorMessage, setIsVoucherErrorMessage] = useState(false);
+  const [createdByPartnerVoucher, setCreatedByPartnerVoucher] =
+    useState(emptyVoucher);
+
   const emptyVoucher = {
     vouchertype: "",
     voucherpartner: "",
@@ -13,10 +17,6 @@ export default function PartnerNewVoucher({
     vouchercurrency: "",
     neededpoints: 0,
   };
-
-  const [isVoucherErrorMessage, setIsVoucherErrorMessage] = useState(false);
-  const [createdByPartnerVoucher, setCreatedByPartnerVoucher] =
-    useState(emptyVoucher);
 
   function updateCreatedByPartnerVoucher(event) {
     const fieldName = event.target.name;
@@ -27,26 +27,11 @@ export default function PartnerNewVoucher({
     });
   }
 
-  function showVoucherCheck(event) {
+  function setRelatedNeededPoints() {
     if (
-      // createdByPartnerVoucher.length !== 4 ||
-      createdByPartnerVoucher.vouchertype === "notChosen" ||
-      createdByPartnerVoucher.vouchervalue === "0" ||
-      createdByPartnerVoucher.vouchervalue.includes("-") ||
-      createdByPartnerVoucher.vouchercurrency === "notChosen"
+      createdByPartnerVoucher.vouchervalue <= 0 ||
+      isNaN(createdByPartnerVoucher.vouchervalue)
     ) {
-      event.preventDefault();
-      setIsVoucherErrorMessage(true);
-    } else {
-      onSetIsPartnerNewVoucher(false);
-      onSetIsPartnerVoucherCheck(true);
-      onSetNewPartnerVoucherForConfirmation(createdByPartnerVoucher);
-      setCreatedByPartnerVoucher(emptyVoucher);
-    }
-  }
-
-  function changePointsNeeded() {
-    if (createdByPartnerVoucher.vouchervalue <= 0) {
       const fieldName = "neededpoints";
       let fieldValue = 0;
       setCreatedByPartnerVoucher({
@@ -93,7 +78,7 @@ export default function PartnerNewVoucher({
         ...createdByPartnerVoucher,
         [fieldName]: fieldValue,
       });
-    } else {
+    } else if (createdByPartnerVoucher.vouchervalue > 100) {
       const fieldName = "neededpoints";
       let fieldValue = 10;
       setCreatedByPartnerVoucher({
@@ -101,6 +86,32 @@ export default function PartnerNewVoucher({
         [fieldName]: fieldValue,
       });
     }
+  }
+
+  function showVoucherCheck(event) {
+    if (voucherNotValid()) {
+      event.preventDefault();
+      setIsVoucherErrorMessage(true);
+    } else {
+      onSetIsPartnerNewVoucher(false);
+      onSetIsPartnerVoucherCheck(true);
+      onSetNewPartnerVoucherForConfirmation(createdByPartnerVoucher);
+      setCreatedByPartnerVoucher(emptyVoucher);
+    }
+  }
+
+  function voucherNotValid() {
+    return (
+      createdByPartnerVoucher.vouchertype === "" ||
+      createdByPartnerVoucher.vouchertype === "notChosen" ||
+      createdByPartnerVoucher.voucherpartner === "" ||
+      !isNaN(createdByPartnerVoucher.voucherpartner) ||
+      isNaN(createdByPartnerVoucher.vouchervalue) ||
+      createdByPartnerVoucher.vouchervalue.includes("-") ||
+      createdByPartnerVoucher.vouchervalue === 0 ||
+      createdByPartnerVoucher.vouchercurrency === "" ||
+      createdByPartnerVoucher.vouchercurrency === "notChosen"
+    );
   }
 
   return (
@@ -143,7 +154,7 @@ export default function PartnerNewVoucher({
             placeholder="Wert in"
             value={createdByPartnerVoucher.vouchervalue}
             onChange={updateCreatedByPartnerVoucher}
-            onBlur={changePointsNeeded}
+            onBlur={setRelatedNeededPoints}
           />
           <VoucherCurrency
             name="vouchercurrency"
@@ -186,18 +197,18 @@ const VoucherForm = styled.form`
 const VoucherSelect = styled.select`
   border: none;
   border-bottom: 0.2rem solid black;
+  cursor: pointer;
   font-size: 1.5rem;
   margin-bottom: 2rem;
-  cursor: pointer;
 `;
 
 const VoucherPartnerInput = styled.input`
   border: none;
   border-bottom: 0.2rem solid black;
+  color: black;
   font-size: 1.5rem;
   margin-bottom: 2rem;
   text-align: center;
-  color: black;
 `;
 
 const VoucherValue = styled.section`
@@ -205,35 +216,35 @@ const VoucherValue = styled.section`
   justify-content: center;
   border: none;
   border-bottom: 0.2rem solid black;
-  margin-bottom: 2rem;
   cursor: pointer;
+  margin-bottom: 2rem;
 `;
 
 const VoucherValueInput = styled.input`
   border: none;
+  color: black;
   font-size: 1.5rem;
   text-align: center;
-  color: black;
 `;
 
 const VoucherCurrency = styled.select`
   border: none;
-  font-size: 2rem;
   cursor: pointer;
+  font-size: 2rem;
 `;
 
 const PointsNeeded = styled.input`
   border: none;
   font-size: 1.5rem;
-  text-align: center;
   margin: 0 1rem;
+  text-align: center;
   width: 2rem;
 `;
 
 const CheckButton = styled.button`
   background-color: red;
-  padding: 1rem;
-  font-size: 1.5rem;
   color: white;
   cursor: pointer;
+  font-size: 1.5rem;
+  padding: 1rem;
 `;
