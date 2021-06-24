@@ -8,6 +8,7 @@ export default function BossMain({
   onSetIsUserIsBoss,
   onSetIsBossNewPoints,
   onSetIsBossVoucherOverview,
+  onSetVouchersOnApi,
 }) {
   function showBossNewPoints() {
     onSetIsUserIsBoss(false);
@@ -15,6 +16,10 @@ export default function BossMain({
   }
 
   function showBossVoucherOverview() {
+    fetch("/vouchers")
+      .then((result) => result.json())
+      .then((apiVouchers) => onSetVouchersOnApi(apiVouchers))
+      .then((error) => console.error(error));
     onSetIsUserIsBoss(false);
     onSetIsBossVoucherOverview(true);
   }

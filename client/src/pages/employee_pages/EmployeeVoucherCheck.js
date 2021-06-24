@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export default function EmployeeVoucherCheck({
+  onSetChosenByEmployeeVouchers,
   chosenByEmployeeVouchers,
   onSetIsEmployeeVoucherChoice,
   onSetIsEmployeeVoucherCheck,
@@ -12,6 +13,7 @@ export default function EmployeeVoucherCheck({
   employeesWithPointsOnApi,
 }) {
   function jumpOnLastPage() {
+    onSetChosenByEmployeeVouchers([]);
     onSetIsEmployeeVoucherCheck(false);
     onSetIsEmployeeVoucherChoice(true);
   }

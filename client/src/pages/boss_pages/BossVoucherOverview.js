@@ -1,17 +1,6 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 
-export default function BossVoucherOverview({
-  onSetVouchersOnApi,
-  vouchersOnApi,
-}) {
-  useEffect(() => {
-    fetch("/vouchers")
-      .then((result) => result.json())
-      .then((apiVouchers) => onSetVouchersOnApi(apiVouchers))
-      .then((error) => console.error(error));
-  }, []);
-
+export default function BossVoucherOverview({ vouchersOnApi }) {
   return (
     <>
       <h1>AKTUELLE GUTSCHEINE</h1>

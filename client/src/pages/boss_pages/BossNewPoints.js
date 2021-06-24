@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import Albert from "../../images/albert-neueseite.jpg";
 import Alex from "../../images/alex-neueseite.jpg";
@@ -22,10 +22,6 @@ export default function BossNewPoints({
   onSetIsBossNewPoints,
   onSetIsBossPointsCheck,
 }) {
-  useEffect(() => {
-    onSetNewEmployeesWithPointsForConfirmation({});
-  }, []);
-
   const [isPointsErrorMessage, setIsPointsErrorMessage] = useState(false);
 
   const employees = {

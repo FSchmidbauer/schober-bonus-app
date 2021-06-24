@@ -93,6 +93,7 @@ export default function App() {
       isBossPointsArePublished ||
       isBossVoucherOverview
     ) {
+      setNewEmployeesWithPointsForConfirmation({});
       setIsBossNewPoints(false);
       setIsBossPointsCheck(false);
       setIsBossPointsArePublished(false);
@@ -163,6 +164,7 @@ export default function App() {
             onSetIsUserIsBoss={setIsUserIsBoss}
             onSetIsBossNewPoints={setIsBossNewPoints}
             onSetIsBossVoucherOverview={setIsBossVoucherOverview}
+            onSetVouchersOnApi={setVouchersOnApi}
           />
         )}
         {isBossNewPoints && (
@@ -179,6 +181,9 @@ export default function App() {
         )}
         {isBossPointsCheck && (
           <BossPointsCheck
+            onSetNewEmployeesWithPointsForConfirmation={
+              setNewEmployeesWithPointsForConfirmation
+            }
             newEmployeesWithPointsForConfirmation={
               newEmployeesWithPointsForConfirmation
             }
@@ -199,10 +204,7 @@ export default function App() {
           />
         )}
         {isBossVoucherOverview && (
-          <BossVoucherOverview
-            vouchersOnApi={vouchersOnApi}
-            onSetVouchersOnApi={setVouchersOnApi}
-          />
+          <BossVoucherOverview vouchersOnApi={vouchersOnApi} />
         )}
         {isUserIsEmployee && (
           <EmployeeMain
@@ -211,6 +213,7 @@ export default function App() {
             onSetIsEmployeeVoucherChoice={setIsEmployeeVoucherChoice}
             isThisEmployeeOnApi={isThisEmployeeOnApi}
             pointsThisEmployeeOnApi={pointsThisEmployeeOnApi}
+            onSetVouchersOnApi={setVouchersOnApi}
           />
         )}
         {isEmployeeVoucherChoice && (

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export default function BossPointsCheck({
+  onSetNewEmployeesWithPointsForConfirmation,
   newEmployeesWithPointsForConfirmation,
   onSetIsBossPointsCheck,
   onSetIsBossPointsArePublished,
@@ -8,6 +9,7 @@ export default function BossPointsCheck({
   onSetEmployeesWithPointsOnApi,
 }) {
   function jumpOnLastPage() {
+    onSetNewEmployeesWithPointsForConfirmation({});
     onSetIsBossPointsCheck(false);
     onSetIsBossNewPoints(true);
   }
@@ -34,7 +36,10 @@ export default function BossPointsCheck({
       {Object.keys(newEmployeesWithPointsForConfirmation).map((employee) => (
         <>
           <EmpWithNewPoints>
-            <img src={newEmployeesWithPointsForConfirmation[employee].image} />
+            <img
+              src={newEmployeesWithPointsForConfirmation[employee].image}
+              alt="Zu bestätigender Mitarbeiter mit neuen Bonuspunkten"
+            />
             <p>
               <span>
                 {newEmployeesWithPointsForConfirmation[employee].points}

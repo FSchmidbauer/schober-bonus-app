@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 export default function EmployeeVoucherChoice({
   loggedInUser,
-  onSetVouchersOnApi,
   vouchersOnApi,
   onSetChosenByEmployeeVouchers,
   chosenByEmployeeVouchers,
@@ -12,14 +11,6 @@ export default function EmployeeVoucherChoice({
   isThisEmployeeOnApi,
   pointsThisEmployeeOnApi,
 }) {
-  useEffect(() => {
-    fetch("/vouchers")
-      .then((result) => result.json())
-      .then((apiVouchers) => onSetVouchersOnApi(apiVouchers))
-      .then(onSetChosenByEmployeeVouchers([]))
-      .then((error) => console.error(error));
-  }, []);
-
   const [isChoiceErrorMessage, setIsChoiceErrorMessage] = useState(false);
   const [pointsAfterVoucher, setPointsAfterVoucher] = useState(
     pointsThisEmployeeOnApi

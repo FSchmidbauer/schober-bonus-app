@@ -6,8 +6,13 @@ export default function EmployeeMain({
   onSetIsEmployeeVoucherChoice,
   isThisEmployeeOnApi,
   pointsThisEmployeeOnApi,
+  onSetVouchersOnApi,
 }) {
   function showEmployeeVoucherChoice() {
+    fetch("/vouchers")
+      .then((result) => result.json())
+      .then((apiVouchers) => onSetVouchersOnApi(apiVouchers))
+      .then((error) => console.error(error));
     onSetIsUserIsEmployee(false);
     onSetIsEmployeeVoucherChoice(true);
   }
@@ -59,14 +64,14 @@ const BonusSection = styled.section`
   }
 `;
 
-const HistorySection = styled.section`
-  grid-column: 2;
-  grid-row: 1;
-  cursor: pointer;
-  p {
-    font-weight: bold;
-  }
-`;
+// const HistorySection = styled.section`
+//   grid-column: 2;
+//   grid-row: 1;
+//   cursor: pointer;
+//   p {
+//     font-weight: bold;
+//   }
+// `;
 
 const ActionImage = styled.img`
   padding: 0.3rem;
