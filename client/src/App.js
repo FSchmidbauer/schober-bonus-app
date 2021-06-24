@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 import SchoberLogo from "./images/logo-autohaus-schober.png";
@@ -58,13 +58,6 @@ export default function App() {
     setNewEmployeesWithPointsForConfirmation,
   ] = useState({});
   const [employeesWithPointsOnApi, setEmployeesWithPointsOnApi] = useState({});
-
-  useEffect(() => {
-    fetch("/emppoints")
-      .then((result) => result.json())
-      .then((apiEmployees) => setEmployeesWithPointsOnApi(apiEmployees))
-      .then((error) => console.error(error));
-  }, []);
 
   function goBackToHome() {
     setLoggedInUser();
@@ -156,6 +149,7 @@ export default function App() {
             onSetIsUserIsEmployee={setIsUserIsEmployee}
             onSetIsUserIsPartner={setIsUserIsPartner}
             onCheckPointsThisEmployeeOnApi={checkPointsThisEmployeeOnApi}
+            onSetEmployeesWithPointsOnApi={setEmployeesWithPointsOnApi}
           />
         )}
         {isUserIsBoss && (

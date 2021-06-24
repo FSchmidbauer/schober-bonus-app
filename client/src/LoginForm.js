@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 
 export default function LoginForm({
@@ -9,7 +9,15 @@ export default function LoginForm({
   onSetIsUserIsEmployee,
   onSetIsUserIsPartner,
   onCheckPointsThisEmployeeOnApi,
+  onSetEmployeesWithPointsOnApi,
 }) {
+  useEffect(() => {
+    fetch("/emppoints")
+      .then((result) => result.json())
+      .then((apiEmployees) => onSetEmployeesWithPointsOnApi(apiEmployees))
+      .then((error) => console.error(error));
+  }, []);
+
   const [isValidErrorMessage, setIsValidErrorMessage] = useState(false);
 
   function updateUser(event) {
@@ -42,7 +50,7 @@ export default function LoginForm({
         loggedInUser.name === "Angelo Brandi" ||
         loggedInUser.name === "Christine Schick")
     ) {
-      // checkPointsThisEmployeeOnApi();
+      onCheckPointsThisEmployeeOnApi();
       onSetIsNoUser(false);
       onSetIsUserIsEmployee(true);
     } else if (loggedInUser.role === "partnerunternehmen") {
