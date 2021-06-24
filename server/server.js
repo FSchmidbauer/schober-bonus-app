@@ -30,7 +30,6 @@ server.use(express.static(path.join(__dirname, "../client/build")));
 server.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build", "index.html"));
 });
-console.log(path.join(__dirname, "../client/build"));
 
 const port = process.env.PORT || 4000;
 server.listen(port);
