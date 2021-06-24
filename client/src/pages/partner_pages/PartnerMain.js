@@ -1,21 +1,22 @@
-import { useState } from "react";
 import styled from "styled-components";
 
 export default function PartnerMain({
-  createdUser,
-  onSetUserIsPartner,
-  onSetPartnerCreateNewVoucher,
+  loggedInUser,
+  onSetIsUserIsPartner,
+  onSetIsPartnerNewVoucher,
 }) {
-  function openVoucherCreator() {
-    onSetUserIsPartner(false);
-    onSetPartnerCreateNewVoucher(true);
+  function showPartnerNewVoucher() {
+    onSetIsUserIsPartner(false);
+    onSetIsPartnerNewVoucher(true);
   }
 
   return (
     <>
       <h1>HAUPTMENÜ</h1>
-      <h2>Hallo {createdUser.name}! Was willst Du tun?</h2>
-      <NewVoucherSection onClick={openVoucherCreator}>
+      <WelcomeMessage>
+        Guten Tag {loggedInUser.name}! Was wollen Sie tun?
+      </WelcomeMessage>
+      <NewVoucherSection onClick={showPartnerNewVoucher}>
         <ActionImage />
         <p>Gutschein anlegen </p>
       </NewVoucherSection>
@@ -23,8 +24,12 @@ export default function PartnerMain({
   );
 }
 
+const WelcomeMessage = styled.h2`
+  padding: 0 2rem;
+`;
+
 const NewVoucherSection = styled.section`
-  margin-top: 1.5rem;
+  margin-top: 4rem;
   cursor: pointer;
   p {
     font-weight: bold;
@@ -36,6 +41,6 @@ const ActionImage = styled.img`
   width: 10rem;
   height: 8rem;
   border: 0.2rem solid black;
-  border-radius: 10vw;
+  border-radius: 3rem;
   cursor: pointer;
 `;
