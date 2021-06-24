@@ -48,6 +48,8 @@ export default function LoginForm({
     } else if (loggedInUser.role === "partnerunternehmen") {
       onSetIsNoUser(false);
       onSetIsUserIsPartner(true);
+    } else {
+      setIsValidErrorMessage(true);
     }
   }
 
