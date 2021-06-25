@@ -191,7 +191,9 @@ const ActionInfo = styled.h4`
 `;
 
 const VoucherForm = styled.form`
-  margin: 1rem 3rem 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0 4rem;
 `;
 
 const VoucherSelect = styled.select`
