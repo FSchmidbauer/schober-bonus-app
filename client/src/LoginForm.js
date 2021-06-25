@@ -20,7 +20,8 @@ export default function LoginForm({
 
   const [isValidErrorMessage, setIsValidErrorMessage] = useState(false);
 
-  function updateUser(event) {
+  function updateUser(event, touchstart) {
+    touchstart.preventDefault();
     const fieldName = event.target.name;
     let fieldValue = event.target.value;
     onSetLoggedInUser({ ...loggedInUser, [fieldName]: fieldValue });
@@ -107,7 +108,6 @@ const LoginRole = styled.select`
   height: 5rem;
   margin: 1rem 0;
   padding: 1rem;
-  touchaction: none;
 `;
 
 const LoginName = styled.input`
@@ -118,7 +118,6 @@ const LoginName = styled.input`
   margin: 1rem 0;
   padding: 0.75rem;
   text-align: center;
-  touchaction: none;
 `;
 
 const LoginButton = styled.button`
