@@ -61,6 +61,7 @@ export default function App() {
 
   function goBackToHome() {
     setLoggedInUser();
+    setNewEmployeesWithPointsForConfirmation({});
     setIsNoUser(true);
     setIsUserIsBoss(false);
     setIsBossNewPoints(false);

@@ -235,7 +235,7 @@ const VoucherCurrency = styled.select`
 const PointsNeeded = styled.input`
   border: none;
   text-align: center;
-  width: 5rem;
+  width: 4rem;
 `;
 
 const CheckButton = styled.button`

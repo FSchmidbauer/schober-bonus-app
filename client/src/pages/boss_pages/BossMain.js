@@ -33,11 +33,17 @@ export default function BossMain({
       <ActionGrid>
         <BonusSection>
           <ActionImage src={BonusImage} onClick={showBossNewPoints} />
-          <p>Bonuspunkte vergeben</p>
+          <p>
+            Bonuspunkte <br />
+            vergeben
+          </p>
         </BonusSection>
         <VoucherSection>
           <ActionImage src={VoucherImage} onClick={showBossVoucherOverview} />
-          <p>Gutscheine ansehen</p>
+          <p>
+            Gutscheine <br />
+            ansehen
+          </p>
         </VoucherSection>
       </ActionGrid>
       {/* <EmployeeSection>
