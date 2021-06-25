@@ -193,14 +193,13 @@ const ActionInfo = styled.h4`
 const VoucherForm = styled.form`
   display: flex;
   flex-direction: column;
-  margin: 0 4rem;
+  margin: 2rem 4rem 0;
 `;
 
 const VoucherSelect = styled.select`
   border: none;
   border-bottom: 0.2rem solid black;
   cursor: pointer;
-  font-size: 1.5rem;
   margin-bottom: 2rem;
 `;
 
@@ -208,14 +207,13 @@ const VoucherPartnerInput = styled.input`
   border: none;
   border-bottom: 0.2rem solid black;
   color: black;
-  font-size: 1.5rem;
   margin-bottom: 2rem;
   text-align: center;
 `;
 
 const VoucherValue = styled.section`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   border: none;
   border-bottom: 0.2rem solid black;
   cursor: pointer;
@@ -225,7 +223,6 @@ const VoucherValue = styled.section`
 const VoucherValueInput = styled.input`
   border: none;
   color: black;
-  font-size: 1.5rem;
   text-align: center;
 `;
 
@@ -237,16 +234,14 @@ const VoucherCurrency = styled.select`
 
 const PointsNeeded = styled.input`
   border: none;
-  font-size: 1.5rem;
-  margin: 0 1rem;
   text-align: center;
-  width: 2rem;
+  width: 5rem;
 `;
 
 const CheckButton = styled.button`
   background-color: red;
   color: white;
   cursor: pointer;
-  font-size: 1.5rem;
+  margin-top: 1rem;
   padding: 1rem;
 `;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 export default function LoginForm({
@@ -9,15 +9,7 @@ export default function LoginForm({
   onSetIsUserIsEmployee,
   onSetIsUserIsPartner,
   onCheckPointsThisEmployeeOnApi,
-  onSetEmployeesWithPointsOnApi,
 }) {
-  useEffect(() => {
-    fetch("/emppoints")
-      .then((result) => result.json())
-      .then((apiEmployees) => onSetEmployeesWithPointsOnApi(apiEmployees))
-      .then((error) => console.error(error));
-  }, []);
-
   const [isValidErrorMessage, setIsValidErrorMessage] = useState(false);
 
   function updateUser(event) {
@@ -106,7 +98,6 @@ const LoginRole = styled.select`
   border: 0.3rem solid black;
   border-radius: 1rem;
   cursor: pointer;
-  font-size: 1.5rem;
   height: 5rem;
   margin: 1rem 0;
   padding: 1rem;
@@ -116,7 +107,6 @@ const LoginName = styled.input`
   border: 0.3rem solid black;
   border-radius: 1rem;
   color: black;
-  font-size: 1.5rem;
   height: 5rem;
   margin: 1rem 0;
   padding: 0.75rem;
