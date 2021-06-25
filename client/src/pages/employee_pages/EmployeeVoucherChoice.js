@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import Voucher from "../../images/voucher.jpg";
 
 export default function EmployeeVoucherChoice({
   loggedInUser,
@@ -78,11 +79,17 @@ export default function EmployeeVoucherChoice({
         {vouchersOnApi.map((voucher, index) => (
           <>
             <SingleVoucher key={index}>
-              <VoucherTitle>{voucher.vouchertype}</VoucherTitle>
-              <VoucherValue>
-                über {voucher.vouchervalue} {voucher.vouchercurrency}
-              </VoucherValue>
-              <VoucherPartner>von {voucher.voucherpartner}</VoucherPartner>
+              <VoucherImage src={Voucher} />
+              <VoucherText>
+                {voucher.vouchertype} <br />
+                <span>
+                  von {voucher.voucherpartner}
+                  <br />
+                  <span>
+                    über {voucher.vouchervalue} {voucher.vouchercurrency}
+                  </span>
+                </span>
+              </VoucherText>
               <BonusPointBubble>{voucher.neededpoints} Punkte</BonusPointBubble>
               <ChooseCheckbox
                 disabled={
@@ -113,9 +120,9 @@ const ActionInfo = styled.h4`
 `;
 
 const PointsInfo = styled.p`
-  background: lightgrey;
+  border: 0.2rem solid black;
   border-radius: 3rem;
-  color: white;
+  color: black;
   font-size: 1.5rem;
   font-weight: bold;
   padding: 0.5rem 2rem;
@@ -133,41 +140,62 @@ const VoucherSection = styled.section`
   place-items: center;
 `;
 
-const ChooseCheckbox = styled.input`
-  border: 0.2rem solid black;
-`;
-
 const SingleVoucher = styled.section`
-  border: 0.2rem solid red;
-  border-radius: 3rem;
-  margin: 1.5rem 3rem;
+  background: lightgrey;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
   position: relative;
+
+  :nth-child(even) {
+    background: white;
+    border: 0.2rem solid lightgrey;
+  }
 `;
 
-const VoucherTitle = styled.p`
+const VoucherImage = styled.img`
+  border-radius: 1rem;
+  width: 25rem;
+`;
+
+const VoucherText = styled.p`
   font-size: 1.5rem;
   font-weight: bold;
-  padding-top: 1rem;
-`;
+  text-align: left;
 
-const VoucherValue = styled.p`
-  margin: 0 8rem;
-  padding: 1rem;
-`;
+  span {
+    font-weight: normal;
 
-const VoucherPartner = styled.p`
-  font-size: 1.2rem;
-  font-weight: bold;
+    span {
+      color: red;
+      font-weight: bold;
+    }
+  }
 `;
 
 const BonusPointBubble = styled.section`
-  background-color: red;
-  border-radius: 1rem;
-  color: white;
+  background: lightgrey;
+  border-radius: 0rem 1rem 1rem 0rem;
+  color: red;
+  font-size: 1.5rem;
+  font-weight: bold;
   padding: 1rem;
   position: absolute;
-  bottom: 13rem;
-  left: 20rem;
+  bottom: 22rem;
+
+  :nth-child(even) {
+    background: white;
+  }
+`;
+
+const ChooseCheckbox = styled.input`
+  border: 0.2rem solid black;
+  border-radius: 1rem;
+  height: 1.75rem;
+  width: 1.75rem;
+  position: absolute;
+  left: 22rem;
+  bottom: 4.5rem;
 `;
 
 const ChoiceError = styled.div`
