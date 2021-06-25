@@ -20,8 +20,7 @@ export default function LoginForm({
 
   const [isValidErrorMessage, setIsValidErrorMessage] = useState(false);
 
-  function updateUser(event, touchstart) {
-    touchstart.preventDefault();
+  function updateUser(event) {
     const fieldName = event.target.name;
     let fieldValue = event.target.value;
     onSetLoggedInUser({ ...loggedInUser, [fieldName]: fieldValue });
