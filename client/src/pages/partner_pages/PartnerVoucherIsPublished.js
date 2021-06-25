@@ -26,10 +26,12 @@ const ActionInfo = styled.h4`
 `;
 
 const NewVoucherButton = styled.button`
-  background-color: red;
-  margin: 3rem;
-  padding: 1rem;
-  font-size: 1.5rem;
+  border: none;
+  background-color: black;
+  border-bottom: 0.5rem solid red;
   color: white;
   cursor: pointer;
+  font-size: 1.5rem;
+  margin: 1rem 4rem;
+  padding: 1rem;
 `;

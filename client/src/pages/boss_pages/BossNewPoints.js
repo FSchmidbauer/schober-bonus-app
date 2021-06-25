@@ -140,12 +140,12 @@ export default function BossNewPoints({
           </>
         ))}
       </EmpGrid>
-      <CheckButton onClick={showBossPointsCheck}>Punkte prüfen</CheckButton>
       {isPointsErrorMessage && (
         <PointsError>
           Du musst zuerst Bonuspunkte vergeben, bevor Du auf diese Seite kannst.
         </PointsError>
       )}
+      <CheckButton onClick={showBossPointsCheck}>Punkte prüfen</CheckButton>
     </>
   );
 }
@@ -154,19 +154,10 @@ const ActionInfo = styled.h4`
   padding: 0 2rem;
 `;
 
-const CheckButton = styled.button`
-  background-color: red;
-  color: white;
-  cursor: pointer;
-  font-size: 1.5rem;
-  margin: 3rem;
-  padding: 1rem;
-`;
-
 const EmpGrid = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin: 1.5rem 0rem 0rem;
+  margin: 1.5rem 0;
   place-items: center;
   row-gap: 3rem;
 `;
@@ -212,4 +203,15 @@ const PointsError = styled.div`
   background-color: red;
   color: white;
   padding: 0.5rem;
+`;
+
+const CheckButton = styled.button`
+  border: none;
+  background-color: black;
+  border-bottom: 0.5rem solid red;
+  color: white;
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin: 1rem 8rem;
+  padding: 1rem;
 `;

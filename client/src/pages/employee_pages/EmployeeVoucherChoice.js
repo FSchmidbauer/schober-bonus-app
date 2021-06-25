@@ -98,12 +98,12 @@ export default function EmployeeVoucherChoice({
           </>
         ))}
       </VoucherSection>
-      <CheckButton onClick={showVoucherCheck}>Auswahl prüfen</CheckButton>
       {isChoiceErrorMessage && (
         <ChoiceError>
           Du musst zuerst eine Auswahl treffen, bevor Du auf diese Seite kannst.
         </ChoiceError>
       )}
+      <CheckButton onClick={showVoucherCheck}>Auswahl prüfen</CheckButton>
     </>
   );
 }
@@ -170,16 +170,19 @@ const BonusPointBubble = styled.section`
   left: 20rem;
 `;
 
-const CheckButton = styled.button`
-  background-color: red;
-  color: white;
-  cursor: pointer;
-  font-size: 1.5rem;
-  padding: 1rem;
-`;
-
 const ChoiceError = styled.div`
   background-color: red;
   color: white;
   padding: 0.5rem;
+`;
+
+const CheckButton = styled.button`
+  border: none;
+  background-color: black;
+  border-bottom: 0.5rem solid red;
+  color: white;
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin: 1rem 8rem;
+  padding: 1rem;
 `;

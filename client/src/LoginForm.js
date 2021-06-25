@@ -63,12 +63,7 @@ export default function LoginForm({
 
   return (
     <>
-      {isValidErrorMessage && (
-        <ValidError>
-          Dieser Nutzer ist leider nicht hinterlegt. Bitte Eingabe überprüfen.
-        </ValidError>
-      )}
-      <h1>LOGIN</h1>
+      <h1>STARTSEITE</h1>
       <LoginFormMask onSubmit={showMainMenues}>
         <LoginRole name="role" onChange={updateUser}>
           <option value="notChosen">-- Bitte Rolle wählen --</option>
@@ -82,29 +77,28 @@ export default function LoginForm({
           placeholder="Vor- und Nachname"
           onChange={updateUser}
         />
+        {isValidErrorMessage && (
+          <ValidError>
+            Dieser Nutzer ist leider nicht hinterlegt. Bitte Eingabe überprüfen.
+          </ValidError>
+        )}
         <LoginButton>Login</LoginButton>
       </LoginFormMask>
     </>
   );
 }
 
-const ValidError = styled.div`
-  background-color: red;
-  color: white;
-  padding: 0.5rem;
-`;
-
 const LoginFormMask = styled.form`
   display: flex;
   flex-direction: column;
-  margin: 0 4rem;
+  padding: 0 1rem;
 `;
 
 const LoginRole = styled.select`
   border: 0.3rem solid black;
   border-radius: 1rem;
   cursor: pointer;
-  height: 5rem;
+  height: 4rem;
   margin: 1rem 0;
   padding: 1rem;
 `;
@@ -113,16 +107,25 @@ const LoginName = styled.input`
   border: 0.3rem solid black;
   border-radius: 1rem;
   color: black;
-  height: 5rem;
+  height: 4rem;
   margin: 1rem 0;
   padding: 0.75rem;
   text-align: center;
 `;
 
-const LoginButton = styled.button`
+const ValidError = styled.div`
   background-color: red;
   color: white;
+  padding: 0.5rem;
+`;
+
+const LoginButton = styled.button`
+  border: none;
+  background-color: black;
+  border-bottom: 0.5rem solid red;
+  color: white;
   cursor: pointer;
-  margin: 2rem 4rem;
+  font-size: 1.5rem;
+  margin: 1rem 8rem;
   padding: 1rem;
 `;

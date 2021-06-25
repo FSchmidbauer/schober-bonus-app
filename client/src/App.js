@@ -62,6 +62,7 @@ export default function App() {
   function goBackToHome() {
     setLoggedInUser();
     setNewEmployeesWithPointsForConfirmation({});
+    setChosenByEmployeeVouchers([]);
     setIsNoUser(true);
     setIsUserIsBoss(false);
     setIsBossNewPoints(false);
@@ -100,6 +101,7 @@ export default function App() {
       isEmployeeVoucherIsAcquired
     ) {
       checkPointsThisEmployeeOnApi();
+      setChosenByEmployeeVouchers([]);
       setIsEmployeeVoucherChoice(false);
       setIsEmployeeVoucherCheck(false);
       setIsEmployeeVoucherIsAcquired(false);
@@ -293,18 +295,17 @@ export default function App() {
 }
 
 const HeaderImage = styled.img`
-  width: 10rem;
-  padding: 0.5rem 0rem 0rem;
   cursor: pointer;
+  padding-top: 0.5rem;
+  width: 8rem;
 `;
 
 const HeaderHeadline = styled.section`
   background-color: black;
   border-bottom: 0.2rem solid red;
   color: white;
-  margin: 0.5rem 0rem 1rem;
+  margin: 0.5rem 0;
   padding: 1rem;
-  font-size: 1.5rem;
 `;
 
 const Main = styled.main`
@@ -329,17 +330,14 @@ const Footernav = styled.footer`
 `;
 
 const FooternavButton = styled.button`
+  border: none;
   background-color: white;
   padding: 0.75rem 1rem;
   margin: 0.5rem 0.5rem;
-  font-size: 1rem;
   cursor: pointer;
 `;
 
 const FooternavText = styled.p`
   color: white;
-  padding: 0.9rem 1rem;
   margin: 0.5rem 0.5rem;
-  font-size: 1rem;
-  cursor: pointer;
 `;

@@ -116,12 +116,6 @@ export default function PartnerNewVoucher({
 
   return (
     <>
-      {isVoucherErrorMessage && (
-        <VoucherError>
-          Der Gutschein ist leider nicht komplett oder fehlerhaft. Bitte
-          ergänzen Sie ihn um die fehlenden Eingaben.
-        </VoucherError>
-      )}
       <h1>NEUER GUTSCHEIN</h1>
       <ActionInfo>
         Bitte tragen Sie die Eckdaten Ihres Gutscheins in das nachfolgende
@@ -174,17 +168,17 @@ export default function PartnerNewVoucher({
           />{" "}
           Bonuspunkte
         </p>
+        {isVoucherErrorMessage && (
+          <VoucherError>
+            Der Gutschein ist leider nicht komplett oder fehlerhaft. Bitte
+            ergänzen Sie ihn um die fehlenden Eingaben.
+          </VoucherError>
+        )}
         <CheckButton>Gutschein prüfen</CheckButton>
       </VoucherForm>
     </>
   );
 }
-
-const VoucherError = styled.div`
-  background-color: red;
-  color: white;
-  padding: 0.5rem;
-`;
 
 const ActionInfo = styled.h4`
   padding: 0 2rem;
@@ -238,10 +232,19 @@ const PointsNeeded = styled.input`
   width: 4rem;
 `;
 
-const CheckButton = styled.button`
+const VoucherError = styled.div`
   background-color: red;
   color: white;
+  padding: 0.5rem;
+`;
+
+const CheckButton = styled.button`
+  border: none;
+  background-color: black;
+  border-bottom: 0.5rem solid red;
+  color: white;
   cursor: pointer;
-  margin-top: 1rem;
+  font-size: 1.5rem;
+  margin: 1rem 4rem;
   padding: 1rem;
 `;

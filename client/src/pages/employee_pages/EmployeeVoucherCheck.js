@@ -160,23 +160,22 @@ const CorrectButton = styled.button`
   border: none;
   background-color: white;
   color: red;
-  padding: 1rem;
-  width: 10rem;
-  font-size: 1.5rem;
   cursor: pointer;
+  font-size: 1.5rem;
+  padding: 1rem;
 
   :hover {
-    background-color: black;
+    background-color: red;
     color: white;
   }
 `;
 
 const ConfirmButton = styled.button`
   border: none;
-  background-color: red;
-  padding: 1rem;
-  width: 10rem;
-  font-size: 1.5rem;
+  background-color: black;
+  border-bottom: 0.5rem solid red;
   color: white;
   cursor: pointer;
+  font-size: 1.5rem;
+  padding: 1rem;
 `;
