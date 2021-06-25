@@ -58,7 +58,7 @@ const BonusSection = styled.section`
   grid-column: 1;
   grid-row: 1;
   cursor: pointer;
-  margin-top: 4rem;
+  margin-top: 2rem;
   p {
     font-weight: bold;
   }

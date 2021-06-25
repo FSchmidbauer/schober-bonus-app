@@ -118,7 +118,7 @@ export default function PartnerNewVoucher({
     <>
       {isVoucherErrorMessage && (
         <VoucherError>
-          Der Gutschein ist leider nicht komplett oder fehlerhaft.<br></br>Bitte
+          Der Gutschein ist leider nicht komplett oder fehlerhaft. Bitte
           ergänzen Sie ihn um die fehlenden Eingaben.
         </VoucherError>
       )}

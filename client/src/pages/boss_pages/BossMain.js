@@ -55,7 +55,7 @@ const WelcomeMessage = styled.h2`
 const ActionGrid = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin: 4rem 0 0;
+  margin-top: 2rem;
 `;
 
 const BonusSection = styled.section`

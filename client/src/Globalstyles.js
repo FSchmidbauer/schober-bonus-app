@@ -9,6 +9,7 @@ export default createGlobalStyle`
     body {
         margin: 0;
         font-family: verdana;
+        font-size: 1.5rem;
         text-align: center;
     }
 `;
