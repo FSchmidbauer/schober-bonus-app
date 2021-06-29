@@ -148,7 +148,7 @@ const VoucherSection = styled.section`
 const SingleVoucher = styled.section`
   background: lightgrey;
   border-radius: 1rem;
-  margin: 1rem;
+  margin: 1rem 2rem;
   padding: 1rem 1rem 0.5rem;
   position: relative;
 
@@ -160,7 +160,7 @@ const SingleVoucher = styled.section`
 
 const VoucherImage = styled.img`
   border-radius: 1rem;
-  max-width: 16rem;
+  max-width: 14rem;
 `;
 
 const VoucherText = styled.p`
@@ -185,7 +185,7 @@ const BonusPointBubble = styled.section`
   font-weight: bold;
   padding: 0.5rem;
   position: absolute;
-  bottom: 14.5rem;
+  bottom: 13.5rem;
 
   :nth-child(even) {
     background: white;
@@ -198,7 +198,7 @@ const ChooseCheckbox = styled.input`
   height: 2rem;
   width: 2rem;
   position: absolute;
-  left: 14rem;
+  left: 13rem;
   bottom: 1rem;
 `;
 
