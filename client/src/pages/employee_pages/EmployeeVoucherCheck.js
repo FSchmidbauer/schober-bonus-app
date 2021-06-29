@@ -141,7 +141,7 @@ const VoucherImage = styled.img`
 `;
 
 const VoucherText = styled.p`
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
   text-align: left;
 
@@ -162,7 +162,7 @@ const BonusPointBubble = styled.section`
   font-weight: bold;
   padding: 0.5rem;
   position: absolute;
-  bottom: 20.5rem;
+  bottom: 14.5rem;
 
   :nth-child(even) {
     background: white;

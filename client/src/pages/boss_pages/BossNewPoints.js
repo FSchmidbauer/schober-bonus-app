@@ -180,6 +180,7 @@ const MinusButton = styled.button`
   border-radius: 1rem;
   color: white;
   cursor: pointer;
+  font-size: 1.5rem;
   padding: 0.75rem 1.1rem;
 `;
 
@@ -189,6 +190,7 @@ const PlusButton = styled.button`
   border-radius: 1rem;
   color: white;
   cursor: pointer;
+  font-size: 1.5rem;
   padding: 0.75rem 1rem;
 `;
 

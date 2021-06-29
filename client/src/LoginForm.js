@@ -61,6 +61,9 @@ export default function LoginForm({
       onSetIsUserIsPartner(true);
     } else {
       setIsValidErrorMessage(true);
+      setTimeout(() => {
+        setIsValidErrorMessage(false);
+      }, 2000);
     }
   }
 

@@ -33,27 +33,29 @@ export default function BossPointsCheck({
       <ActionInfo>
         Du hast folgenden Mitarbeitern neue Bonuspunkte gegeben:
       </ActionInfo>
-      {Object.keys(newEmployeesWithPointsForConfirmation).map((employee) => (
-        <>
-          <EmpWithNewPoints>
-            <img
-              src={newEmployeesWithPointsForConfirmation[employee].image}
-              alt="Zu bestätigender Mitarbeiter mit neuen Bonuspunkten"
+      {Object.keys(newEmployeesWithPointsForConfirmation).map(
+        (employee, index) => (
+          <>
+            <EmpWithNewPoints key={index}>
+              <img
+                src={newEmployeesWithPointsForConfirmation[employee].image}
+                alt="Zu bestätigender Mitarbeiter mit neuen Bonuspunkten"
+              />
+              <p>
+                <span>
+                  {newEmployeesWithPointsForConfirmation[employee].points}
+                </span>{" "}
+                Punkt(e)
+              </p>
+            </EmpWithNewPoints>
+            <EmpCommentInput
+              type="text"
+              name="begruendung"
+              placeholder="Begründung (optional)"
             />
-            <p>
-              <span>
-                {newEmployeesWithPointsForConfirmation[employee].points}
-              </span>{" "}
-              Punkt(e)
-            </p>
-          </EmpWithNewPoints>
-          <EmpCommentInput
-            type="text"
-            name="begruendung"
-            placeholder="Begründung (optional)"
-          />
-        </>
-      ))}
+          </>
+        )
+      )}
       <ButtonSection>
         <CorrectButton onClick={jumpOnLastPage}>Anpassen</CorrectButton>
         <ConfirmButton
