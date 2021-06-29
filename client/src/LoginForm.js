@@ -51,12 +51,28 @@ export default function LoginForm({
         loggedInUser.name === "Alexander Mayer" ||
         loggedInUser.name === "Andrea Breitenwinkler" ||
         loggedInUser.name === "Angelo Brandi" ||
-        loggedInUser.name === "Christine Schick")
+        loggedInUser.name === "Berit Dörnfelder" ||
+        loggedInUser.name === "Christine Schick" ||
+        loggedInUser.name === "Claudia Thomsen" ||
+        loggedInUser.name === "Dominic Lohr" ||
+        loggedInUser.name === "Ersin Alatza" ||
+        loggedInUser.name === "Martin Gilnhammer" ||
+        loggedInUser.name === "Matthias List" ||
+        loggedInUser.name === "Michael Aslanides" ||
+        loggedInUser.name === "Niklas Neumayer" ||
+        loggedInUser.name === "Rene Bungert" ||
+        loggedInUser.name === "Sandra Hinterseer")
     ) {
       onCheckPointsThisEmployeeOnApi();
       onSetIsNoUser(false);
       onSetIsUserIsEmployee(true);
-    } else if (loggedInUser.role === "partnerunternehmen") {
+    } else if (
+      loggedInUser.role === "partnerunternehmen" &&
+      loggedInUser.name &&
+      loggedInUser.name.length > 3 &&
+      isNaN(loggedInUser.name) &&
+      loggedInUser.name.includes(" ")
+    ) {
       onSetIsNoUser(false);
       onSetIsUserIsPartner(true);
     } else {
@@ -80,7 +96,11 @@ export default function LoginForm({
         <LoginName
           type="text"
           name="name"
-          placeholder="Vor- und Nachname"
+          placeholder={
+            loggedInUser && loggedInUser.role === "partnerunternehmen"
+              ? "Name Ansprechpartner"
+              : "Vor- und Nachname"
+          }
           onChange={updateUser}
         />
         {isValidErrorMessage && (
