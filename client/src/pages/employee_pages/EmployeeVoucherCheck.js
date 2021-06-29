@@ -125,7 +125,7 @@ const VoucherToConfirmSection = styled.section`
 const VoucherToConfirm = styled.section`
   background: lightgrey;
   border-radius: 1rem;
-  margin: 1rem;
+  margin: 1rem 2rem;
   padding: 1rem 1rem 0.5rem;
   position: relative;
 
@@ -137,7 +137,7 @@ const VoucherToConfirm = styled.section`
 
 const VoucherImage = styled.img`
   border-radius: 1rem;
-  max-width: 16rem;
+  max-width: 14rem;
 `;
 
 const VoucherText = styled.p`
@@ -162,7 +162,7 @@ const BonusPointBubble = styled.section`
   font-weight: bold;
   padding: 0.5rem;
   position: absolute;
-  bottom: 14.5rem;
+  bottom: 13.5rem;
 
   :nth-child(even) {
     background: white;

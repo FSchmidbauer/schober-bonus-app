@@ -94,16 +94,26 @@ export default function EmployeeVoucherChoice({
                 </span>
               </VoucherText>
               <BonusPointBubble>{voucher.neededpoints} Punkte</BonusPointBubble>
-              <ChooseCheckbox
-                disabled={
-                  pointsAfterVoucher < voucher.neededpoints &&
+              <ChooseSection>
+                <ChooseInfo>
+                  {pointsAfterVoucher < voucher.neededpoints &&
                   !chosenByEmployeeVouchers.some(
                     (chosenvoucher) => chosenvoucher._id === voucher._id
                   )
-                }
-                type="checkbox"
-                onClick={() => chooseOrUnChooseVoucher(voucher)}
-              />
+                    ? "zu wenig Punkte"
+                    : ""}
+                </ChooseInfo>
+                <ChooseCheckbox
+                  disabled={
+                    pointsAfterVoucher < voucher.neededpoints &&
+                    !chosenByEmployeeVouchers.some(
+                      (chosenvoucher) => chosenvoucher._id === voucher._id
+                    )
+                  }
+                  type="checkbox"
+                  onClick={() => chooseOrUnChooseVoucher(voucher)}
+                />
+              </ChooseSection>
             </SingleVoucher>
           </>
         ))}
@@ -149,7 +159,7 @@ const SingleVoucher = styled.section`
   background: lightgrey;
   border-radius: 1rem;
   margin: 1rem 2rem;
-  padding: 1rem 1rem 0.5rem;
+  padding: 1rem 1rem 3rem;
   position: relative;
 
   :nth-child(even) {
@@ -185,21 +195,32 @@ const BonusPointBubble = styled.section`
   font-weight: bold;
   padding: 0.5rem;
   position: absolute;
-  bottom: 13.5rem;
+  bottom: 16rem;
 
   :nth-child(even) {
     background: white;
   }
 `;
 
+const ChooseSection = styled.section`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+  position: absolute;
+  left: 9rem;
+  bottom: 1rem;
+`;
+
+const ChooseInfo = styled.span`
+  grid-column: 1;
+  font-size: 0.75rem;
+`;
+
 const ChooseCheckbox = styled.input`
+  grid-column: 2;
   border: 0.2rem solid black;
-  border-radius: 1rem;
   height: 2rem;
   width: 2rem;
-  position: absolute;
-  left: 13rem;
-  bottom: 1rem;
 `;
 
 const ChoiceError = styled.div`
