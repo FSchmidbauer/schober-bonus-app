@@ -101,7 +101,7 @@ export default function EmployeeVoucherChoice({
                     (chosenvoucher) => chosenvoucher._id === voucher._id
                   )
                     ? "zu wenig Punkte"
-                    : ""}
+                    : "für Dich verfügbar"}
                 </ChooseInfo>
                 <ChooseCheckbox
                   disabled={
@@ -159,7 +159,7 @@ const SingleVoucher = styled.section`
   background: lightgrey;
   border-radius: 1rem;
   margin: 1rem 2rem;
-  padding: 1rem 1rem 3rem;
+  padding: 1rem;
   position: relative;
 
   :nth-child(even) {
@@ -176,7 +176,7 @@ const VoucherImage = styled.img`
 const VoucherText = styled.p`
   font-size: 1rem;
   font-weight: bold;
-  text-align: left;
+  text-align: center;
 
   span {
     font-weight: normal;
@@ -195,7 +195,7 @@ const BonusPointBubble = styled.section`
   font-weight: bold;
   padding: 0.5rem;
   position: absolute;
-  bottom: 16rem;
+  bottom: 18rem;
 
   :nth-child(even) {
     background: white;
@@ -203,24 +203,20 @@ const BonusPointBubble = styled.section`
 `;
 
 const ChooseSection = styled.section`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  place-items: center;
-  position: absolute;
-  left: 9rem;
-  bottom: 1rem;
+  display: flex;
+  flex-flow: column wrap;
 `;
 
 const ChooseInfo = styled.span`
-  grid-column: 1;
   font-size: 0.75rem;
+  margin: 0.5rem 0;
 `;
 
 const ChooseCheckbox = styled.input`
-  grid-column: 2;
   border: 0.2rem solid black;
   height: 2rem;
   width: 2rem;
+  margin: 0 auto;
 `;
 
 const ChoiceError = styled.div`

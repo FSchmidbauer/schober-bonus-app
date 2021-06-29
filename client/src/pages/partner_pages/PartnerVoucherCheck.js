@@ -65,7 +65,7 @@ const VoucherToConfirm = styled.section`
   background: lightgrey;
   border-radius: 1rem;
   margin: 1rem 2rem;
-  padding: 1rem 1rem 0.5rem;
+  padding: 1rem;
   position: relative;
 
   :nth-child(even) {
@@ -82,7 +82,7 @@ const VoucherImage = styled.img`
 const VoucherText = styled.p`
   font-size: 1rem;
   font-weight: bold;
-  text-align: left;
+  text-align: center;
 
   span {
     font-weight: normal;
