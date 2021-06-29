@@ -106,6 +106,9 @@ export default function BossNewPoints({
       onSetIsBossPointsCheck(true);
     } else {
       setIsPointsErrorMessage(true);
+      setTimeout(() => {
+        setIsPointsErrorMessage(false);
+      }, 2000);
     }
   }
 
@@ -125,7 +128,7 @@ export default function BossNewPoints({
                 <MinusButton onClick={() => subtractPoints(employee)}>
                   -
                 </MinusButton>
-                <EmpInputfield
+                <EmpPointsField
                   type="text"
                   name={employees[employee].name}
                   value={
@@ -157,7 +160,8 @@ const ActionInfo = styled.h4`
 const EmpGrid = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin: 1.5rem 0;
+  column-gap: 0.5rem;
+  margin-top: 2rem;
   place-items: center;
   row-gap: 3rem;
 `;
@@ -165,43 +169,40 @@ const EmpGrid = styled.section`
 const EmpImage = styled.img`
   border: 0.2rem solid black;
   border-radius: 3rem;
-  height: 10rem;
-  width: 10rem;
+  max-height: 8rem;
+  max-width: 8rem;
   padding: 0.3rem;
 `;
 
 const MinusButton = styled.button`
   background: red;
   border: 0.2rem solid red;
-  border-radius: 10vw;
+  border-radius: 1rem;
   color: white;
   cursor: pointer;
-  font-size: 1.5rem;
-  height: 3rem;
-  width: 3rem;
+  padding: 0.75rem 1.1rem;
 `;
 
 const PlusButton = styled.button`
   background: green;
   border: 0.2rem solid green;
-  border-radius: 10vw;
+  border-radius: 1rem;
   color: white;
   cursor: pointer;
-  font-size: 1.5rem;
-  height: 3rem;
-  width: 3rem;
+  padding: 0.75rem 1rem;
 `;
 
-const EmpInputfield = styled.input`
+const EmpPointsField = styled.input`
   border: none;
-  font-size: 1.5rem;
+  font-size: 2rem;
+  max-width: 3rem;
   text-align: center;
-  width: 3rem;
 `;
 
 const PointsError = styled.div`
   background-color: red;
   color: white;
+  margin: 1rem 1rem 0rem;
   padding: 0.5rem;
 `;
 
@@ -212,6 +213,6 @@ const CheckButton = styled.button`
   color: white;
   cursor: pointer;
   font-size: 1.5rem;
-  margin: 1rem 8rem;
+  margin: 2rem 4rem;
   padding: 1rem;
 `;

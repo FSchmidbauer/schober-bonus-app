@@ -29,18 +29,18 @@ const WelcomeMessage = styled.h2`
 `;
 
 const NewVoucherSection = styled.section`
-  margin-top: 2rem;
   cursor: pointer;
+  margin-top: 2rem;
   p {
     font-weight: bold;
   }
 `;
 
 const ActionImage = styled.img`
-  padding: 0.3rem;
-  width: 10rem;
-  height: 8rem;
   border: 0.2rem solid black;
-  border-radius: 3rem;
+  border-radius: 2rem;
   cursor: pointer;
+  padding: 0.3rem;
+  max-height: 6rem;
+  max-width: 10rem;
 `;

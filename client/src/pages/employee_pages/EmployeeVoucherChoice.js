@@ -58,6 +58,9 @@ export default function EmployeeVoucherChoice({
   function showVoucherCheck() {
     if (chosenByEmployeeVouchers.length === 0) {
       setIsChoiceErrorMessage(true);
+      setTimeout(() => {
+        setIsChoiceErrorMessage(false);
+      }, 2000);
     } else {
       onSetIsEmployeeVoucherChoice(false);
       onSetIsEmployeeVoucherCheck(true);
@@ -66,7 +69,7 @@ export default function EmployeeVoucherChoice({
 
   return (
     <>
-      <h1>GUTSCHEINAUSWAHL</h1>
+      <h1>GUTSCHEIN-AUSWAHL</h1>
       <ActionInfo>
         Wenn Du genügend Bonuspunkte hast, kannst Du Dir jetzt per Klick einen
         oder mehrere dieser Gutscheine für Dich aussuchen.
@@ -105,6 +108,10 @@ export default function EmployeeVoucherChoice({
           </>
         ))}
       </VoucherSection>
+      <PointsInfo>
+        {loggedInUser.name.split(" ")[0]}:{" "}
+        <span>{isThisEmployeeOnApi ? pointsAfterVoucher : "0"}</span>{" "}
+      </PointsInfo>
       {isChoiceErrorMessage && (
         <ChoiceError>
           Du musst zuerst eine Auswahl treffen, bevor Du auf diese Seite kannst.
@@ -121,12 +128,12 @@ const ActionInfo = styled.h4`
 
 const PointsInfo = styled.p`
   border: 0.2rem solid black;
-  border-radius: 3rem;
+  border-radius: 2rem;
   color: black;
   font-size: 1.5rem;
   font-weight: bold;
+  margin: 4rem 3rem 4rem;
   padding: 0.5rem 2rem;
-  margin: 1rem 6rem 3rem;
 
   span {
     color: red;
@@ -134,17 +141,15 @@ const PointsInfo = styled.p`
 `;
 
 const VoucherSection = styled.section`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  place-items: center;
+  display: flex;
+  flex-flow: column wrap;
 `;
 
 const SingleVoucher = styled.section`
   background: lightgrey;
   border-radius: 1rem;
-  margin-bottom: 2rem;
-  padding: 1rem;
+  margin: 1rem;
+  padding: 1rem 1rem 0.5rem;
   position: relative;
 
   :nth-child(even) {
@@ -155,7 +160,7 @@ const SingleVoucher = styled.section`
 
 const VoucherImage = styled.img`
   border-radius: 1rem;
-  width: 25rem;
+  max-width: 16rem;
 `;
 
 const VoucherText = styled.p`
@@ -177,11 +182,10 @@ const BonusPointBubble = styled.section`
   background: lightgrey;
   border-radius: 0rem 1rem 1rem 0rem;
   color: red;
-  font-size: 1.5rem;
   font-weight: bold;
-  padding: 1rem;
+  padding: 0.5rem;
   position: absolute;
-  bottom: 22rem;
+  bottom: 20.5rem;
 
   :nth-child(even) {
     background: white;
@@ -191,16 +195,17 @@ const BonusPointBubble = styled.section`
 const ChooseCheckbox = styled.input`
   border: 0.2rem solid black;
   border-radius: 1rem;
-  height: 1.75rem;
-  width: 1.75rem;
+  height: 2rem;
+  width: 2rem;
   position: absolute;
-  left: 22rem;
-  bottom: 4.5rem;
+  left: 14rem;
+  bottom: 1rem;
 `;
 
 const ChoiceError = styled.div`
   background-color: red;
   color: white;
+  margin: 1rem;
   padding: 0.5rem;
 `;
 
@@ -211,6 +216,5 @@ const CheckButton = styled.button`
   color: white;
   cursor: pointer;
   font-size: 1.5rem;
-  margin: 1rem 8rem;
   padding: 1rem;
 `;

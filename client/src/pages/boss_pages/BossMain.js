@@ -61,6 +61,7 @@ const WelcomeMessage = styled.h2`
 const ActionGrid = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  column-gap: 0.5rem;
   margin-top: 2rem;
 `;
 
@@ -83,18 +84,18 @@ const VoucherSection = styled.section`
 `;
 
 // const EmployeeSection = styled.section`
-//   margin-top: 1.5rem;
 //   cursor: pointer;
+//   margin-top: 1.5rem;
 //   p {
 //     font-weight: bold;
 //   }
 // `;
 
 const ActionImage = styled.img`
-  padding: 0.3rem;
-  width: 10rem;
-  height: 8rem;
   border: 0.2rem solid black;
-  border-radius: 3rem;
+  border-radius: 2rem;
   cursor: pointer;
+  padding: 0.3rem;
+  max-height: 6rem;
+  max-width: 10rem;
 `;

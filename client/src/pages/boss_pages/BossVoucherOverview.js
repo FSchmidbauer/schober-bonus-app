@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Voucher from "../../images/voucher.jpg";
 
 export default function BossVoucherOverview({ vouchersOnApi }) {
   return (
@@ -8,15 +9,23 @@ export default function BossVoucherOverview({ vouchersOnApi }) {
         Folgende Gutscheine sind im Moment für Deine Mitarbeiter verfügbar:
       </ActionInfo>
       <VoucherSection>
-        {vouchersOnApi.map((voucher) => (
-          <SingleVoucher>
-            <VoucherTitle>{voucher.vouchertype}</VoucherTitle>
-            <VoucherValue>
-              über {voucher.vouchervalue} {voucher.vouchercurrency}
-            </VoucherValue>
-            <VoucherPartner>von {voucher.voucherpartner}</VoucherPartner>
-            <BonusPointBubble>{voucher.neededpoints} Punkte</BonusPointBubble>
-          </SingleVoucher>
+        {vouchersOnApi.map((voucher, index) => (
+          <>
+            <SingleVoucher key={index}>
+              <VoucherImage src={Voucher} />
+              <VoucherText>
+                {voucher.vouchertype} <br />
+                <span>
+                  von {voucher.voucherpartner}
+                  <br />
+                  <span>
+                    über {voucher.vouchervalue} {voucher.vouchercurrency}
+                  </span>
+                </span>
+              </VoucherText>
+              <BonusPointBubble>{voucher.neededpoints} Punkte</BonusPointBubble>
+            </SingleVoucher>
+          </>
         ))}
       </VoucherSection>
     </>
@@ -28,40 +37,53 @@ const ActionInfo = styled.h4`
 `;
 
 const VoucherSection = styled.section`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
+  display: flex;
+  flex-flow: column wrap;
 `;
 
 const SingleVoucher = styled.section`
+  background: lightgrey;
+  border-radius: 1rem;
+  margin: 1rem;
+  padding: 1rem 1rem 0.5rem;
   position: relative;
-  margin: 1.5rem 3rem;
-  border: 0.2rem solid red;
-  border-radius: 3rem;
+
+  :nth-child(even) {
+    background: white;
+    border: 0.2rem solid lightgrey;
+  }
 `;
 
-const VoucherTitle = styled.p`
-  padding-top: 1rem;
-  font-weight: bold;
+const VoucherImage = styled.img`
+  border-radius: 1rem;
+  max-width: 16rem;
+`;
+
+const VoucherText = styled.p`
   font-size: 1.5rem;
-`;
-
-const VoucherValue = styled.p`
-  margin: 0 8rem;
-  padding: 1rem;
-`;
-
-const VoucherPartner = styled.p`
   font-weight: bold;
-  font-size: 1.2rem;
+  text-align: left;
+
+  span {
+    font-weight: normal;
+
+    span {
+      color: red;
+      font-weight: bold;
+    }
+  }
 `;
 
 const BonusPointBubble = styled.section`
+  background: lightgrey;
+  border-radius: 0rem 1rem 1rem 0rem;
+  color: red;
+  font-weight: bold;
+  padding: 0.5rem;
   position: absolute;
-  left: 20rem;
-  bottom: 11rem;
-  background-color: red;
-  border-radius: 1rem;
-  color: white;
-  padding: 1rem;
+  bottom: 20.5rem;
+
+  :nth-child(even) {
+    background: white;
+  }
 `;

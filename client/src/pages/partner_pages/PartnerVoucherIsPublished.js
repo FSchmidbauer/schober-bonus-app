@@ -32,6 +32,6 @@ const NewVoucherButton = styled.button`
   color: white;
   cursor: pointer;
   font-size: 1.5rem;
-  margin: 1rem 4rem;
+  margin: 1rem 1rem;
   padding: 1rem;
 `;

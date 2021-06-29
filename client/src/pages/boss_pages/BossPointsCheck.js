@@ -77,14 +77,14 @@ const EmpWithNewPoints = styled.section`
   font-size: 1.5rem;
   font-weight: bold;
   padding: 0.2rem;
-  margin: 1rem;
+  margin: 2rem 0 2rem;
 
   img {
-    padding: 0.3rem;
-    width: 10rem;
-    height: 10rem;
-    border-radius: 3rem;
     border: 0.2rem solid black;
+    border-radius: 3rem;
+    max-height: 8rem;
+    max-width: 8rem;
+    padding: 0.3rem;
   }
 
   p {
@@ -97,16 +97,15 @@ const EmpWithNewPoints = styled.section`
 const EmpCommentInput = styled.input`
   border: 0.1rem solid black;
   color: black;
-  height: 8rem;
-  margin: 1rem 3rem 3rem;
-  padding: 1rem;
+  height: 6rem;
+  margin-bottom: 2rem;
+  padding: 0 3rem;
   text-align: center;
 `;
 
 const ButtonSection = styled.section`
   display: flex;
   justify-content: space-around;
-  margin: 0.75rem;
 `;
 
 const CorrectButton = styled.button`

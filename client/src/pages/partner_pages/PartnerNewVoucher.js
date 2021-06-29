@@ -92,6 +92,9 @@ export default function PartnerNewVoucher({
     event.preventDefault();
     if (notAValidVoucher()) {
       setIsVoucherErrorMessage(true);
+      setTimeout(() => {
+        setIsVoucherErrorMessage(false);
+      }, 2000);
     } else {
       onSetIsPartnerNewVoucher(false);
       onSetIsPartnerVoucherCheck(true);
@@ -160,14 +163,14 @@ export default function PartnerNewVoucher({
             <option value="%">%</option>
           </VoucherCurrency>
         </VoucherValue>
-        <p>
+        <PointsInfo>
           Zu erwerben für
           <PointsNeeded
             name="neededpoints"
             value={createdByPartnerVoucher.neededpoints}
           />{" "}
           Bonuspunkte
-        </p>
+        </PointsInfo>
         {isVoucherErrorMessage && (
           <VoucherError>
             Der Gutschein ist leider nicht komplett oder fehlerhaft. Bitte
@@ -187,13 +190,14 @@ const ActionInfo = styled.h4`
 const VoucherForm = styled.form`
   display: flex;
   flex-direction: column;
-  margin: 2rem 4rem 0;
+  margin: 2rem 2rem 0;
 `;
 
 const VoucherSelect = styled.select`
   border: none;
   border-bottom: 0.2rem solid black;
   cursor: pointer;
+  font-size: 1.5rem;
   margin-bottom: 2rem;
 `;
 
@@ -201,6 +205,7 @@ const VoucherPartnerInput = styled.input`
   border: none;
   border-bottom: 0.2rem solid black;
   color: black;
+  font-size: 1.5rem;
   margin-bottom: 2rem;
   text-align: center;
 `;
@@ -217,13 +222,18 @@ const VoucherValue = styled.section`
 const VoucherValueInput = styled.input`
   border: none;
   color: black;
+  font-size: 1.5rem;
   text-align: center;
 `;
 
 const VoucherCurrency = styled.select`
   border: none;
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 1.5rem;
+`;
+
+const PointsInfo = styled.p`
+  font-size: 0.75rem;
 `;
 
 const PointsNeeded = styled.input`
@@ -235,6 +245,7 @@ const PointsNeeded = styled.input`
 const VoucherError = styled.div`
   background-color: red;
   color: white;
+  margin: 1rem;
   padding: 0.5rem;
 `;
 
@@ -245,6 +256,6 @@ const CheckButton = styled.button`
   color: white;
   cursor: pointer;
   font-size: 1.5rem;
-  margin: 1rem 4rem;
+  margin: 1rem 0;
   padding: 1rem;
 `;

@@ -21,10 +21,9 @@ export default function EmployeeMain({
     <>
       <h1>HAUPTMENÜ</h1>
       <WelcomeMessage>
-        Hallo {loggedInUser.name.split(" ")[0]}! Du hast aktuell
-        <br />
+        Hallo {loggedInUser.name.split(" ")[0]}! Du hast aktuell{" "}
         <span>{isThisEmployeeOnApi ? pointsThisEmployeeOnApi : "0"}</span>{" "}
-        Bonuspunkte. <br /> Was willst Du tun?
+        Bonuspunkte. Was willst Du tun?
       </WelcomeMessage>
       {/* <ActionGrid> */}
       <BonusSection>
@@ -49,9 +48,10 @@ const WelcomeMessage = styled.h2`
 `;
 
 // const ActionGrid = styled.section`
-//   display: grid;
-//   grid-template-columns: 1fr 1fr;
-//   margin: 1.5rem 0rem 0rem;
+//    display: grid;
+//    grid-template-columns: 1fr 1fr;
+//    column-gap: 0.5rem;
+//    margin-top: 2rem;
 // `;
 
 const BonusSection = styled.section`
@@ -74,10 +74,10 @@ const BonusSection = styled.section`
 // `;
 
 const ActionImage = styled.img`
-  padding: 0.3rem;
-  width: 10rem;
-  height: 8rem;
   border: 0.2rem solid black;
-  border-radius: 3rem;
+  border-radius: 2rem;
   cursor: pointer;
+  padding: 0.3rem;
+  max-height: 6rem;
+  max-width: 10rem;
 `;

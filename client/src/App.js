@@ -309,13 +309,9 @@ const HeaderHeadline = styled.section`
 `;
 
 const Main = styled.main`
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  text-align: center;
-  max-width: 30rem;
   margin: 0 auto;
-  padding-bottom: 4rem;
+  max-width: 30rem;
+  padding-bottom: 5rem;
 `;
 
 const Footernav = styled.footer`

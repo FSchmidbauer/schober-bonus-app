@@ -16,7 +16,7 @@ export default function LoginForm({
       .then((result) => result.json())
       .then((apiEmployees) => onSetEmployeesWithPointsOnApi(apiEmployees))
       .then((error) => console.error(error));
-  });
+  }, []);
 
   const [isValidErrorMessage, setIsValidErrorMessage] = useState(false);
 
@@ -32,6 +32,9 @@ export default function LoginForm({
       decideWhichMenuToShow();
     } else {
       setIsValidErrorMessage(true);
+      setTimeout(() => {
+        setIsValidErrorMessage(false);
+      }, 2000);
     }
   }
 
@@ -91,14 +94,15 @@ export default function LoginForm({
 const LoginFormMask = styled.form`
   display: flex;
   flex-direction: column;
-  padding: 0 1rem;
+  padding: 0 2rem;
 `;
 
 const LoginRole = styled.select`
   border: 0.3rem solid black;
   border-radius: 1rem;
   cursor: pointer;
-  height: 4rem;
+  font-size: 1.2rem;
+  height: 6rem;
   margin: 1rem 0;
   padding: 1rem;
 `;
@@ -107,7 +111,8 @@ const LoginName = styled.input`
   border: 0.3rem solid black;
   border-radius: 1rem;
   color: black;
-  height: 4rem;
+  font-size: 1.5rem;
+  height: 6rem;
   margin: 1rem 0;
   padding: 0.75rem;
   text-align: center;
@@ -126,6 +131,6 @@ const LoginButton = styled.button`
   color: white;
   cursor: pointer;
   font-size: 1.5rem;
-  margin: 1rem 8rem;
+  margin: 1rem 4rem;
   padding: 1rem;
 `;
