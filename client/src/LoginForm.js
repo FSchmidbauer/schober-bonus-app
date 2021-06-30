@@ -15,7 +15,8 @@ export default function LoginForm({
     fetch("/emppoints")
       .then((result) => result.json())
       .then((apiEmployees) => onSetEmployeesWithPointsOnApi(apiEmployees))
-      .then((error) => console.error(error));
+      .catch((error) => console.error(error));
+    // eslint-disable-next-line
   }, []);
 
   const [isValidErrorMessage, setIsValidErrorMessage] = useState(false);

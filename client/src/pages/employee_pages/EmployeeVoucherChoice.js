@@ -80,42 +80,40 @@ export default function EmployeeVoucherChoice({
       </PointsInfo>
       <VoucherSection>
         {vouchersOnApi.map((voucher, index) => (
-          <>
-            <SingleVoucher key={index}>
-              <VoucherImage src={Voucher} />
-              <VoucherText>
-                {voucher.vouchertype} <br />
+          <SingleVoucher key={index}>
+            <VoucherImage src={Voucher} />
+            <VoucherText>
+              {voucher.vouchertype} <br />
+              <span>
+                von {voucher.voucherpartner}
+                <br />
                 <span>
-                  von {voucher.voucherpartner}
-                  <br />
-                  <span>
-                    über {voucher.vouchervalue} {voucher.vouchercurrency}
-                  </span>
+                  über {voucher.vouchervalue} {voucher.vouchercurrency}
                 </span>
-              </VoucherText>
-              <BonusPointBubble>{voucher.neededpoints} Punkte</BonusPointBubble>
-              <ChooseSection>
-                <ChooseInfo>
-                  {pointsAfterVoucher < voucher.neededpoints &&
+              </span>
+            </VoucherText>
+            <BonusPointBubble>{voucher.neededpoints} Punkte</BonusPointBubble>
+            <ChooseSection>
+              <ChooseInfo>
+                {pointsAfterVoucher < voucher.neededpoints &&
+                !chosenByEmployeeVouchers.some(
+                  (chosenvoucher) => chosenvoucher._id === voucher._id
+                )
+                  ? "zu wenig Punkte"
+                  : "für Dich verfügbar"}
+              </ChooseInfo>
+              <ChooseCheckbox
+                disabled={
+                  pointsAfterVoucher < voucher.neededpoints &&
                   !chosenByEmployeeVouchers.some(
                     (chosenvoucher) => chosenvoucher._id === voucher._id
                   )
-                    ? "zu wenig Punkte"
-                    : "für Dich verfügbar"}
-                </ChooseInfo>
-                <ChooseCheckbox
-                  disabled={
-                    pointsAfterVoucher < voucher.neededpoints &&
-                    !chosenByEmployeeVouchers.some(
-                      (chosenvoucher) => chosenvoucher._id === voucher._id
-                    )
-                  }
-                  type="checkbox"
-                  onClick={() => chooseOrUnChooseVoucher(voucher)}
-                />
-              </ChooseSection>
-            </SingleVoucher>
-          </>
+                }
+                type="checkbox"
+                onClick={() => chooseOrUnChooseVoucher(voucher)}
+              />
+            </ChooseSection>
+          </SingleVoucher>
         ))}
       </VoucherSection>
       <PointsInfo>

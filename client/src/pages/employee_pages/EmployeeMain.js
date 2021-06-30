@@ -12,7 +12,7 @@ export default function EmployeeMain({
     fetch("/vouchers")
       .then((result) => result.json())
       .then((apiVouchers) => onSetVouchersOnApi(apiVouchers))
-      .then((error) => console.error(error));
+      .catch((error) => console.error(error));
     onSetIsUserIsEmployee(false);
     onSetIsEmployeeVoucherChoice(true);
   }

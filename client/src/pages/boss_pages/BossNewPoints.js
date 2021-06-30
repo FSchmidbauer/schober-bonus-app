@@ -131,6 +131,7 @@ export default function BossNewPoints({
                 <EmpPointsField
                   type="text"
                   name={employees[employee].name}
+                  readOnly
                   value={
                     newEmployeesWithPointsForConfirmation[employee]
                       ? newEmployeesWithPointsForConfirmation[employee].points
