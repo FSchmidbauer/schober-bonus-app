@@ -167,6 +167,7 @@ export default function PartnerNewVoucher({
           Zu erwerben für
           <PointsNeeded
             name="neededpoints"
+            readOnly
             value={createdByPartnerVoucher.neededpoints}
           />{" "}
           Bonuspunkte

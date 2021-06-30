@@ -10,22 +10,20 @@ export default function BossVoucherOverview({ vouchersOnApi }) {
       </ActionInfo>
       <VoucherSection>
         {vouchersOnApi.map((voucher, index) => (
-          <>
-            <SingleVoucher key={index}>
-              <VoucherImage src={Voucher} />
-              <VoucherText>
-                {voucher.vouchertype} <br />
+          <SingleVoucher key={index}>
+            <VoucherImage src={Voucher} />
+            <VoucherText>
+              {voucher.vouchertype} <br />
+              <span>
+                von {voucher.voucherpartner}
+                <br />
                 <span>
-                  von {voucher.voucherpartner}
-                  <br />
-                  <span>
-                    über {voucher.vouchervalue} {voucher.vouchercurrency}
-                  </span>
+                  über {voucher.vouchervalue} {voucher.vouchercurrency}
                 </span>
-              </VoucherText>
-              <BonusPointBubble>{voucher.neededpoints} Punkte</BonusPointBubble>
-            </SingleVoucher>
-          </>
+              </span>
+            </VoucherText>
+            <BonusPointBubble>{voucher.neededpoints} Punkte</BonusPointBubble>
+          </SingleVoucher>
         ))}
       </VoucherSection>
     </>

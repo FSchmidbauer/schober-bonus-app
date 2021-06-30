@@ -19,7 +19,7 @@ export default function BossMain({
     fetch("/vouchers")
       .then((result) => result.json())
       .then((apiVouchers) => onSetVouchersOnApi(apiVouchers))
-      .then((error) => console.error(error));
+      .catch((error) => console.error(error));
     onSetIsUserIsBoss(false);
     onSetIsBossVoucherOverview(true);
   }

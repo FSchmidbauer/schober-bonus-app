@@ -131,6 +131,7 @@ export default function BossNewPoints({
                 <EmpPointsField
                   type="text"
                   name={employees[employee].name}
+                  readOnly
                   value={
                     newEmployeesWithPointsForConfirmation[employee]
                       ? newEmployeesWithPointsForConfirmation[employee].points
@@ -175,23 +176,25 @@ const EmpImage = styled.img`
 `;
 
 const MinusButton = styled.button`
-  background: red;
-  border: 0.2rem solid red;
-  border-radius: 1rem;
-  color: white;
+  background: white;
+  border: none;
+  border-bottom: 0.2rem solid red;
+  color: red;
   cursor: pointer;
   font-size: 1.5rem;
-  padding: 0.75rem 1.1rem;
+  font-weight: bold;
+  padding: 0.5rem 1.2rem;
 `;
 
 const PlusButton = styled.button`
-  background: green;
-  border: 0.2rem solid green;
-  border-radius: 1rem;
-  color: white;
+  background: white;
+  border: none;
+  border-bottom: 0.2rem solid green;
+  color: green;
   cursor: pointer;
   font-size: 1.5rem;
-  padding: 0.75rem 1rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
 `;
 
 const EmpPointsField = styled.input`
