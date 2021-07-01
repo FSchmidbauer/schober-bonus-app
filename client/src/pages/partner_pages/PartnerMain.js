@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import TitelbildVoucher from "../../images/voucher.jpg";
 
 export default function PartnerMain({
   loggedInUser,
@@ -17,7 +18,7 @@ export default function PartnerMain({
         Guten Tag {loggedInUser.name}! Was wollen Sie tun?
       </WelcomeMessage>
       <NewVoucherSection onClick={showPartnerNewVoucher}>
-        <ActionImage />
+        <ActionImage src={TitelbildVoucher} />
         <p>Gutschein anlegen </p>
       </NewVoucherSection>
     </>

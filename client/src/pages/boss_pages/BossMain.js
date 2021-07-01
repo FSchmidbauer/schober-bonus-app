@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import BonusImage from "../../images/bonus-image.png";
-import VoucherImage from "../../images/voucher-image.png";
+import TitelbildBonus from "../../images/team.jpg";
+import TitelbildVoucher from "../../images/voucher.jpg";
 // import EmployeesImage from "../../images/employees-image.png";
 
 export default function BossMain({
@@ -32,14 +32,17 @@ export default function BossMain({
       </WelcomeMessage>
       <ActionGrid>
         <BonusSection>
-          <ActionImage src={BonusImage} onClick={showBossNewPoints} />
+          <ActionImage src={TitelbildBonus} onClick={showBossNewPoints} />
           <p>
             Bonuspunkte <br />
             vergeben
           </p>
         </BonusSection>
         <VoucherSection>
-          <ActionImage src={VoucherImage} onClick={showBossVoucherOverview} />
+          <ActionImage
+            src={TitelbildVoucher}
+            onClick={showBossVoucherOverview}
+          />
           <p>
             Gutscheine <br />
             ansehen

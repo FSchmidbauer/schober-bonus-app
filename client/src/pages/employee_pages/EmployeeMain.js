@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import TitelbildVoucher from "../../images/voucher.jpg";
 
 export default function EmployeeMain({
   loggedInUser,
@@ -27,7 +28,10 @@ export default function EmployeeMain({
       </WelcomeMessage>
       {/* <ActionGrid> */}
       <BonusSection>
-        <ActionImage onClick={showEmployeeVoucherChoice} />
+        <ActionImage
+          src={TitelbildVoucher}
+          onClick={showEmployeeVoucherChoice}
+        />
         <p>Bonuspunkte einlösen </p>
       </BonusSection>
       {/* <HistorySection>
